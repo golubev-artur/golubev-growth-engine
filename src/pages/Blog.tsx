@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import { blogPosts } from "@/data/blog";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
+import arthurOffice5 from "@/assets/arthur-office-5.jpg";
 
 const BlogPage = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,8 +20,12 @@ const BlogPage = () => {
 
   return (
     <Layout>
-      <section className="py-20 md:py-28 bg-primary">
-        <div className="container mx-auto px-4 md:px-8">
+      <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={arthurOffice5} alt="" className="w-full h-full object-cover opacity-15" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
+        </div>
+        <div className="container mx-auto px-4 md:px-8 relative">
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">Блог</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary-foreground tracking-tight leading-[1.08] text-wrap-balance">
             Статьи и практические руководства

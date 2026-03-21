@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Layout from "@/components/Layout";
 import { getBlogPostBySlug } from "@/data/blog";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import arthurMain from "@/assets/arthur-main.jpg";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -12,7 +13,6 @@ const BlogPost = () => {
 
   if (!post) return <Navigate to="/blog" replace />;
 
-  // Simple markdown-like rendering: ## headings, **bold**, \n\n paragraphs
   const renderContent = (content: string) => {
     return content.split("\n\n").map((block, i) => {
       if (block.startsWith("## ")) {
@@ -63,6 +63,15 @@ const BlogPost = () => {
 
       <section className="py-12 md:py-20 bg-background">
         <article className="container mx-auto px-4 md:px-8 max-w-3xl prose-container">
+          {/* Author card */}
+          <div className="flex items-center gap-4 mb-10 pb-8 border-b border-border">
+            <img src={arthurMain} alt="Артур Голубев" className="w-14 h-14 rounded-full object-cover object-top shadow-md" />
+            <div>
+              <p className="font-semibold text-foreground text-sm">Артур Голубев</p>
+              <p className="text-xs text-muted-foreground">Основатель Golubev Consulting</p>
+            </div>
+          </div>
+
           {renderContent(post.content)}
 
           <div className="mt-16 pt-8 border-t border-border text-center">

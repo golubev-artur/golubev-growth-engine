@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import arthurAbout from "@/assets/arthur-main.jpg";
 
 const stats = [
   { value: "12+", label: "лет опыта" },
@@ -31,17 +32,26 @@ const AboutSection = () => {
           transition: "opacity 600ms cubic-bezier(0.16,1,0.3,1), transform 600ms cubic-bezier(0.16,1,0.3,1), filter 600ms cubic-bezier(0.16,1,0.3,1)",
         }}
       >
-        <div className="max-w-3xl">
-          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">О компании</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight mb-6 text-wrap-balance">
-            Выстраиваем системы, которые работают без вас
-          </h2>
-          <p className="text-primary-foreground/70 text-lg leading-relaxed mb-4">
-            Golubev Consulting — это команда практиков, которая помогает собственникам бизнеса навести порядок в продажах, процессах, маркетинге и управлении. Мы не просто консультируем — мы внедряем решения и доводим их до результата.
-          </p>
-          <p className="text-primary-foreground/60 leading-relaxed">
-            Наш подход — системный: мы видим бизнес целиком, находим узкие места и строим процессы, которые масштабируются. Работаем с малым и средним бизнесом в России и СНГ.
-          </p>
+        <div className="grid lg:grid-cols-5 gap-12 items-center">
+          <div className="lg:col-span-2">
+            <img
+              src={arthurAbout}
+              alt="Артур Голубев — основатель Golubev Consulting"
+              className="w-full max-w-sm mx-auto rounded-xl shadow-2xl object-cover aspect-[2/3]"
+            />
+          </div>
+          <div className="lg:col-span-3">
+            <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">О компании</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight mb-6 text-wrap-balance">
+              Выстраиваем системы, которые работают без вас
+            </h2>
+            <p className="text-primary-foreground/70 text-lg leading-relaxed mb-4">
+              Golubev Consulting — это команда практиков, которая помогает собственникам бизнеса навести порядок в продажах, процессах, маркетинге и управлении. Мы не просто консультируем — мы внедряем решения и доводим их до результата.
+            </p>
+            <p className="text-primary-foreground/60 leading-relaxed">
+              Наш подход — системный: мы видим бизнес целиком, находим узкие места и строим процессы, которые масштабируются. Работаем с малым и средним бизнесом в России и СНГ.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
