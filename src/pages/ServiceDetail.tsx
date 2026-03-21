@@ -8,20 +8,21 @@ import {
   AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from "recharts";
 
-// Service page images - consultant in different settings
 import arthurOffice1 from "@/assets/arthur-office-1.jpg";
 import arthurOffice2 from "@/assets/arthur-office-2.jpg";
 import arthurOffice4 from "@/assets/arthur-office-4.jpg";
 import arthurOffice5 from "@/assets/arthur-office-5.jpg";
+import serviceStrategySession from "@/assets/service-strategy-session.jpg";
 
 const serviceImages: Record<string, string> = {
-  "prodazhi-i-crm": arthurOffice1,
-  "biznes-processy": arthurOffice2,
+  "sales-crm": arthurOffice1,
+  "business-processes": arthurOffice2,
   "marketing": arthurOffice4,
-  "upravlenie-i-strategiya": arthurOffice1,
-  "personal-i-komanda": arthurOffice5,
-  "tekhnologii-i-avtomatizaciya": arthurOffice4,
-  "klientskij-servis": arthurOffice2,
+  "management-strategy": arthurOffice1,
+  "hr-team": arthurOffice5,
+  "tech-automation": arthurOffice4,
+  "client-service": arthurOffice2,
+  "strategic-session": serviceStrategySession,
 };
 
 const useReveal = (threshold = 0.15) => {
@@ -70,7 +71,6 @@ const ServiceDetail = () => {
 
   return (
     <Layout>
-      {/* Hero with image */}
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="w-full h-full object-cover opacity-15" />
@@ -92,7 +92,6 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Expert section */}
       <section className="py-12 bg-card border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex items-center gap-6">
@@ -106,7 +105,6 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Charts */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
@@ -156,7 +154,6 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Service items */}
       <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8" ref={itemsReveal.ref}>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10">Что входит в направление</h2>

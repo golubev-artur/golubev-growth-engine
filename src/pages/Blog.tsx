@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import { blogPosts } from "@/data/blog";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import arthurOffice5 from "@/assets/arthur-office-5.jpg";
 
 const BlogPage = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,12 +19,8 @@ const BlogPage = () => {
 
   return (
     <Layout>
-      <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={arthurOffice5} alt="" className="w-full h-full object-cover opacity-15" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
-        </div>
-        <div className="container mx-auto px-4 md:px-8 relative">
+      <section className="py-20 md:py-28 bg-primary">
+        <div className="container mx-auto px-4 md:px-8">
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">Блог</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary-foreground tracking-tight leading-[1.08] text-wrap-balance">
             Статьи и практические руководства
@@ -50,6 +45,13 @@ const BlogPage = () => {
                   transition: `opacity 500ms ${80 + i * 70}ms cubic-bezier(0.16,1,0.3,1), transform 500ms ${80 + i * 70}ms cubic-bezier(0.16,1,0.3,1)`,
                 }}
               >
+                <div className="aspect-[3/2] overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
                 <div className="p-6">
                   <span className="inline-block text-xs font-medium bg-accent/10 text-accent px-2.5 py-1 rounded-md mb-3">
                     {post.category}
