@@ -8,6 +8,22 @@ import {
   AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from "recharts";
 
+// Service page images - consultant in different settings
+import arthurOffice1 from "@/assets/arthur-office-1.jpg";
+import arthurOffice2 from "@/assets/arthur-office-2.jpg";
+import arthurOffice4 from "@/assets/arthur-office-4.jpg";
+import arthurOffice5 from "@/assets/arthur-office-5.jpg";
+
+const serviceImages: Record<string, string> = {
+  "prodazhi-i-crm": arthurOffice1,
+  "biznes-processy": arthurOffice2,
+  "marketing": arthurOffice4,
+  "upravlenie-i-strategiya": arthurOffice1,
+  "personal-i-komanda": arthurOffice5,
+  "tekhnologii-i-avtomatizaciya": arthurOffice4,
+  "klientskij-servis": arthurOffice2,
+};
+
 const useReveal = (threshold = 0.15) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -44,6 +60,7 @@ const ServiceDetail = () => {
   if (!service) return <Navigate to="/services" replace />;
 
   const Icon = service.icon;
+  const heroImage = serviceImages[service.slug] || arthurOffice1;
 
   const comparisonData = service.benefitsLabels.map((label, i) => ({
     name: label,
@@ -53,9 +70,13 @@ const ServiceDetail = () => {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-20 md:py-28 bg-primary">
-        <div className="container mx-auto px-4 md:px-8">
+      {/* Hero with image */}
+      <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="" className="w-full h-full object-cover opacity-15" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
+        </div>
+        <div className="container mx-auto px-4 md:px-8 relative">
           <Link to="/services" className="inline-flex items-center gap-1 text-sm text-primary-foreground/50 hover:text-accent transition-colors mb-6">
             <ArrowLeft className="h-4 w-4" /> Все услуги
           </Link>
@@ -71,11 +92,24 @@ const ServiceDetail = () => {
         </div>
       </section>
 
+      {/* Expert section */}
+      <section className="py-12 bg-card border-b border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="flex items-center gap-6">
+            <img src={heroImage} alt="Консультант Golubev Consulting" className="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shadow-lg" />
+            <div>
+              <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Ваш эксперт</p>
+              <p className="text-lg font-bold text-foreground">Артур Голубев</p>
+              <p className="text-sm text-muted-foreground mt-1">Основатель Golubev Consulting · 12+ лет в консалтинге</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Charts */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
-            {/* Trend chart */}
             <div ref={chartReveal.ref} style={revealStyle(chartReveal.visible)} className="border border-border rounded-lg p-6 bg-card shadow-sm">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Динамика показателей</h3>
               <p className="text-xs text-muted-foreground mb-6">Типичный рост после внедрения наших рекомендаций</p>
@@ -84,10 +118,7 @@ const ServiceDetail = () => {
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(214 20% 92%)" />
                   <XAxis dataKey="name" tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }}
-                    itemStyle={{ color: "#fff" }}
-                  />
+                  <Tooltip contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} itemStyle={{ color: "#fff" }} />
                   <defs>
                     <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor={ACCENT_HSL} stopOpacity={0.3} />
@@ -99,7 +130,6 @@ const ServiceDetail = () => {
               </ResponsiveContainer>
             </div>
 
-            {/* Before/After comparison */}
             <div ref={compareReveal.ref} style={revealStyle(compareReveal.visible, 100)} className="border border-border rounded-lg p-6 bg-card shadow-sm">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">До и после</h3>
               <p className="text-xs text-muted-foreground mb-6">Средние результаты наших клиентов, %</p>
@@ -108,19 +138,12 @@ const ServiceDetail = () => {
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(214 20% 92%)" />
                   <XAxis dataKey="name" tick={{ fontSize: 11, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }}
-                    itemStyle={{ color: "#fff" }}
-                  />
+                  <Tooltip contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} itemStyle={{ color: "#fff" }} />
                   <Bar dataKey="before" name="До" radius={[4, 4, 0, 0]} maxBarSize={32}>
-                    {comparisonData.map((_, i) => (
-                      <Cell key={i} fill={ACCENT_LIGHT} fillOpacity={0.35} />
-                    ))}
+                    {comparisonData.map((_, i) => <Cell key={i} fill={ACCENT_LIGHT} fillOpacity={0.35} />)}
                   </Bar>
                   <Bar dataKey="after" name="После" radius={[4, 4, 0, 0]} maxBarSize={32}>
-                    {comparisonData.map((_, i) => (
-                      <Cell key={i} fill={ACCENT_HSL} />
-                    ))}
+                    {comparisonData.map((_, i) => <Cell key={i} fill={ACCENT_HSL} />)}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
@@ -157,9 +180,7 @@ const ServiceDetail = () => {
             <Button
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
-              onClick={() => {
-                window.location.href = "/#contact";
-              }}
+              onClick={() => { window.location.href = "/#contact"; }}
             >
               Обсудить проект
               <ArrowRight className="ml-2 h-4 w-4" />
