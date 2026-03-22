@@ -151,6 +151,22 @@ const ServiceDetail = () => {
               </div>
             </div>
           </div>
+
+          {/* Description under charts */}
+          <div className="mt-10 grid lg:grid-cols-2 gap-8">
+            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
+              <h3 className="text-lg font-bold text-foreground mb-3">Описание методологии</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Графики отражают типичную динамику ключевых показателей наших клиентов. Данные собраны на основе более чем 100 проектов за последние 5 лет. Мы используем проверенные методологии и адаптируем подход под специфику каждой компании, что позволяет достигать устойчивых результатов уже в первые 3-6 месяцев сотрудничества.
+              </p>
+            </div>
+            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
+              <h3 className="text-lg font-bold text-foreground mb-3">Обучение команды</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                {service.trainingDescription}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
