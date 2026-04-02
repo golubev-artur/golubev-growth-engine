@@ -17,7 +17,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/golubev-growth-engine">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
