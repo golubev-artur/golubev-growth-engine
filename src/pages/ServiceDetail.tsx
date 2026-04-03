@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { getServiceBySlug } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import ContactFormModal from "@/components/ContactFormModal";
 import {
   AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from "recharts";
@@ -52,6 +53,8 @@ const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const service = getServiceBySlug(slug || "");
 
+  const [formOpen, setFormOpen] = useState(false);
+
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
   const chartReveal = useReveal(0.2);
@@ -71,6 +74,7 @@ const ServiceDetail = () => {
 
   return (
     <Layout>
+      <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={service.title} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="w-full h-full object-cover opacity-15" />
@@ -193,7 +197,7 @@ const ServiceDetail = () => {
             <Button
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
-              onClick={() => { window.location.href = "/#contact"; }}
+              onClick={() => setFormOpen(true)}
             >
               Обсудить проект
               <ArrowRight className="ml-2 h-4 w-4" />

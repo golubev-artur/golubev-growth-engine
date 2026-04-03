@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="0.3" y2="0">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#2196F3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <!-- Raised fist punching upward -->
+  <g fill="white" transform="translate(130,60)">
+    <!-- Fingers (curled) -->
+    <rect x="0" y="80" width="55" height="70" rx="16"/>
+    <rect x="65" y="60" width="55" height="90" rx="16"/>
+    <rect x="130" y="60" width="55" height="90" rx="16"/>
+    <rect x="195" y="80" width="55" height="70" rx="16"/>
+    <!-- Thumb -->
+    <rect x="-20" y="140" width="50" height="55" rx="16" transform="rotate(-15, 0, 160)"/>
+    <!-- Palm -->
+    <rect x="0" y="135" width="250" height="100" rx="20"/>
+    <!-- Wrist / arm -->
+    <rect x="40" y="220" width="170" height="160" rx="24"/>
+  </g>
+</svg>
