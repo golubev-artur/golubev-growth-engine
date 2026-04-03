@@ -74,6 +74,13 @@ const BlogPost = () => {
 
       <section className="py-12 md:py-20 bg-background">
         <article className="container mx-auto px-4 md:px-8 max-w-3xl prose-container">
+          {/* Blog post image */}
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full h-56 md:h-72 object-cover rounded-xl shadow-md mb-8"
+          />
+
           {/* Author card */}
           <div className="flex items-center gap-4 mb-10 pb-8 border-b border-border">
             <img src={arthurMain} alt="Артур Голубев" className="w-14 h-14 rounded-full object-cover object-top shadow-md" />
