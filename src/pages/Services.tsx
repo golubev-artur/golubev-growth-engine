@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 import { services } from "@/data/services";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
@@ -19,6 +20,11 @@ const ServicesPage = () => {
 
   return (
     <Layout>
+      <Seo
+        title="Услуги — 8 направлений консалтинга для бизнеса"
+        description="Продажи и CRM, маркетинг, бизнес-процессы, управление, HR, автоматизация, клиентский сервис, стратегические сессии. 50 услуг для роста бизнеса."
+        path="/services"
+      />
       <section className="py-20 md:py-28 bg-primary">
         <div className="container mx-auto px-4 md:px-8">
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">Направления</p>

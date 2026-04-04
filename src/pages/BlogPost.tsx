@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 import { getBlogPostBySlug, blogPosts } from "@/data/blog";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
 import arthurMain from "@/assets/arthur-main.jpg";
@@ -53,6 +54,12 @@ const BlogPost = () => {
 
   return (
     <Layout>
+      <Seo
+        title={post.title}
+        description={post.excerpt}
+        path={`/blog/${post.slug}`}
+        type="article"
+      />
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={post.category} />
 
       <section className="py-20 md:py-28 bg-primary">

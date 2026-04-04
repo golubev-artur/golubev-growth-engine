@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 import { blogPosts } from "@/data/blog";
 import { ArrowRight, ArrowLeft, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -34,6 +35,11 @@ const BlogPage = () => {
 
   return (
     <Layout>
+      <Seo
+        title="Блог — статьи и руководства по развитию бизнеса"
+        description="Практические статьи о продажах, CRM, автоматизации, управлении и маркетинге. Опыт и инструменты из реальных проектов Golubev Consulting."
+        path="/blog"
+      />
       <section className="py-20 md:py-28 bg-primary">
         <div className="container mx-auto px-4 md:px-8">
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">Блог</p>

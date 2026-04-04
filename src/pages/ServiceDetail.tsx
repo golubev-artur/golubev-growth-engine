@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
@@ -74,6 +75,11 @@ const ServiceDetail = () => {
 
   return (
     <Layout>
+      <Seo
+        title={service.title}
+        description={service.description}
+        path={`/services/${service.slug}`}
+      />
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={service.title} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
         <div className="absolute inset-0">
