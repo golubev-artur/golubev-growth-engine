@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
-import { getServiceBySlug } from "@/data/services";
+import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import ContactFormModal from "@/components/ContactFormModal";
@@ -202,6 +202,41 @@ const ServiceDetail = () => {
               Обсудить проект
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Related services */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8">Другие направления</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {(() => {
+              const idx = services.findIndex((s) => s.slug === service.slug);
+              const others = services.filter((s) => s.slug !== service.slug);
+              return Array.from({ length: 3 }, (_, i) => others[(idx + i * 2 + 1) % others.length])
+                .filter((s, i, arr) => arr.findIndex((a) => a.slug === s.slug) === i);
+            })()
+              .map((related) => {
+                const RelIcon = related.icon;
+                return (
+                  <Link
+                    key={related.slug}
+                    to={`/services/${related.slug}`}
+                    className="group flex gap-4 p-5 rounded-xl border border-border bg-card hover:border-accent/30 hover:shadow-md transition-all"
+                  >
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent shrink-0">
+                      <RelIcon className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
+                        {related.title}
+                      </h4>
+                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{related.shortDesc}</p>
+                    </div>
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </section>

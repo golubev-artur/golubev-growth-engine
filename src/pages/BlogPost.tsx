@@ -16,11 +16,12 @@ const BlogPost = () => {
 
   if (!post) return <Navigate to="/blog" replace />;
 
-  // Related posts: same category first, then others, exclude current
-  const relatedPosts = [
-    ...blogPosts.filter((p) => p.slug !== post.slug && p.category === post.category),
-    ...blogPosts.filter((p) => p.slug !== post.slug && p.category !== post.category),
-  ].slice(0, 3);
+  // Related posts: unique per post using slug-based offset
+  const otherPosts = blogPosts.filter((p) => p.slug !== post.slug);
+  const postIndex = blogPosts.findIndex((p) => p.slug === post.slug);
+  const relatedPosts = Array.from({ length: 3 }, (_, i) =>
+    otherPosts[(postIndex + i * 2) % otherPosts.length]
+  ).filter((p, i, arr) => arr.findIndex((a) => a.slug === p.slug) === i);
 
   const renderContent = (content: string) => {
     return content.split("\n\n").map((block, i) => {
