@@ -86,7 +86,7 @@ const BlogPost = () => {
           <img
             src={post.image}
             alt={post.title}
-            className="w-full h-56 md:h-72 object-cover rounded-xl shadow-md mb-8"
+            className="w-full max-h-[32rem] object-contain rounded-xl shadow-md mb-8 bg-muted/30"
           />
 
           {/* Author card */}
@@ -133,7 +133,7 @@ const BlogPost = () => {
                     <img
                       src={related.image}
                       alt={related.title}
-                      className="w-20 h-20 rounded-lg object-cover shrink-0"
+                      className="w-20 h-20 rounded-lg object-cover object-top shrink-0"
                     />
                     <div className="min-w-0">
                       <span className="text-xs text-accent font-medium">{related.category}</span>
