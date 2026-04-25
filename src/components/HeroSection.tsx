@@ -55,8 +55,7 @@ const HeroSection = () => {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-primary-foreground/30 text-[hsl(215_40%_40%)] hover:text-white hover:bg-primary-foreground/10 active:scale-[0.97] transition-all text-base"
+                className="bg-green-600 text-white hover:bg-green-500 active:scale-[0.97] transition-all text-base px-8"
                 onClick={() => scrollTo("services")}
               >
                 Наши услуги
