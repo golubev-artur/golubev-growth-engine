@@ -79,6 +79,10 @@ const ServiceDetail = () => {
         title={service.title}
         description={service.description}
         path={`/services/${service.slug}`}
+        breadcrumbs={[
+          { name: "Услуги", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ]}
       />
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={service.title} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">

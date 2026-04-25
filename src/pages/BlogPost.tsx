@@ -59,6 +59,12 @@ const BlogPost = () => {
         description={post.excerpt}
         path={`/blog/${post.slug}`}
         type="article"
+        image={post.image}
+        publishedTime={post.date}
+        breadcrumbs={[
+          { name: "Блог", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]}
       />
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={post.category} />
 
