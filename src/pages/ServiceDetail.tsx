@@ -5,6 +5,12 @@ import Seo from "@/components/Seo";
 import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import ContactFormModal from "@/components/ContactFormModal";
 import {
   AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
@@ -83,6 +89,8 @@ const ServiceDetail = () => {
           { name: "Услуги", path: "/services" },
           { name: service.title, path: `/services/${service.slug}` },
         ]}
+        service={{ title: service.title, description: service.description }}
+        faqs={service.faqs}
       />
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={service.title} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
@@ -216,8 +224,27 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Related services */}
+      {/* FAQ */}
       <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8">Частые вопросы</h2>
+          <Accordion type="single" collapsible className="space-y-3">
+            {service.faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="border border-border rounded-lg bg-card px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:text-accent transition-colors">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground text-sm leading-relaxed">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* Related services */}
+      <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8">Другие направления</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

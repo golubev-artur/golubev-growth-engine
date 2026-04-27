@@ -5,6 +5,16 @@ interface Breadcrumb {
   path: string;
 }
 
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface ServiceData {
+  title: string;
+  description: string;
+}
+
 interface SeoProps {
   title?: string;
   description?: string;
@@ -13,6 +23,8 @@ interface SeoProps {
   image?: string;
   publishedTime?: string;
   breadcrumbs?: Breadcrumb[];
+  faqs?: Faq[];
+  service?: ServiceData;
 }
 
 const SITE = "https://golubev-consulting.ru";
@@ -46,10 +58,10 @@ const removeJsonLd = (id: string) => {
 };
 
 const resolveImage = (img?: string): string => {
-  if (!img) return `${SITE}/favicon-512.png`;
+  if (!img) return `${SITE}/og-image.svg`;
   if (img.startsWith("http")) return img;
   if (img.startsWith("/")) return `${SITE}${img}`;
-  return `${SITE}/favicon-512.png`;
+  return `${SITE}/og-image.svg`;
 };
 
 const Seo = ({
@@ -60,6 +72,8 @@ const Seo = ({
   image,
   publishedTime,
   breadcrumbs,
+  faqs,
+  service,
 }: SeoProps) => {
   const fullTitle = title ? `${title} — Golubev Consulting` : DEFAULT_TITLE;
   const desc = description || DEFAULT_DESC;
@@ -157,8 +171,46 @@ const Seo = ({
       document.title = DEFAULT_TITLE;
       removeJsonLd("article");
       removeJsonLd("breadcrumb");
+      removeJsonLd("service");
+      removeJsonLd("faq");
     };
-  }, [fullTitle, desc, url, type, ogImage, publishedTime, breadcrumbs]);
+    // Service schema
+    if (service) {
+      setJsonLd("service", {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+        url,
+        provider: {
+          "@type": "Organization",
+          name: "Golubev Consulting",
+          url: SITE,
+        },
+      });
+    } else {
+      removeJsonLd("service");
+    }
+
+    // FAQPage schema
+    if (faqs && faqs.length > 0) {
+      setJsonLd("faq", {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.answer,
+          },
+        })),
+      });
+    } else {
+      removeJsonLd("faq");
+    }
+
+  }, [fullTitle, desc, url, type, ogImage, publishedTime, breadcrumbs, faqs, service]);
 
   return null;
 };
