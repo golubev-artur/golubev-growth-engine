@@ -36,7 +36,7 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center py-24">
           <div className="space-y-6">
             <p className="text-accent text-sm font-semibold tracking-widest uppercase">
-              Golubev Consulting
+              ГОЛУБЕВ КОНСАЛТИНГ
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-[1.08] tracking-tight text-wrap-balance">
               Системный консалтинг для роста вашего бизнеса
