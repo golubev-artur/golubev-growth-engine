@@ -7,8 +7,8 @@ const Footer = () => (
     <div className="container mx-auto px-4 md:px-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
-          <Link to="/" className="text-lg font-bold text-primary-foreground tracking-tight">
-            Golubev <span className="text-accent">Consulting</span>
+          <Link to="/" className="inline-flex items-center">
+            <img src="/logo.png" alt="Голубев Консалтинг" className="h-10 w-auto" />
           </Link>
           <p className="text-primary-foreground/50 text-sm mt-3 max-w-xs">
             Системный консалтинг для малого и среднего бизнеса.
