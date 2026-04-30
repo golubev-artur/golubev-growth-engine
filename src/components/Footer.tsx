@@ -8,7 +8,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <Link to="/" className="inline-flex items-center">
-            <img src="/logo.png" alt="Голубев Консалтинг" className="h-10 w-auto" />
+            <img src="/logo-white.png" alt="Голубев Консалтинг" className="h-20 w-auto" />
           </Link>
           <p className="text-primary-foreground/50 text-sm mt-3 max-w-xs">
             Системный консалтинг для малого и среднего бизнеса.
