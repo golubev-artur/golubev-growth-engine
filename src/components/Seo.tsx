@@ -58,10 +58,10 @@ const removeJsonLd = (id: string) => {
 };
 
 const resolveImage = (img?: string): string => {
-  if (!img) return `${SITE}/og-image.svg`;
+  if (!img) return `${SITE}/og-image.png`;
   if (img.startsWith("http")) return img;
   if (img.startsWith("/")) return `${SITE}${img}`;
-  return `${SITE}/og-image.svg`;
+  return `${SITE}/og-image.png`;
 };
 
 const Seo = ({
