@@ -101,7 +101,7 @@ const BlogPost = () => {
             <img src={arthurMain} alt="Артур Голубев — основатель ГОЛУБЕВ КОНСАЛТИНГ, бизнес-консультант" loading="lazy" className="w-14 h-14 rounded-full object-cover object-top shadow-md" />
             <div>
               <p className="font-semibold text-foreground text-sm">Артур Голубев</p>
-              <p className="text-xs text-muted-foreground">Основатель Golubev Consulting</p>
+              <p className="text-xs text-muted-foreground">Основатель Голубев КОНСАЛТИНГ</p>
             </div>
           </div>
 

@@ -121,7 +121,7 @@ const ServiceDetail = () => {
             <div>
               <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Ваш эксперт</p>
               <p className="text-lg font-bold text-foreground">Артур Голубев</p>
-              <p className="text-sm text-muted-foreground mt-1">Основатель Golubev Consulting · 12+ лет в консалтинге</p>
+              <p className="text-sm text-muted-foreground mt-1">Основатель Голубев КОНСАЛТИНГ · 12+ лет в консалтинге</p>
             </div>
           </div>
         </div>
