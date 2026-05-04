@@ -91,13 +91,13 @@ const BlogPost = () => {
           {/* Blog post image */}
           <img
             src={post.image}
-            alt={post.title}
+            alt={`${post.title} — ГОЛУБЕВ КОНСАЛТИНГ`}
             className="w-full max-h-[32rem] object-contain rounded-xl shadow-md mb-8 bg-muted/30"
           />
 
           {/* Author card */}
           <div className="flex items-center gap-4 mb-10 pb-8 border-b border-border">
-            <img src={arthurMain} alt="Артур Голубев" className="w-14 h-14 rounded-full object-cover object-top shadow-md" />
+            <img src={arthurMain} alt="Артур Голубев — основатель ГОЛУБЕВ КОНСАЛТИНГ, бизнес-консультант" className="w-14 h-14 rounded-full object-cover object-top shadow-md" />
             <div>
               <p className="font-semibold text-foreground text-sm">Артур Голубев</p>
               <p className="text-xs text-muted-foreground">Основатель Golubev Consulting</p>

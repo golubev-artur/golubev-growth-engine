@@ -117,7 +117,7 @@ const ServiceDetail = () => {
       <section className="py-12 bg-card border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex items-center gap-6">
-            <img src={heroImage} alt="Консультант Golubev Consulting" className="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shadow-lg" />
+            <img src={heroImage} alt={`Артур Голубев — эксперт по направлению «${service.title}», ГОЛУБЕВ КОНСАЛТИНГ`} className="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shadow-lg" />
             <div>
               <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Ваш эксперт</p>
               <p className="text-lg font-bold text-foreground">Артур Голубев</p>
