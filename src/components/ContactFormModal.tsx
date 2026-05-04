@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Send, X } from "lucide-react";
+import { sendToTelegram } from "@/lib/telegram";
 
 const directions = [
   "Продажи и CRM",
@@ -29,18 +30,26 @@ const ContactFormModal = ({ open, onClose, defaultDirection }: ContactFormModalP
 
   if (!open) return null;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Заявка отправлена",
-        description: "Мы свяжемся с вами в ближайшее время.",
-      });
-      (e.target as HTMLFormElement).reset();
-      onClose();
-    }, 800);
+    const form = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form));
+    await sendToTelegram({
+      name: data.name as string,
+      phone: data.phone as string,
+      email: data.email as string,
+      direction: data.direction as string,
+      message: data.message as string,
+      source: `Модальная форма — ${window.location.pathname}`,
+    });
+    setLoading(false);
+    toast({
+      title: "Заявка отправлена",
+      description: "Мы свяжемся с вами в ближайшее время.",
+    });
+    form.reset();
+    onClose();
   };
 
   return (
