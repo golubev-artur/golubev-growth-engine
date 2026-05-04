@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone } from "lucide-react";
 import { services } from "@/data/services";
 
 const Footer = () => (
@@ -35,15 +34,7 @@ const Footer = () => (
 
         <div>
           <h4 className="text-sm font-semibold text-primary-foreground mb-4">Контакты</h4>
-          <div className="flex flex-col gap-2 text-sm">
-            <a href="tel:+79001234567" className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> +7 (900) 123-45-67
-            </a>
-            <a href="mailto:info@golubev.consulting" className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
-              <Mail className="h-4 w-4" /> info@golubev.consulting
-            </a>
-          </div>
-          <div className="mt-6">
+          <div className="mt-2">
             <Link to="/blog" className="text-sm text-accent hover:text-accent/80 transition-colors">
               Читать блог →
             </Link>
