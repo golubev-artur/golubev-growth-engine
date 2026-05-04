@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ContactFormModal from "@/components/ContactFormModal";
 
 const navLinks = [
   { to: "/services", label: "Услуги" },
@@ -12,6 +13,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
   const location = useLocation();
 
   const handleNavClick = (to: string) => {
@@ -27,6 +29,8 @@ const Navbar = () => {
   };
 
   return (
+    <>
+    <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} />
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between py-0 px-4 md:px-8">
         <Link to="/" className="inline-flex items-center self-center">
@@ -57,7 +61,7 @@ const Navbar = () => {
           <Button
             size="sm"
             className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
-            onClick={() => handleNavClick("/#contact")}
+            onClick={() => setFormOpen(true)}
           >
             Оставить заявку
           </Button>
@@ -93,13 +97,14 @@ const Navbar = () => {
           <Button
             size="sm"
             className="w-full bg-accent text-accent-foreground"
-            onClick={() => handleNavClick("/#contact")}
+            onClick={() => { setMobileOpen(false); setFormOpen(true); }}
           >
             Оставить заявку
           </Button>
         </div>
       )}
     </nav>
+    </>
   );
 };
 
