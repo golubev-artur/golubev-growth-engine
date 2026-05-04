@@ -95,7 +95,7 @@ const ServiceDetail = () => {
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={service.title} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover object-top opacity-15" />
+          <img src={heroImage} alt="" loading="lazy" className="w-full h-full object-cover object-top opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
         </div>
         <div className="container mx-auto px-4 md:px-8 relative">
@@ -117,7 +117,7 @@ const ServiceDetail = () => {
       <section className="py-12 bg-card border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex items-center gap-6">
-            <img src={heroImage} alt={`Артур Голубев — эксперт по направлению «${service.title}», ГОЛУБЕВ КОНСАЛТИНГ`} className="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shadow-lg" />
+            <img src={heroImage} alt={`Артур Голубев — эксперт по направлению «${service.title}», ГОЛУБЕВ КОНСАЛТИНГ`} loading="lazy" className="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shadow-lg" />
             <div>
               <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Ваш эксперт</p>
               <p className="text-lg font-bold text-foreground">Артур Голубев</p>

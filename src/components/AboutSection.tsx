@@ -37,6 +37,7 @@ const AboutSection = () => {
             <img
               src={arthurAbout}
               alt="Артур Голубев — основатель ГОЛУБЕВ КОНСАЛТИНГ"
+              loading="lazy"
               className="w-full max-w-sm mx-auto rounded-xl shadow-2xl object-cover aspect-[2/3]"
             />
           </div>
