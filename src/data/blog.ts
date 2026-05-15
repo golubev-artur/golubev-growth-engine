@@ -1,15 +1,15 @@
-import blogCrm from "@/assets/blog-crm.jpg";
-import blogOkr from "@/assets/blog-okr.jpg";
-import blogAutomation from "@/assets/blog-automation.jpg";
-import blogHr from "@/assets/blog-hr.jpg";
-import blogNps from "@/assets/blog-nps.jpg";
-import blogAi from "@/assets/blog-ai.jpg";
-import arthurOffice1 from "@/assets/arthur-office-1.jpg";
-import arthurOffice2 from "@/assets/arthur-office-2.jpg";
-import arthurOffice4 from "@/assets/arthur-office-4.jpg";
-import arthurOffice5 from "@/assets/arthur-office-5.jpg";
-import serviceStrategy from "@/assets/service-strategy-session.jpg";
-import arthurMain from "@/assets/arthur-main.jpg";
+const blogCrm = "/blog/blog-crm.jpg";
+const blogOkr = "/blog/blog-okr.jpg";
+const blogAutomation = "/blog/blog-automation.jpg";
+const blogHr = "/blog/blog-hr.jpg";
+const blogNps = "/blog/blog-nps.jpg";
+const blogAi = "/blog/blog-ai.jpg";
+const arthurOffice1 = "/blog/arthur-office-1.jpg";
+const arthurOffice2 = "/blog/arthur-office-2.jpg";
+const arthurOffice4 = "/blog/arthur-office-4.jpg";
+const arthurOffice5 = "/blog/arthur-office-5.jpg";
+const serviceStrategy = "/blog/service-strategy-session.jpg";
+const arthurMain = "/blog/arthur-main.jpg";
 
 export interface BlogPost {
   slug: string;

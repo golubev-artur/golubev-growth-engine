@@ -12,12 +12,40 @@
       <link>https://golubev-consulting.ru</link>
     </image>
   <item>
+    <title>Контент-стратегия для B2B компании: пример плана, который приводит клиентов</title>
+    <link>https://golubev-consulting.ru/blog/content-strategy-b2b</link>
+    <guid>https://golubev-consulting.ru/blog/content-strategy-b2b</guid>
+    <description>Как построить контент-стратегию для B2B компании, которая генерирует лиды, а не просто создаёт иллюзию активности — конкретный план с примерами форматов и каналов.</description>
+    <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    <category>Маркетинг</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-main.jpg" type="image/jpeg" length="0"/>
+  </item>
+  <item>
+    <title>Интеграция CRM с телефонией: как настроить и перестать терять звонки</title>
+    <link>https://golubev-consulting.ru/blog/crm-telephony-integration</link>
+    <guid>https://golubev-consulting.ru/blog/crm-telephony-integration</guid>
+    <description>Пошаговая инструкция по интеграции CRM с телефонией — какие задачи решает связка, как выбрать провайдера и настроить систему, чтобы каждый звонок фиксировался автоматически.</description>
+    <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
+    <category>Автоматизация</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
+  </item>
+  <item>
+    <title>Корпоративная культура: как выстроить с нуля и не скатиться в формальность</title>
+    <link>https://golubev-consulting.ru/blog/corporate-culture-from-scratch</link>
+    <guid>https://golubev-consulting.ru/blog/corporate-culture-from-scratch</guid>
+    <description>Почему корпоративная культура — это не про пиццу по пятницам, а про правила игры, которые определяют, как люди работают, принимают решения и относятся к клиентам.</description>
+    <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
+    <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
+  </item>
+  <item>
     <title>Как нанять хорошего менеджера по продажам: чек-лист для собственника</title>
     <link>https://golubev-consulting.ru/blog/hire-good-sales-manager</link>
     <guid>https://golubev-consulting.ru/blog/hire-good-sales-manager</guid>
     <description>Почему большинство наймов менеджеров по продажам заканчиваются увольнением через три месяца — и как выстроить процесс, чтобы находить тех, кто реально продаёт.</description>
     <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Оценка персонала 360 градусов: как провести и не превратить в формальность</title>
@@ -26,6 +54,7 @@
     <description>Пошаговая инструкция по проведению оценки 360 градусов в малом и среднем бизнесе — от подготовки анкет до работы с результатами, чтобы люди реально росли.</description>
     <pubDate>Mon, 11 May 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Матрица ответственности RACI для малого бизнеса: как внедрить и перестать разруливать всё вручную</title>
@@ -34,6 +63,7 @@
     <description>Как построить матрицу RACI в малом бизнесе — зачем она нужна, как заполнить за один вечер и почему это лучший инструмент против «я думал, это не моя задача».</description>
     <pubDate>Sun, 10 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как избавиться от хаоса в компании: системный подход для собственника</title>
@@ -42,6 +72,7 @@
     <description>Почему в компании всё держится на ручном управлении, задачи теряются и каждый день — тушение пожаров. Пошаговый план, как навести порядок без бюрократии.</description>
     <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Организационная структура малого бизнеса: примеры и пошаговое построение</title>
@@ -50,6 +81,7 @@
     <description>Как выстроить организационную структуру в малом бизнесе — какие модели работают, типичные ошибки и пошаговый план от хаоса к понятной иерархии.</description>
     <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Регламенты для сотрудников: как написать, чтобы их читали и выполняли</title>
@@ -58,6 +90,7 @@
     <description>Практическое руководство по написанию регламентов — какие документы нужны в первую очередь, как их оформить и внедрить, чтобы команда реально работала по стандартам.</description>
     <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Описание бизнес-процессов для малого бизнеса: с чего начать и не утонуть в документации</title>
@@ -66,6 +99,7 @@
     <description>Практическое руководство по описанию бизнес-процессов в малом бизнесе — какие процессы описывать первыми, как это сделать быстро и чтобы документы реально использовала команда.</description>
     <pubDate>Wed, 06 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-automation.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как поставить цели команде на квартал: система, которая работает без напоминаний</title>
@@ -74,6 +108,7 @@
     <description>Пошаговая инструкция по квартальному целеполаганию для команды — от формулировки целей до еженедельного трекинга, без OKR-теории и бесконечных встреч.</description>
     <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Финансовая модель для малого бизнеса в Excel: как построить за один день и перестать работать вслепую</title>
@@ -82,6 +117,7 @@
     <description>Три блока, пять шагов и три сценария — рабочая финансовая модель в Excel, которая показывает кассовые разрывы за 6 недель до того, как они случились.</description>
     <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Антикризисный план для малого бизнеса: 5 шагов, чтобы не потонуть в кризис</title>
@@ -90,6 +126,7 @@
     <description>Как действовать, когда падает выручка и горят деньги — пять конкретных шагов, которые помогут малому бизнесу пережить кризис без хаоса и закрытия.</description>
     <pubDate>Sun, 03 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-main.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Управленческая отчётность для собственника: шаблон и ключевые показатели</title>
@@ -98,6 +135,7 @@
     <description>Три отчёта, которые дают полную картину бизнеса за 15 минут в неделю — без бухгалтерского образования и сложных систем.</description>
     <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Аудит отдела продаж: что проверить в первую очередь и как это сделать</title>
@@ -106,6 +144,7 @@
     <description>Пошаговый разбор аудита отдела продаж — 7 ключевых блоков, которые показывают, где теряются деньги, клиенты и время менеджеров.</description>
     <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как увеличить конверсию воронки продаж: 8 инструментов с реальными примерами</title>
@@ -114,6 +153,7 @@
     <description>Разбираем конкретные точки роста в воронке продаж и практические инструменты, которые увеличивают конверсию на каждом этапе — без магии и теории.</description>
     <pubDate>Thu, 30 Apr 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Внедрение amoCRM для B2B-компании: пошаговый план без хаоса и слитых лидов</title>
@@ -122,6 +162,7 @@
     <description>Как правильно внедрить amoCRM в B2B-компании — от описания процессов до работы с командой — чтобы система реально заработала, а не превратилась в мусорник.</description>
     <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как построить отдел продаж с нуля: пошаговый план для малого бизнеса</title>
@@ -130,6 +171,7 @@
     <description>Практическое руководство по созданию отдела продаж в компании, где раньше продавал только собственник — без лишних затрат и хаоса при найме.</description>
     <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как собственнику выйти из операционки: пошаговый план на 90 дней</title>
@@ -138,6 +180,7 @@
     <description>Практический план для владельца бизнеса, который хочет перестать тушить пожары и заняться стратегией.</description>
     <pubDate>Mon, 20 Apr 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>KPI для менеджера по продажам B2B: примеры и формулы расчёта</title>
@@ -146,6 +189,7 @@
     <description>Какие показатели реально работают в B2B-продажах, как их считать и как привязать к мотивации менеджера.</description>
     <pubDate>Fri, 17 Apr 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как провести стратегическую сессию с командой самостоятельно: пошаговый сценарий</title>
@@ -154,6 +198,7 @@
     <description>Готовый сценарий стратегической сессии для малого бизнеса — без дорогого фасилитатора, но с реальным результатом.</description>
     <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Скрипт холодного звонка B2B: структура, примеры и работа с возражениями</title>
@@ -162,6 +207,7 @@
     <description>Готовая структура скрипта для холодных звонков в B2B, которая работает даже без опытных продавцов.</description>
     <pubDate>Sat, 11 Apr 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-automation.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как выстроить систему найма без HR-отдела: инструкция для малого бизнеса</title>
@@ -170,6 +216,7 @@
     <description>Пошаговая система подбора персонала для компаний, где нет выделенного HR — но нанимать нужно быстро и качественно.</description>
     <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>План адаптации нового сотрудника: шаблон на 30-60-90 дней</title>
@@ -178,6 +225,7 @@
     <description>Готовая структура онбординга, которая сокращает время выхода на результат и снижает текучесть в испытательный срок.</description>
     <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как посчитать ROI от обучения сотрудников: формула и примеры</title>
@@ -186,6 +234,7 @@
     <description>Методика расчёта возврата инвестиций в обучение персонала — от простых формул до модели Киркпатрика.</description>
     <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как сделать планёрки эффективными: система встреч, которая не крадёт время</title>
@@ -194,6 +243,7 @@
     <description>Как выстроить ритм совещаний в компании так, чтобы команда синхронизировалась, а не тратила часы впустую.</description>
     <pubDate>Mon, 30 Mar 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Unit-экономика: как понять, зарабатывает ли ваш бизнес на каждом клиенте</title>
@@ -202,6 +252,7 @@
     <description>Разбираем ключевые метрики юнит-экономики — LTV, CAC, маржинальность — и как использовать их для принятия решений.</description>
     <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>База знаний для сотрудников: как создать с нуля и заставить использовать</title>
@@ -210,6 +261,7 @@
     <description>Пошаговое руководство по созданию корпоративной базы знаний — от выбора инструмента до внедрения культуры документирования.</description>
     <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
     <category>Бизнес-процессы</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-ai.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Делегирование без потери качества: фреймворк для руководителя</title>
@@ -218,6 +270,7 @@
     <description>Как передавать задачи команде так, чтобы результат не страдал, а вы освобождали время для стратегии.</description>
     <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Система мотивации отдела продаж: как платить за результат, а не за присутствие</title>
@@ -226,6 +279,7 @@
     <description>Как выстроить схему вознаграждения для менеджеров по продажам, которая стимулирует правильное поведение и масштабируется с ростом команды.</description>
     <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-nps.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Аналитика воронки продаж: где вы теряете деньги</title>
@@ -234,6 +288,7 @@
     <description>Как находить слабые места в воронке, считать конверсии между этапами и принимать решения на основе данных.</description>
     <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Почему CRM не работает: 5 ошибок внедрения</title>
@@ -242,6 +297,7 @@
     <description>Разбираем типичные причины, по которым компании не получают отдачи от CRM-системы, и как это исправить.</description>
     <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Система наставничества в компании: как построить с нуля и не потерять наставников</title>
@@ -250,6 +306,7 @@
     <description>Практическое руководство по запуску программы наставничества — от выбора наставников до измерения эффективности.</description>
     <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-main.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Стратегия ценообразования в B2B: как перестать продавать дёшево и не потерять клиентов</title>
@@ -258,6 +315,7 @@
     <description>Как выстроить ценовую стратегию, которая отражает реальную ценность продукта и позволяет повышать цены без потери клиентской базы.</description>
     <pubDate>Thu, 12 Mar 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-okr.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Customer Journey Map: как увидеть бизнес глазами клиента</title>
@@ -266,6 +324,7 @@
     <description>Пошаговое руководство по созданию карты пути клиента — от первого касания до повторной покупки.</description>
     <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
     <category>Клиентский сервис</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>OKR для малого бизнеса: как ставить цели, которые достигаются</title>
@@ -274,6 +333,7 @@
     <description>Практическое руководство по внедрению OKR в компании от 10 до 100 сотрудников.</description>
     <pubDate>Sun, 08 Mar 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-okr.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Управление изменениями: почему 70% трансформаций проваливаются</title>
@@ -282,6 +342,7 @@
     <description>Как внедрять изменения в компании так, чтобы команда не саботировала, а поддерживала новые процессы.</description>
     <pubDate>Mon, 02 Mar 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>С чего начать автоматизацию бизнес-процессов</title>
@@ -290,6 +351,7 @@
     <description>Пошаговый план автоматизации для компаний, которые тонут в рутине и ручных операциях.</description>
     <pubDate>Sat, 28 Feb 2026 00:00:00 GMT</pubDate>
     <category>Бизнес-процессы</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-automation.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Цифровая трансформация малого бизнеса: с чего начать в 2026 году</title>
@@ -298,6 +360,7 @@
     <description>Практичный план цифровизации для компаний с оборотом от 10 до 500 млн рублей — без лишних затрат.</description>
     <pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate>
     <category>Технологии и автоматизация</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-main.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>Как удержать ключевых сотрудников без повышения зарплаты</title>
@@ -306,6 +369,7 @@
     <description>Нематериальная мотивация, карьерные треки и корпоративная культура как инструменты удержания.</description>
     <pubDate>Fri, 20 Feb 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>NPS на практике: как измерять и что делать с результатами</title>
@@ -314,6 +378,7 @@
     <description>Полное руководство по внедрению Net Promoter Score — от первого опроса до системных улучшений.</description>
     <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>
     <category>Клиентский сервис</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-nps.jpg" type="image/jpeg" length="0"/>
   </item>
   <item>
     <title>ИИ-инструменты, которые уже экономят бизнесу часы в день</title>
@@ -322,6 +387,7 @@
     <description>Обзор практичных AI-решений для продаж, маркетинга, HR и операционных задач.</description>
     <pubDate>Thu, 05 Feb 2026 00:00:00 GMT</pubDate>
     <category>Технологии и автоматизация</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-ai.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
