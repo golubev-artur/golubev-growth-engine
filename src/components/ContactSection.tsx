@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Send } from "lucide-react";
+import { Send, Phone } from "lucide-react";
 import { sendToTelegram } from "@/lib/telegram";
 
 const directions = [
@@ -73,6 +73,13 @@ const ContactSection = () => {
           <p className="text-muted-foreground">
             Заполните форму — мы свяжемся с вами в течение рабочего дня.
           </p>
+          <a
+            href="tel:+79261692114"
+            className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors text-base font-medium"
+          >
+            <Phone className="h-4 w-4" />
+            +7 (926) 169-21-14
+          </a>
         </div>
 
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
