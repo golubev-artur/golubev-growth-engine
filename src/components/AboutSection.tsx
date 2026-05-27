@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import arthurAbout from "@/assets/arthur-main.jpg";
+import teamPhoto from "@/assets/team-photo.jpg";
 
 const stats = [
   { value: "12+", label: "лет опыта" },
@@ -35,10 +35,10 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-2">
             <img
-              src={arthurAbout}
-              alt="Артур Голубев — основатель ГОЛУБЕВ КОНСАЛТИНГ"
+              src={teamPhoto}
+              alt="Команда ГОЛУБЕВ КОНСАЛТИНГ"
               loading="lazy"
-              className="w-full max-w-sm mx-auto rounded-xl shadow-2xl object-cover aspect-[2/3]"
+              className="w-full max-w-lg mx-auto rounded-xl shadow-2xl object-cover aspect-[16/9]"
             />
           </div>
           <div className="lg:col-span-3">
