@@ -24,7 +24,7 @@ const PromoVideoSection = () => {
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto relative group cursor-pointer" onClick={toggle}>
+        <div className="max-w-6xl mx-auto relative group cursor-pointer" onClick={toggle}>
           <div className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
             <video
               ref={videoRef}
