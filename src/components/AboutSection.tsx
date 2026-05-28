@@ -11,6 +11,7 @@ const stats = [
 const AboutSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [lightbox, setLightbox] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -38,7 +39,8 @@ const AboutSection = () => {
               src={teamPhoto}
               alt="Команда ГОЛУБЕВ КОНСАЛТИНГ"
               loading="lazy"
-              className="w-full max-w-lg mx-auto rounded-xl shadow-2xl object-cover aspect-[16/9]"
+              className="w-full max-w-lg mx-auto rounded-xl shadow-2xl object-cover aspect-[16/9] cursor-zoom-in"
+              onClick={() => setLightbox(true)}
             />
           </div>
           <div className="lg:col-span-3">
@@ -72,6 +74,18 @@ const AboutSection = () => {
           ))}
         </div>
       </div>
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-zoom-out"
+          onClick={() => setLightbox(false)}
+        >
+          <img
+            src={teamPhoto}
+            alt="Команда ГОЛУБЕВ КОНСАЛТИНГ"
+            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg"
+          />
+        </div>
+      )}
     </section>
   );
 };
