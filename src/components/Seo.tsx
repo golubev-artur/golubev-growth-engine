@@ -167,13 +167,6 @@ const Seo = ({
       removeJsonLd("breadcrumb");
     }
 
-    return () => {
-      document.title = DEFAULT_TITLE;
-      removeJsonLd("article");
-      removeJsonLd("breadcrumb");
-      removeJsonLd("service");
-      removeJsonLd("faq");
-    };
     // Service schema
     if (service) {
       setJsonLd("service", {
@@ -209,6 +202,14 @@ const Seo = ({
     } else {
       removeJsonLd("faq");
     }
+
+    return () => {
+      document.title = DEFAULT_TITLE;
+      removeJsonLd("article");
+      removeJsonLd("breadcrumb");
+      removeJsonLd("service");
+      removeJsonLd("faq");
+    };
 
   }, [fullTitle, desc, url, type, ogImage, publishedTime, breadcrumbs, faqs, service]);
 
