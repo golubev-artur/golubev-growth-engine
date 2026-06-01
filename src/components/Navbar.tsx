@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <>
     <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} />
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+    <nav aria-label="Главная навигация" className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between py-0 px-4 md:px-8">
         <Link to="/" className="inline-flex items-center self-center">
           <img src="/logo.png" alt="Голубев Консалтинг" loading="eager" className="h-[100px] w-auto" />
@@ -67,7 +67,7 @@ const Navbar = () => {
           </Button>
         </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button aria-label="Открыть меню" className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
