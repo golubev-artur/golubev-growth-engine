@@ -31,10 +31,15 @@ const Footer = () => (
               <Mail className="h-3.5 w-3.5 shrink-0" />
               info@golubev-consulting.ru
             </a>
-            <span className="flex items-center gap-2 text-sm text-primary-foreground/60">
-              <MapPin className="h-3.5 w-3.5 shrink-0" />
-              Москва · Онлайн по всей России и СНГ
-            </span>
+            <a
+              href="https://maps.yandex.ru/?text=Мясницкая+ул.,+46+стр.+1,+Москва"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2 text-sm text-primary-foreground/60 hover:text-accent transition-colors"
+            >
+              <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+              <span>г. Москва, м. Красные ворота,<br />Мясницкая ул., 46 стр. 1</span>
+            </a>
           </div>
         </div>
 

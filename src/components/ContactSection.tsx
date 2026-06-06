@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Phone } from "lucide-react";
+import { Send, Phone, MapPin } from "lucide-react";
 import { sendToTelegram } from "@/lib/telegram";
 
 const directions = [
@@ -79,6 +79,15 @@ const ContactSection = () => {
           >
             <Phone className="h-4 w-4" />
             +7 (926) 169-21-14
+          </a>
+          <a
+            href="https://maps.yandex.ru/?text=Мясницкая+ул.,+46+стр.+1,+Москва"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-3 px-5 py-2.5 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors text-sm font-medium"
+          >
+            <MapPin className="h-4 w-4" />
+            м. Красные ворота, Мясницкая ул., 46 стр. 1
           </a>
         </div>
 
