@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import { blogPosts } from "@/data/blog";
-import BlogBanner from "@/components/BlogBanner";
 import { ArrowRight, ArrowLeft, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
 const POSTS_PER_PAGE = 6;
@@ -60,28 +59,36 @@ const BlogPage = () => {
               <Link
                 key={post.slug}
                 to={`/blog/${post.slug}`}
-                className="group block border border-border rounded-lg overflow-hidden bg-card shadow-sm hover:shadow-lg hover:border-accent/30 transition-all active:scale-[0.98]"
+                className="group block border border-border rounded-lg overflow-hidden bg-card shadow-sm hover:shadow-lg transition-all active:scale-[0.98]"
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? "translateY(0)" : "translateY(14px)",
                   transition: `opacity 500ms ${80 + i * 70}ms cubic-bezier(0.16,1,0.3,1), transform 500ms ${80 + i * 70}ms cubic-bezier(0.16,1,0.3,1)`,
                 }}
               >
-                {/* Баннер вместо jpg */}
                 <div className="aspect-[3/2] overflow-hidden">
-                  <BlogBanner
-                    category={post.category}
-                    title={post.title}
-                    readTime={post.readTime}
-                    date={post.date}
-                    index={startIdx + i}
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-5">
-                  <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors leading-snug line-clamp-2">
+                <div className="p-6">
+                  <span className="inline-block text-xs font-medium bg-accent/10 text-accent px-2.5 py-1 rounded-md mb-3">
+                    {post.category}
+                  </span>
+                  <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors mb-2 leading-snug">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-2 line-clamp-2">{post.excerpt}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> {new Date(post.date).toLocaleDateString("ru-RU")}</span>
+                      <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {post.readTime}</span>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
                 </div>
               </Link>
             ))}
