@@ -12,6 +12,7 @@ import BlogPost from "./pages/BlogPost";
 import Privacy from "./pages/Privacy";
 import Press from "./pages/Press";
 import FaqPage from "./pages/FaqPage";
+import Presentation from "./pages/Presentation";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/press" element={<Press />} />
           <Route path="/faq" element={<FaqPage />} />
+          <Route path="/presentation" element={<Presentation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

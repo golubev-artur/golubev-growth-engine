@@ -6,7 +6,6 @@ import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import PromoVideoSection from "@/components/PromoVideoSection";
 import FaqSection from "@/components/FaqSection";
-import PresentationGate from "@/components/PresentationGate";
 
 const Index = () => (
   <Layout>
@@ -20,7 +19,6 @@ const Index = () => (
     <ServicesSection />
     <AboutSection />
     <FaqSection />
-    <PresentationGate />
     <ContactSection />
   </Layout>
 );

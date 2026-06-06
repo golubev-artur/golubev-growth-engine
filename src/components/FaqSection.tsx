@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { generalFaqs } from "@/data/faq";
 
-const categories = ["Все", "Общее", "Стоимость", "Результаты", "Процесс"];
+const VISIBLE_COUNT = 5;
+
+// Первые 5 — самые частые и короткие для однородного вида на главной
+const PREVIEW_INDICES = [0, 4, 6, 7, 10]; // Как проходит встреча / Почему 250к / Диагностика / Гарантия / Менять всё сразу
 
 const FaqSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("Все");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -21,9 +25,9 @@ const FaqSection = () => {
     return () => obs.disconnect();
   }, []);
 
-  const filtered = activeCategory === "Все"
-    ? generalFaqs
-    : generalFaqs.filter((f) => f.category === activeCategory);
+  const previewFaqs = PREVIEW_INDICES.map((i) => generalFaqs[i]).filter(Boolean);
+  const extraFaqs = generalFaqs.filter((_, i) => !PREVIEW_INDICES.includes(i));
+  const shown = expanded ? [...previewFaqs, ...extraFaqs] : previewFaqs;
 
   return (
     <section id="faq" className="py-24 md:py-32 bg-background">
@@ -45,31 +49,14 @@ const FaqSection = () => {
             Ответы на вопросы, которые нам задают чаще всего
           </p>
 
-          {/* Category filter */}
-          <div className="flex flex-wrap gap-2 justify-center mb-8">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => { setActiveCategory(cat); setOpenIndex(null); }}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === cat
-                    ? "bg-accent text-accent-foreground shadow-sm"
-                    : "bg-card text-muted-foreground hover:bg-accent/10 hover:text-accent border border-border"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
           {/* Accordion */}
           <div className="space-y-2">
-            {filtered.map((faq, i) => {
+            {shown.map((faq, i) => {
               const isOpen = openIndex === i;
               return (
                 <div
-                  key={i}
-                  className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+                  key={faq.question}
+                  className={`rounded-xl border transition-colors duration-200 overflow-hidden ${
                     isOpen ? "border-accent/40 bg-accent/5" : "border-border bg-card"
                   }`}
                   style={{
@@ -90,7 +77,7 @@ const FaqSection = () => {
                     />
                   </button>
                   <div
-                    className="overflow-hidden transition-all duration-200"
+                    className="overflow-hidden transition-all duration-300"
                     style={{ maxHeight: isOpen ? "400px" : "0px" }}
                   >
                     <p className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed">
@@ -100,6 +87,33 @@ const FaqSection = () => {
                 </div>
               );
             })}
+          </div>
+
+          {/* Show more / collapse */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+            {!expanded ? (
+              <button
+                onClick={() => { setExpanded(true); setOpenIndex(null); }}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border bg-card text-sm font-medium text-muted-foreground hover:border-accent/40 hover:text-accent transition-all"
+              >
+                <ChevronDown className="h-4 w-4" />
+                Показать все вопросы ({generalFaqs.length})
+              </button>
+            ) : (
+              <button
+                onClick={() => { setExpanded(false); setOpenIndex(null); }}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border bg-card text-sm font-medium text-muted-foreground hover:border-accent/40 hover:text-accent transition-all"
+              >
+                <ChevronDown className="h-4 w-4 rotate-180" />
+                Свернуть
+              </button>
+            )}
+            <Link
+              to="/faq"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent/80 transition-colors"
+            >
+              Все вопросы на отдельной странице <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </div>
       </div>

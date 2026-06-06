@@ -74,7 +74,7 @@ const Footer = () => (
               { to: "/blog", label: "Блог" },
               { to: "/faq", label: "FAQ" },
               { to: "/press", label: "Для СМИ" },
-              { to: "/#get-presentation", label: "Скачать презентацию" },
+              { to: "/presentation", label: "Скачать презентацию" },
               { to: "/privacy", label: "Политика конфиденциальности" },
             ].map((item) => (
               <li key={item.to}>
@@ -136,7 +136,7 @@ const Footer = () => (
           </Link>
           <div className="mt-3">
             <Link
-              to="/#get-presentation"
+              to="/presentation"
               className="inline-flex items-center gap-1.5 text-sm text-primary-foreground/55 hover:text-accent transition-colors"
             >
               Скачать презентацию →
