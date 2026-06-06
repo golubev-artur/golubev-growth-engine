@@ -32,7 +32,7 @@ const FaqPage = () => {
           </Link>
         </div>
       </section>
-      <FaqSection />
+      <FaqSection showAll />
     </Layout>
   );
 };

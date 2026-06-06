@@ -3,14 +3,20 @@ import { ChevronDown, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { generalFaqs } from "@/data/faq";
 
-const VISIBLE_COUNT = 5;
+const categories = ["Все", "Общее", "Стоимость", "Результаты", "Процесс"];
 
-// Первые 5 — самые частые и короткие для однородного вида на главной
-const PREVIEW_INDICES = [0, 4, 6, 7, 10]; // Как проходит встреча / Почему 250к / Диагностика / Гарантия / Менять всё сразу
+// На главной показываем первые N вопросов из выбранной категории, остальные скрыты
+const PREVIEW_COUNT = 5;
 
-const FaqSection = () => {
+interface FaqSectionProps {
+  /** false = главная (5 вопросов + «показать все»), true = отдельная страница (все сразу) */
+  showAll?: boolean;
+}
+
+const FaqSection = ({ showAll = false }: FaqSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Все");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [expanded, setExpanded] = useState(false);
 
@@ -25,9 +31,20 @@ const FaqSection = () => {
     return () => obs.disconnect();
   }, []);
 
-  const previewFaqs = PREVIEW_INDICES.map((i) => generalFaqs[i]).filter(Boolean);
-  const extraFaqs = generalFaqs.filter((_, i) => !PREVIEW_INDICES.includes(i));
-  const shown = expanded ? [...previewFaqs, ...extraFaqs] : previewFaqs;
+  // Сбрасываем раскрытие при смене категории
+  const handleCategory = (cat: string) => {
+    setActiveCategory(cat);
+    setOpenIndex(null);
+    setExpanded(false);
+  };
+
+  const filtered = activeCategory === "Все"
+    ? generalFaqs
+    : generalFaqs.filter((f) => f.category === activeCategory);
+
+  const shown = (showAll || expanded) ? filtered : filtered.slice(0, PREVIEW_COUNT);
+  const hasMore = !showAll && !expanded && filtered.length > PREVIEW_COUNT;
+  const canCollapse = !showAll && expanded;
 
   return (
     <section id="faq" className="py-24 md:py-32 bg-background">
@@ -48,6 +65,26 @@ const FaqSection = () => {
           <p className="text-muted-foreground text-center mb-10">
             Ответы на вопросы, которые нам задают чаще всего
           </p>
+
+          {/* Category filter */}
+          <div className="flex flex-wrap gap-2 justify-center mb-8">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleCategory(cat)}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                  activeCategory === cat
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "bg-card text-muted-foreground hover:bg-accent/10 hover:text-accent border border-border"
+                }`}
+              >
+                {cat}
+                <span className={`ml-1.5 text-xs ${activeCategory === cat ? "opacity-70" : "opacity-50"}`}>
+                  {cat === "Все" ? generalFaqs.length : generalFaqs.filter(f => f.category === cat).length}
+                </span>
+              </button>
+            ))}
+          </div>
 
           {/* Accordion */}
           <div className="space-y-2">
@@ -89,32 +126,37 @@ const FaqSection = () => {
             })}
           </div>
 
-          {/* Show more / collapse */}
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-            {!expanded ? (
-              <button
-                onClick={() => { setExpanded(true); setOpenIndex(null); }}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border bg-card text-sm font-medium text-muted-foreground hover:border-accent/40 hover:text-accent transition-all"
-              >
-                <ChevronDown className="h-4 w-4" />
-                Показать все вопросы ({generalFaqs.length})
-              </button>
-            ) : (
-              <button
-                onClick={() => { setExpanded(false); setOpenIndex(null); }}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border bg-card text-sm font-medium text-muted-foreground hover:border-accent/40 hover:text-accent transition-all"
-              >
-                <ChevronDown className="h-4 w-4 rotate-180" />
-                Свернуть
-              </button>
-            )}
-            <Link
-              to="/faq"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent/80 transition-colors"
-            >
-              Все вопросы на отдельной странице <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
+          {/* Footer buttons */}
+          {(hasMore || canCollapse || !showAll) && (
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+              {hasMore && (
+                <button
+                  onClick={() => { setExpanded(true); setOpenIndex(null); }}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border bg-card text-sm font-medium text-muted-foreground hover:border-accent/40 hover:text-accent transition-all"
+                >
+                  <ChevronDown className="h-4 w-4" />
+                  Показать ещё {filtered.length - PREVIEW_COUNT}
+                </button>
+              )}
+              {canCollapse && (
+                <button
+                  onClick={() => { setExpanded(false); setOpenIndex(null); }}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border bg-card text-sm font-medium text-muted-foreground hover:border-accent/40 hover:text-accent transition-all"
+                >
+                  <ChevronDown className="h-4 w-4 rotate-180" />
+                  Свернуть
+                </button>
+              )}
+              {!showAll && (
+                <Link
+                  to="/faq"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent/80 transition-colors"
+                >
+                  Все вопросы на отдельной странице <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
