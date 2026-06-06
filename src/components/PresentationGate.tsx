@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { sendToTelegram } from "@/lib/telegram";
+import { getPageLabel } from "@/lib/pageLabel";
 import {
   FileDown, Send, CheckCircle2, User, Phone, Mail, Building2, AlertCircle,
 } from "lucide-react";
@@ -103,7 +104,7 @@ const PresentationGate = () => {
       phone: fields.phone.value,
       email: fields.email.value,
       message: `Компания: ${fields.company.value}`,
-      source: "Запрос презентации — подвал сайта",
+      source: `Запрос презентации — ${getPageLabel(window.location.pathname)}`,
     });
     setLoading(false);
     setSubmitted(true);

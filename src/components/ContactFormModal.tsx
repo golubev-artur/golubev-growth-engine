@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Send, X } from "lucide-react";
 import { sendToTelegram } from "@/lib/telegram";
+import { getPageLabel } from "@/lib/pageLabel";
 
 const directions = [
   "Продажи и CRM",
@@ -41,7 +42,7 @@ const ContactFormModal = ({ open, onClose, defaultDirection }: ContactFormModalP
       email: data.email as string,
       direction: data.direction as string,
       message: data.message as string,
-      source: `Модальная форма — ${window.location.pathname}`,
+      source: `Модальная форма — ${getPageLabel(window.location.pathname)}`,
     });
     setLoading(false);
     toast({
