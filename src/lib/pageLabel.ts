@@ -6,6 +6,7 @@ export function getPageLabel(pathname: string): string {
   if (pathname === "/presentation") return "Страница презентации";
   if (pathname === "/faq") return "Страница FAQ";
   if (pathname === "/press") return "Пресс-центр";
+  if (pathname === "/forma") return "Страница записи на онлайн-встречу";
   if (pathname === "/blog") return "Блог";
   if (pathname === "/services") return "Все услуги";
   if (pathname === "/privacy") return "Политика конфиденциальности";

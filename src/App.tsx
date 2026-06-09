@@ -13,6 +13,7 @@ import Privacy from "./pages/Privacy";
 import Press from "./pages/Press";
 import FaqPage from "./pages/FaqPage";
 import Presentation from "./pages/Presentation";
+import Booking from "./pages/Booking";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/press" element={<Press />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/presentation" element={<Presentation />} />
+          <Route path="/forma" element={<Booking />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
