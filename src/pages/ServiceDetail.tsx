@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -31,6 +31,7 @@ const serviceImages: Record<string, string> = {
   "tech-automation": arthurOffice4,
   "client-service": arthurOffice2,
   "strategic-session": serviceStrategySession,
+  "legal": arthurOffice5,
 };
 
 const useReveal = (threshold = 0.15) => {
@@ -61,8 +62,9 @@ const ServiceDetail = () => {
   const service = getServiceBySlug(slug || "");
 
   const [formOpen, setFormOpen] = useState(false);
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
 
-  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+  useEffect(() => { window.scrollTo(0, 0); setExpandedItem(null); }, [slug]);
 
   const chartReveal = useReveal(0.2);
   const compareReveal = useReveal(0.2);
@@ -196,19 +198,34 @@ const ServiceDetail = () => {
         <div className="container mx-auto px-4 md:px-8" ref={itemsReveal.ref}>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10">Что входит в направление</h2>
           <div className="grid md:grid-cols-2 gap-5">
-            {service.items.map((item, i) => (
-              <div
-                key={i}
-                className="flex gap-4 p-5 rounded-lg border border-border bg-background shadow-sm"
-                style={revealStyle(itemsReveal.visible, 60 + i * 60)}
-              >
-                <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm">{item.name}</h4>
-                  <p className="text-muted-foreground text-sm mt-1">{item.desc}</p>
+            {service.items.map((item, i) => {
+              const isExpanded = expandedItem === i;
+              const hasLong = !!item.longDesc;
+              return (
+                <div
+                  key={i}
+                  className={`flex gap-4 p-5 rounded-lg border border-border bg-background shadow-sm transition-all ${hasLong ? 'cursor-pointer hover:border-accent/40' : ''}`}
+                  style={revealStyle(itemsReveal.visible, 60 + i * 60)}
+                  onClick={hasLong ? () => setExpandedItem(isExpanded ? null : i) : undefined}
+                >
+                  <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className="font-semibold text-foreground text-sm">{item.name}</h4>
+                      {hasLong && (
+                        <ChevronDown className={`h-4 w-4 text-muted-foreground shrink-0 mt-0.5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                      )}
+                    </div>
+                    <p className="text-muted-foreground text-sm mt-1">{item.desc}</p>
+                    {hasLong && isExpanded && (
+                      <p className="text-muted-foreground text-sm mt-3 leading-relaxed border-t border-border pt-3">
+                        {item.longDesc}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-12 text-center">
