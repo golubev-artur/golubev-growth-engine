@@ -129,71 +129,6 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div ref={chartReveal.ref} style={revealStyle(chartReveal.visible)} className="border border-border rounded-lg p-6 bg-card shadow-sm">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Динамика показателей</h3>
-              <p className="text-xs text-muted-foreground mb-6">Типичный рост после внедрения наших рекомендаций</p>
-              <ResponsiveContainer width="100%" height={260}>
-                <AreaChart data={service.chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(214 20% 92%)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
-                  <Tooltip contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} itemStyle={{ color: "#fff" }} />
-                  <defs>
-                    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor={ACCENT_HSL} stopOpacity={0.3} />
-                      <stop offset="100%" stopColor={ACCENT_HSL} stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <Area type="monotone" dataKey="value" stroke={ACCENT_HSL} strokeWidth={2.5} fill="url(#areaGrad)" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div ref={compareReveal.ref} style={revealStyle(compareReveal.visible, 100)} className="border border-border rounded-lg p-6 bg-card shadow-sm">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">До и после</h3>
-              <p className="text-xs text-muted-foreground mb-6">Средние результаты наших клиентов, %</p>
-              <ResponsiveContainer width="100%" height={260}>
-                <BarChart data={comparisonData} barGap={4}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(214 20% 92%)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
-                  <Tooltip contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} itemStyle={{ color: "#fff" }} />
-                  <Bar dataKey="before" name="До" radius={[4, 4, 0, 0]} maxBarSize={32}>
-                    {comparisonData.map((_, i) => <Cell key={i} fill={ACCENT_LIGHT} fillOpacity={0.35} />)}
-                  </Bar>
-                  <Bar dataKey="after" name="После" radius={[4, 4, 0, 0]} maxBarSize={32}>
-                    {comparisonData.map((_, i) => <Cell key={i} fill={ACCENT_HSL} />)}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-              <div className="flex gap-6 mt-3 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm" style={{ backgroundColor: ACCENT_LIGHT, opacity: 0.35 }} /> До</span>
-                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm" style={{ backgroundColor: ACCENT_HSL }} /> После</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Description under charts */}
-          <div className="mt-10 grid lg:grid-cols-2 gap-8">
-            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
-              <h3 className="text-lg font-bold text-foreground mb-3">Описание методологии</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Графики отражают типичную динамику ключевых показателей наших клиентов. Данные собраны на основе более чем 100 проектов за последние 5 лет. Мы используем проверенные методологии и адаптируем подход под специфику каждой компании, что позволяет достигать устойчивых результатов уже в первые 3-6 месяцев сотрудничества.
-              </p>
-            </div>
-            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
-              <h3 className="text-lg font-bold text-foreground mb-3">Обучение команды</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {service.trainingDescription}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8" ref={itemsReveal.ref}>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10">Что входит в направление</h2>
@@ -251,6 +186,70 @@ const ServiceDetail = () => {
               Обсудить проект
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div ref={chartReveal.ref} style={revealStyle(chartReveal.visible)} className="border border-border rounded-lg p-6 bg-card shadow-sm">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Динамика показателей</h3>
+              <p className="text-xs text-muted-foreground mb-6">Типичный рост после внедрения наших рекомендаций</p>
+              <ResponsiveContainer width="100%" height={260}>
+                <AreaChart data={service.chartData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(214 20% 92%)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
+                  <Tooltip contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} itemStyle={{ color: "#fff" }} />
+                  <defs>
+                    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor={ACCENT_HSL} stopOpacity={0.3} />
+                      <stop offset="100%" stopColor={ACCENT_HSL} stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <Area type="monotone" dataKey="value" stroke={ACCENT_HSL} strokeWidth={2.5} fill="url(#areaGrad)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div ref={compareReveal.ref} style={revealStyle(compareReveal.visible, 100)} className="border border-border rounded-lg p-6 bg-card shadow-sm">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">До и после</h3>
+              <p className="text-xs text-muted-foreground mb-6">Средние результаты наших клиентов, %</p>
+              <ResponsiveContainer width="100%" height={260}>
+                <BarChart data={comparisonData} barGap={4}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(214 20% 92%)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fontSize: 12, fill: "hsl(215 14% 46%)" }} axisLine={false} tickLine={false} />
+                  <Tooltip contentStyle={{ backgroundColor: "hsl(215 40% 16%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} itemStyle={{ color: "#fff" }} />
+                  <Bar dataKey="before" name="До" radius={[4, 4, 0, 0]} maxBarSize={32}>
+                    {comparisonData.map((_, i) => <Cell key={i} fill={ACCENT_LIGHT} fillOpacity={0.35} />)}
+                  </Bar>
+                  <Bar dataKey="after" name="После" radius={[4, 4, 0, 0]} maxBarSize={32}>
+                    {comparisonData.map((_, i) => <Cell key={i} fill={ACCENT_HSL} />)}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <div className="flex gap-6 mt-3 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm" style={{ backgroundColor: ACCENT_LIGHT, opacity: 0.35 }} /> До</span>
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm" style={{ backgroundColor: ACCENT_HSL }} /> После</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 grid lg:grid-cols-2 gap-8">
+            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
+              <h3 className="text-lg font-bold text-foreground mb-3">Описание методологии</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Графики отражают типичную динамику ключевых показателей наших клиентов. Данные собраны на основе более чем 100 проектов за последние 5 лет. Мы используем проверенные методологии и адаптируем подход под специфику каждой компании, что позволяет достигать устойчивых результатов уже в первые 3-6 месяцев сотрудничества.
+              </p>
+            </div>
+            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
+              <h3 className="text-lg font-bold text-foreground mb-3">Обучение команды</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                {service.trainingDescription}
+              </p>
+            </div>
           </div>
         </div>
       </section>
