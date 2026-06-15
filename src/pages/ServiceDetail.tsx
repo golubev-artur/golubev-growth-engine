@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronDown, X } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -197,31 +197,45 @@ const ServiceDetail = () => {
       <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8" ref={itemsReveal.ref}>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10">Что входит в направление</h2>
+
+          {expandedItem !== null && service.items[expandedItem]?.longDesc && (
+            <div className="mb-8 p-6 rounded-xl border-2 border-accent/30 bg-accent/5 shadow-md relative">
+              <button
+                onClick={() => setExpandedItem(null)}
+                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <div className="flex items-start gap-3 mb-3">
+                <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                <h3 className="text-lg font-bold text-foreground pr-8">{service.items[expandedItem].name}</h3>
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed pl-8">
+                {service.items[expandedItem].longDesc}
+              </p>
+            </div>
+          )}
+
           <div className="grid md:grid-cols-2 gap-5">
             {service.items.map((item, i) => {
-              const isExpanded = expandedItem === i;
+              const isActive = expandedItem === i;
               const hasLong = !!item.longDesc;
               return (
                 <div
                   key={i}
-                  className={`flex gap-4 p-5 rounded-lg border border-border bg-background shadow-sm transition-all ${hasLong ? 'cursor-pointer hover:border-accent/40' : ''}`}
+                  className={`flex gap-4 p-5 rounded-lg border bg-background shadow-sm transition-all ${hasLong ? 'cursor-pointer hover:border-accent/40' : 'border-border'} ${isActive ? 'border-accent/50 ring-1 ring-accent/20' : 'border-border'}`}
                   style={revealStyle(itemsReveal.visible, 60 + i * 60)}
-                  onClick={hasLong ? () => setExpandedItem(isExpanded ? null : i) : undefined}
+                  onClick={hasLong ? () => setExpandedItem(isActive ? null : i) : undefined}
                 >
-                  <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                  <CheckCircle2 className={`h-5 w-5 mt-0.5 shrink-0 ${isActive ? 'text-accent' : 'text-accent/60'}`} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-semibold text-foreground text-sm">{item.name}</h4>
+                      <h4 className={`font-semibold text-sm ${isActive ? 'text-accent' : 'text-foreground'}`}>{item.name}</h4>
                       {hasLong && (
-                        <ChevronDown className={`h-4 w-4 text-muted-foreground shrink-0 mt-0.5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`h-4 w-4 shrink-0 mt-0.5 transition-transform ${isActive ? 'rotate-180 text-accent' : 'text-muted-foreground'}`} />
                       )}
                     </div>
                     <p className="text-muted-foreground text-sm mt-1">{item.desc}</p>
-                    {hasLong && isExpanded && (
-                      <p className="text-muted-foreground text-sm mt-3 leading-relaxed border-t border-border pt-3">
-                        {item.longDesc}
-                      </p>
-                    )}
                   </div>
                 </div>
               );
