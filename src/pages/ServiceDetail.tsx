@@ -148,6 +148,16 @@ const ServiceDetail = () => {
               <p className="text-muted-foreground text-sm leading-relaxed pl-8">
                 {service.items[expandedItem].longDesc}
               </p>
+              <div className="pl-8 mt-4">
+                <Button
+                  size="sm"
+                  className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
+                  onClick={() => setFormOpen(true)}
+                >
+                  Обсудить проект
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </div>
           )}
 
