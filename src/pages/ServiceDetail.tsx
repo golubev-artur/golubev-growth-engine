@@ -63,6 +63,17 @@ const ServiceDetail = () => {
 
   const [formOpen, setFormOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<number | null>(null);
+  const expandedRef = useRef<HTMLDivElement>(null);
+
+  const handleExpandItem = (i: number) => {
+    const isActive = expandedItem === i;
+    setExpandedItem(isActive ? null : i);
+    if (!isActive) {
+      setTimeout(() => {
+        expandedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  };
 
   useEffect(() => { window.scrollTo(0, 0); setExpandedItem(null); }, [slug]);
 
@@ -134,7 +145,7 @@ const ServiceDetail = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10">Что входит в направление</h2>
 
           {expandedItem !== null && service.items[expandedItem]?.longDesc && (
-            <div className="mb-8 p-6 rounded-xl border-2 border-accent/30 bg-accent/5 shadow-md relative">
+            <div ref={expandedRef} className="mb-8 p-6 rounded-xl border-2 border-accent/30 bg-accent/5 shadow-md relative scroll-mt-6">
               <button
                 onClick={() => setExpandedItem(null)}
                 className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
@@ -170,7 +181,7 @@ const ServiceDetail = () => {
                   key={i}
                   className={`flex gap-4 p-5 rounded-lg border bg-background shadow-sm transition-all ${hasLong ? 'cursor-pointer hover:border-accent/40' : 'border-border'} ${isActive ? 'border-accent/50 ring-1 ring-accent/20' : 'border-border'}`}
                   style={revealStyle(itemsReveal.visible, 60 + i * 60)}
-                  onClick={hasLong ? () => setExpandedItem(isActive ? null : i) : undefined}
+                  onClick={hasLong ? () => handleExpandItem(i) : undefined}
                 >
                   <CheckCircle2 className={`h-5 w-5 mt-0.5 shrink-0 ${isActive ? 'text-accent' : 'text-accent/60'}`} />
                   <div className="flex-1 min-w-0">
