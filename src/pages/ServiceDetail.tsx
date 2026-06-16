@@ -70,7 +70,10 @@ const ServiceDetail = () => {
     setExpandedItem(isActive ? null : i);
     if (!isActive) {
       setTimeout(() => {
-        expandedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const section = document.getElementById('items-section');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }, 50);
     }
   };
@@ -142,10 +145,15 @@ const ServiceDetail = () => {
 
       <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8" ref={itemsReveal.ref}>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10">Что входит в направление</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-10 scroll-mt-28" id="items-section">Что входит в направление</h2>
 
-          {expandedItem !== null && service.items[expandedItem]?.longDesc && (
-            <div ref={expandedRef} className="mb-8 p-6 rounded-xl border-2 border-accent/30 bg-accent/5 shadow-md relative scroll-mt-6">
+          {expandedItem !== null && service.items[expandedItem]?.longDesc && (() => {
+            const longItems = service.items.map((item, i) => ({ ...item, idx: i })).filter(item => item.longDesc);
+            const currentPos = longItems.findIndex(item => item.idx === expandedItem);
+            const prevIdx = currentPos > 0 ? longItems[currentPos - 1].idx : null;
+            const nextIdx = currentPos < longItems.length - 1 ? longItems[currentPos + 1].idx : null;
+            return (
+            <div ref={expandedRef} className="mb-8 p-6 rounded-xl border-2 border-accent/30 bg-accent/5 shadow-md relative scroll-mt-28">
               <button
                 onClick={() => setExpandedItem(null)}
                 className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
@@ -159,7 +167,7 @@ const ServiceDetail = () => {
               <p className="text-muted-foreground text-sm leading-relaxed pl-8">
                 {service.items[expandedItem].longDesc}
               </p>
-              <div className="pl-8 mt-4">
+              <div className="pl-8 mt-4 flex items-center justify-between flex-wrap gap-3">
                 <Button
                   size="sm"
                   className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
@@ -168,9 +176,27 @@ const ServiceDetail = () => {
                   Обсудить проект
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => prevIdx !== null && handleExpandItem(prevIdx)}
+                    disabled={prevIdx === null}
+                    className="w-9 h-9 rounded-full border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors disabled:opacity-30 disabled:cursor-default"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                  <span className="text-xs text-muted-foreground">{currentPos + 1} / {longItems.length}</span>
+                  <button
+                    onClick={() => nextIdx !== null && handleExpandItem(nextIdx)}
+                    disabled={nextIdx === null}
+                    className="w-9 h-9 rounded-full border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors disabled:opacity-30 disabled:cursor-default"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
-          )}
+            );
+          })()}
 
           <div className="grid md:grid-cols-2 gap-5">
             {service.items.map((item, i) => {
