@@ -99,13 +99,17 @@ const PresentationGate = () => {
     if (hasError) return;
 
     setLoading(true);
-    await sendToTelegram({
-      name: fields.name.value,
-      phone: fields.phone.value,
-      email: fields.email.value,
-      message: `Компания: ${fields.company.value}`,
-      source: `Запрос презентации — ${getPageLabel(window.location.pathname)}`,
-    });
+    try {
+      await sendToTelegram({
+        name: fields.name.value,
+        phone: fields.phone.value,
+        email: fields.email.value,
+        message: `Компания: ${fields.company.value}`,
+        source: `Запрос презентации — ${getPageLabel(window.location.pathname)}`,
+      });
+    } catch {
+      // не блокируем UX
+    }
     setLoading(false);
     setSubmitted(true);
   };

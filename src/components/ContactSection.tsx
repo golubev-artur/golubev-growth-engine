@@ -17,6 +17,8 @@ const directions = [
   "Технологии и автоматизация",
   "Клиентский сервис",
   "Стратегическая сессия",
+  "Финансы и управленческий учёт",
+  "Юридические услуги",
 ];
 
 const ContactSection = () => {
@@ -24,6 +26,7 @@ const ContactSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [direction, setDirection] = useState("");
 
   useEffect(() => {
     const el = ref.current;
@@ -38,20 +41,25 @@ const ContactSection = () => {
     setLoading(true);
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form));
-    await sendToTelegram({
-      name: data.name as string,
-      phone: data.phone as string,
-      email: data.email as string,
-      direction: data.direction as string,
-      message: data.message as string,
-      source: `Форма обратной связи — ${getPageLabel(window.location.pathname)}`,
-    });
+    try {
+      await sendToTelegram({
+        name: data.name as string,
+        phone: data.phone as string,
+        email: data.email as string,
+        direction: direction || "",
+        message: data.message as string,
+        source: `Форма обратной связи — ${getPageLabel(window.location.pathname)}`,
+      });
+    } catch {
+      // не блокируем UX
+    }
     setLoading(false);
     toast({
       title: "Заявка отправлена",
       description: "Мы свяжемся с вами в ближайшее время.",
     });
     form.reset();
+    setDirection("");
   };
 
   return (
@@ -98,7 +106,7 @@ const ContactSection = () => {
             <Input name="phone" placeholder="Телефон" type="tel" required className="bg-background" />
           </div>
           <Input name="email" placeholder="Email" type="email" className="bg-background" />
-          <Select name="direction">
+          <Select name="direction" value={direction} onValueChange={setDirection}>
             <SelectTrigger className="bg-background">
               <SelectValue placeholder="Интересующее направление" />
             </SelectTrigger>

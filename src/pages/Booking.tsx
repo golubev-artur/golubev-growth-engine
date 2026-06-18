@@ -18,6 +18,8 @@ const directions = [
   "Технологии и автоматизация",
   "Клиентский сервис",
   "Стратегическая сессия",
+  "Финансы и управленческий учёт",
+  "Юридические услуги",
 ];
 
 const benefits = [
@@ -31,20 +33,25 @@ const Booking = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [direction, setDirection] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form));
-    await sendToTelegram({
-      name: data.name as string,
-      phone: data.phone as string,
-      email: data.email as string,
-      direction: data.direction as string,
-      message: data.message as string,
-      source: "Страница записи на онлайн-встречу (/forma)",
-    });
+    try {
+      await sendToTelegram({
+        name: data.name as string,
+        phone: data.phone as string,
+        email: data.email as string,
+        direction: direction || "",
+        message: data.message as string,
+        source: "Страница записи на онлайн-встречу (/forma)",
+      });
+    } catch {
+      // не блокируем UX
+    }
     setLoading(false);
     setSent(true);
     toast({
@@ -52,6 +59,7 @@ const Booking = () => {
       description: "Мы свяжемся с вами для подтверждения времени встречи.",
     });
     form.reset();
+    setDirection("");
   };
 
   return (
@@ -118,7 +126,7 @@ const Booking = () => {
                       <Input name="name" placeholder="Ваше имя" required className="bg-background" />
                       <Input name="phone" placeholder="Телефон" type="tel" required className="bg-background" />
                       <Input name="email" placeholder="Email" type="email" className="bg-background" />
-                      <Select name="direction">
+                      <Select name="direction" value={direction} onValueChange={setDirection}>
                         <SelectTrigger className="bg-background">
                           <SelectValue placeholder="Какой вопрос хотите обсудить?" />
                         </SelectTrigger>
