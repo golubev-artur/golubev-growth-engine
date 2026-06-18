@@ -24,11 +24,15 @@ export async function sendToTelegram(data: {
   const text = lines.join("\n");
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "HTML" }),
+      signal: controller.signal,
     });
+    clearTimeout(timeout);
   } catch {
     // не блокируем UX если TG недоступен
   }

@@ -31,6 +31,7 @@ interface ContactFormModalProps {
 const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: ContactFormModalProps) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [direction, setDirection] = useState(defaultDirection || "");
 
   if (!open) return null;
 
@@ -39,22 +40,27 @@ const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: Conta
     setLoading(true);
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form));
-    await sendToTelegram({
-      name: data.name as string,
-      phone: data.phone as string,
-      email: data.email as string,
-      direction: data.direction as string,
-      message: data.message as string,
-      source: sourceItem
-        ? `Кнопка «Записаться на консультацию» → ${getPageLabel(window.location.pathname)} → ${sourceItem}`
-        : `Модальная форма — ${getPageLabel(window.location.pathname)}`,
-    });
+    try {
+      await sendToTelegram({
+        name: data.name as string,
+        phone: data.phone as string,
+        email: data.email as string,
+        direction: direction || (data.direction as string) || "",
+        message: data.message as string,
+        source: sourceItem
+          ? `Кнопка «Записаться на консультацию» → ${getPageLabel(window.location.pathname)} → ${sourceItem}`
+          : `Модальная форма — ${getPageLabel(window.location.pathname)}`,
+      });
+    } catch {
+      // не блокируем UX
+    }
     setLoading(false);
     toast({
       title: "Заявка отправлена",
       description: "Мы свяжемся с вами в ближайшее время.",
     });
     form.reset();
+    setDirection(defaultDirection || "");
     onClose();
   };
 
@@ -88,7 +94,7 @@ const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: Conta
             <Input name="phone" placeholder="Телефон" type="tel" required className="bg-card" />
           </div>
           <Input name="email" placeholder="Email" type="email" className="bg-card" />
-          <Select name="direction" defaultValue={defaultDirection}>
+          <Select name="direction" value={direction} onValueChange={setDirection}>
             <SelectTrigger className="bg-card">
               <SelectValue placeholder="Интересующее направление" />
             </SelectTrigger>
