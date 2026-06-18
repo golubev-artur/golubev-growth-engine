@@ -17,15 +17,18 @@ const directions = [
   "Технологии и автоматизация",
   "Клиентский сервис",
   "Стратегическая сессия",
+  "Финансы и управленческий учёт",
+  "Юридические услуги",
 ];
 
 interface ContactFormModalProps {
   open: boolean;
   onClose: () => void;
   defaultDirection?: string;
+  sourceItem?: string;
 }
 
-const ContactFormModal = ({ open, onClose, defaultDirection }: ContactFormModalProps) => {
+const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: ContactFormModalProps) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +45,9 @@ const ContactFormModal = ({ open, onClose, defaultDirection }: ContactFormModalP
       email: data.email as string,
       direction: data.direction as string,
       message: data.message as string,
-      source: `Модальная форма — ${getPageLabel(window.location.pathname)}`,
+      source: sourceItem
+        ? `Кнопка «Записаться на консультацию» → ${getPageLabel(window.location.pathname)} → ${sourceItem}`
+        : `Модальная форма — ${getPageLabel(window.location.pathname)}`,
     });
     setLoading(false);
     toast({
@@ -70,7 +75,7 @@ const ContactFormModal = ({ open, onClose, defaultDirection }: ContactFormModalP
         <div className="text-center mb-6">
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-2">Контакты</p>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2">
-            Обсудим ваш проект
+            Запись на консультацию
           </h2>
           <p className="text-muted-foreground text-sm">
             Заполните форму — мы свяжемся с вами в течение рабочего дня.

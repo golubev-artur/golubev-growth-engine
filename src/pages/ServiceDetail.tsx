@@ -62,6 +62,7 @@ const ServiceDetail = () => {
   const service = getServiceBySlug(slug || "");
 
   const [formOpen, setFormOpen] = useState(false);
+  const [formSourceItem, setFormSourceItem] = useState<string | undefined>();
   const [expandedItem, setExpandedItem] = useState<number | null>(null);
   const expandedRef = useRef<HTMLDivElement>(null);
 
@@ -108,7 +109,7 @@ const ServiceDetail = () => {
         service={{ title: service.title, description: service.description }}
         faqs={service.faqs}
       />
-      <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} defaultDirection={service.title} />
+      <ContactFormModal open={formOpen} onClose={() => { setFormOpen(false); setFormSourceItem(undefined); }} defaultDirection={service.title} sourceItem={formSourceItem} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" loading="lazy" className="w-full h-full object-cover object-top opacity-15" />
@@ -171,9 +172,9 @@ const ServiceDetail = () => {
                 <Button
                   size="sm"
                   className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
-                  onClick={() => setFormOpen(true)}
+                  onClick={() => { setFormSourceItem(service.items[expandedItem].name); setFormOpen(true); }}
                 >
-                  Обсудить проект
+                  Записаться на консультацию
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <div className="flex items-center gap-2">
@@ -228,9 +229,9 @@ const ServiceDetail = () => {
             <Button
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 active:scale-[0.97] transition-all"
-              onClick={() => setFormOpen(true)}
+              onClick={() => { setFormSourceItem(undefined); setFormOpen(true); }}
             >
-              Обсудить проект
+              Записаться на консультацию
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
