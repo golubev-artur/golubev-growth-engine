@@ -7,7 +7,8 @@ import {
   ArrowRight, Clock, FileText, Lightbulb, ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Link2 } from "lucide-react";
 import ContactFormModal from "@/components/ContactFormModal";
 import type { MonthlyGoal, Protocol } from "@/types/client";
 
@@ -27,12 +28,33 @@ const formatMonth = (monthStr: string) => {
   return `${monthNames[m] || m} ${y}`;
 };
 
-const ProtocolCard = ({ protocol }: { protocol: Protocol }) => {
-  const [open, setOpen] = useState(false);
+const copyLink = (hash: string) => {
+  const url = `${window.location.origin}${window.location.pathname}#${hash}`;
+  navigator.clipboard.writeText(url);
+};
+
+const ProtocolCard = ({ protocol, defaultOpen }: { protocol: Protocol; defaultOpen?: boolean }) => {
+  const [open, setOpen] = useState(defaultOpen || false);
+  const ref = useRef<HTMLDivElement>(null);
+  const anchor = protocol.id;
+
+  useEffect(() => {
+    if (defaultOpen && ref.current) {
+      setTimeout(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    }
+  }, [defaultOpen]);
+
+  const toggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (next) window.history.replaceState(null, "", `#${anchor}`);
+    else window.history.replaceState(null, "", window.location.pathname);
+  };
+
   return (
-    <div className="border border-border rounded-xl bg-card shadow-sm overflow-hidden">
+    <div ref={ref} id={anchor} className="border border-border rounded-xl bg-card shadow-sm overflow-hidden">
       <button
-        onClick={() => setOpen(!open)}
+        onClick={toggle}
         className="w-full flex items-center gap-4 p-5 text-left hover:bg-accent/5 transition-colors"
       >
         <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-blue-500/10 text-blue-500 shrink-0">
@@ -48,6 +70,13 @@ const ProtocolCard = ({ protocol }: { protocol: Protocol }) => {
       </button>
       {open && (
         <div className="px-5 pb-5 space-y-5 border-t border-border pt-5">
+          <button
+            onClick={() => copyLink(anchor)}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors"
+          >
+            <Link2 className="h-3.5 w-3.5" />
+            Скопировать ссылку
+          </button>
           {protocol.participants.map((p, pi) => (
             <div key={pi}>
               <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
@@ -86,16 +115,31 @@ const ProtocolCard = ({ protocol }: { protocol: Protocol }) => {
   );
 };
 
-const GoalCard = ({ goal }: { goal: MonthlyGoal }) => {
-  const [open, setOpen] = useState(false);
+const GoalCard = ({ goal, defaultOpen }: { goal: MonthlyGoal; defaultOpen?: boolean }) => {
+  const [open, setOpen] = useState(defaultOpen || false);
   const [expandedWeek, setExpandedWeek] = useState<number | null>(null);
   const [showPrev, setShowPrev] = useState(false);
   const [showExpected, setShowExpected] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const anchor = goal.id;
+
+  useEffect(() => {
+    if (defaultOpen && ref.current) {
+      setTimeout(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    }
+  }, [defaultOpen]);
+
+  const toggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (next) window.history.replaceState(null, "", `#${anchor}`);
+    else window.history.replaceState(null, "", window.location.pathname);
+  };
 
   return (
-    <div className="border border-border rounded-xl bg-card shadow-sm overflow-hidden">
+    <div ref={ref} id={anchor} className="border border-border rounded-xl bg-card shadow-sm overflow-hidden">
       <button
-        onClick={() => setOpen(!open)}
+        onClick={toggle}
         className="w-full flex items-center gap-4 p-5 text-left hover:bg-accent/5 transition-colors"
       >
         <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-accent/10 text-accent shrink-0">
@@ -112,6 +156,13 @@ const GoalCard = ({ goal }: { goal: MonthlyGoal }) => {
       </button>
       {open && (
         <div className="px-5 pb-5 space-y-6 border-t border-border pt-5">
+          <button
+            onClick={() => copyLink(anchor)}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors"
+          >
+            <Link2 className="h-3.5 w-3.5" />
+            Скопировать ссылку
+          </button>
           {/* Principle */}
           {goal.principle && (
             <div className="text-center p-4 rounded-lg bg-accent/5 border border-accent/10">
@@ -240,7 +291,14 @@ const ClientPortal = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? getClientData(slug) : undefined;
   const [formOpen, setFormOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"goals" | "protocols">("goals");
+
+  const hash = window.location.hash.replace("#", "");
+  const isProtocolHash = hash.startsWith("proto-");
+  const isGoalHash = hash.startsWith("goal-");
+
+  const [activeTab, setActiveTab] = useState<"goals" | "protocols">(
+    isProtocolHash ? "protocols" : "goals"
+  );
 
   if (!data) return <Navigate to="/404" replace />;
 
@@ -335,7 +393,7 @@ const ClientPortal = () => {
           {activeTab === "goals" && (
             <div className="space-y-4">
               {sortedGoals.map((goal) => (
-                <GoalCard key={goal.id} goal={goal} />
+                <GoalCard key={goal.id} goal={goal} defaultOpen={goal.id === hash} />
               ))}
               {goals.length === 0 && (
                 <p className="text-center text-muted-foreground py-12">Целей пока нет</p>
@@ -346,7 +404,7 @@ const ClientPortal = () => {
           {activeTab === "protocols" && (
             <div className="space-y-4">
               {sortedProtocols.map((protocol) => (
-                <ProtocolCard key={protocol.id} protocol={protocol} />
+                <ProtocolCard key={protocol.id} protocol={protocol} defaultOpen={protocol.id === hash} />
               ))}
               {protocols.length === 0 && (
                 <p className="text-center text-muted-foreground py-12">Протоколов пока нет</p>
