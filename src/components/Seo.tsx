@@ -25,6 +25,7 @@ interface SeoProps {
   breadcrumbs?: Breadcrumb[];
   faqs?: Faq[];
   service?: ServiceData;
+  noIndex?: boolean;
 }
 
 const SITE = "https://golubev-consulting.ru";
@@ -74,6 +75,7 @@ const Seo = ({
   breadcrumbs,
   faqs,
   service,
+  noIndex,
 }: SeoProps) => {
   const fullTitle = title ? `${title} — Golubev Consulting` : DEFAULT_TITLE;
   const desc = description || DEFAULT_DESC;
@@ -84,6 +86,12 @@ const Seo = ({
     document.title = fullTitle;
 
     setMeta("name", "description", desc);
+
+    if (noIndex) {
+      setMeta("name", "robots", "noindex, nofollow");
+    } else {
+      document.querySelector('meta[name="robots"]')?.remove();
+    }
 
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonical) {
@@ -205,13 +213,14 @@ const Seo = ({
 
     return () => {
       document.title = DEFAULT_TITLE;
+      document.querySelector('meta[name="robots"]')?.remove();
       removeJsonLd("article");
       removeJsonLd("breadcrumb");
       removeJsonLd("service");
       removeJsonLd("faq");
     };
 
-  }, [fullTitle, desc, url, type, ogImage, publishedTime, breadcrumbs, faqs, service]);
+  }, [fullTitle, desc, url, type, ogImage, publishedTime, breadcrumbs, faqs, service, noIndex]);
 
   return null;
 };
