@@ -87,133 +87,147 @@ const ProtocolCard = ({ protocol }: { protocol: Protocol }) => {
 };
 
 const GoalCard = ({ goal }: { goal: MonthlyGoal }) => {
+  const [open, setOpen] = useState(false);
   const [expandedWeek, setExpandedWeek] = useState<number | null>(null);
   const [showPrev, setShowPrev] = useState(false);
   const [showExpected, setShowExpected] = useState(false);
 
   return (
-    <div className="space-y-6">
-      {/* Principle */}
-      {goal.principle && (
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-4">
-            <Target className="h-4 w-4" />
-            Принцип — {formatMonth(goal.month)}
-          </div>
-          <p className="text-muted-foreground leading-relaxed">
-            {goal.principle}
-            {goal.principleHighlight && (
-              <strong className="text-foreground"> {goal.principleHighlight}</strong>
-            )}
+    <div className="border border-border rounded-xl bg-card shadow-sm overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-4 p-5 text-left hover:bg-accent/5 transition-colors"
+      >
+        <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-accent/10 text-accent shrink-0">
+          <Target className="h-5 w-5" />
+        </span>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-bold text-foreground">{goal.title}</h3>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            {goal.subtitle || formatMonth(goal.month)}
           </p>
-          {goal.description && (
-            <p className="text-muted-foreground mt-3 leading-relaxed">{goal.description}</p>
-          )}
         </div>
-      )}
-
-      {/* Previous results */}
-      {goal.previousResults && goal.previousResults.length > 0 && (
-        <div>
-          <button
-            onClick={() => setShowPrev(!showPrev)}
-            className="flex items-center gap-2 text-lg font-bold text-foreground mb-4 hover:text-accent transition-colors"
-          >
-            <ChevronDown className={`h-5 w-5 transition-transform ${showPrev ? "rotate-180" : ""}`} />
-            Что сделано ранее
-          </button>
-          {showPrev && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-              {goal.previousResults.map((r, i) => (
-                <div key={i} className="border border-border rounded-lg p-4 bg-card">
-                  <p className="text-sm text-muted-foreground line-through mb-2">{r.before}</p>
-                  <p className="text-sm font-semibold text-accent flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5" />
-                    {r.after}
-                  </p>
-                </div>
-              ))}
+        <span className="text-xs text-muted-foreground shrink-0 mr-2">{goal.weeks.length} нед.</span>
+        <ChevronDown className={`h-5 w-5 text-muted-foreground shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="px-5 pb-5 space-y-6 border-t border-border pt-5">
+          {/* Principle */}
+          {goal.principle && (
+            <div className="text-center p-4 rounded-lg bg-accent/5 border border-accent/10">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {goal.principle}
+                {goal.principleHighlight && (
+                  <strong className="text-foreground"> {goal.principleHighlight}</strong>
+                )}
+              </p>
+              {goal.description && (
+                <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{goal.description}</p>
+              )}
             </div>
           )}
-        </div>
-      )}
 
-      {/* Weekly plan */}
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-4">План по неделям</h3>
-        <div className="space-y-4">
-          {goal.weeks.map((week) => {
-            const isOpen = expandedWeek === week.num;
-            return (
-              <div key={week.num} className="border border-border rounded-xl bg-card shadow-sm overflow-hidden">
-                <button
-                  onClick={() => setExpandedWeek(isOpen ? null : week.num)}
-                  className="w-full flex items-center gap-4 p-5 text-left hover:bg-accent/5 transition-colors"
-                >
-                  <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-accent/10 text-accent font-bold text-lg shrink-0">
-                    {week.num}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-foreground">Неделя {week.num}. {week.title}</h4>
-                    <p className="text-sm text-muted-foreground mt-0.5">{week.goal}</p>
-                  </div>
-                  <ChevronDown className={`h-5 w-5 text-muted-foreground shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-                </button>
-                {isOpen && (
-                  <div className="px-5 pb-5 space-y-5 border-t border-border pt-5">
-                    {week.blocks.map((block, bi) => (
-                      <div key={bi}>
-                        <h5 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                          <BarChart3 className="h-4 w-4 text-accent" />
-                          {block.title}
-                        </h5>
-                        <ul className="space-y-2">
-                          {block.items.map((item, ii) => (
-                            <li key={ii} className="flex items-start gap-3 text-sm text-muted-foreground">
-                              <CheckCircle2 className="h-4 w-4 text-accent/60 shrink-0 mt-0.5" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                    <div className="pt-3 border-t border-border">
-                      <p className="text-sm text-muted-foreground flex items-start gap-2">
-                        <Calendar className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                        <span>
-                          <strong>Пятница — созвон 60 мин:</strong> 30 мин собственник + опердир, 20 мин консультант, 10 мин задачи
-                        </span>
+          {/* Previous results */}
+          {goal.previousResults && goal.previousResults.length > 0 && (
+            <div>
+              <button
+                onClick={() => setShowPrev(!showPrev)}
+                className="flex items-center gap-2 text-sm font-bold text-foreground mb-3 hover:text-accent transition-colors"
+              >
+                <ChevronDown className={`h-4 w-4 transition-transform ${showPrev ? "rotate-180" : ""}`} />
+                Что сделано ранее
+              </button>
+              {showPrev && (
+                <div className="grid md:grid-cols-2 gap-3">
+                  {goal.previousResults.map((r, i) => (
+                    <div key={i} className="border border-border rounded-lg p-3 bg-background">
+                      <p className="text-xs text-muted-foreground line-through mb-1.5">{r.before}</p>
+                      <p className="text-xs font-semibold text-accent flex items-start gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                        {r.after}
                       </p>
                     </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Expected results */}
-      {goal.expectedResults && goal.expectedResults.length > 0 && (
-        <div>
-          <button
-            onClick={() => setShowExpected(!showExpected)}
-            className="flex items-center gap-2 text-lg font-bold text-foreground mb-4 hover:text-accent transition-colors"
-          >
-            <ChevronDown className={`h-5 w-5 transition-transform ${showExpected ? "rotate-180" : ""}`} />
-            Ожидаемые итоги — {formatMonth(goal.month)}
-          </button>
-          {showExpected && (
-            <div className="space-y-3">
-              {goal.expectedResults.map((r, i) => (
-                <div key={i} className="flex items-start gap-4 p-4 rounded-lg border border-border bg-card">
-                  <Shield className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-muted-foreground line-through">{r.before}</p>
-                    <p className="text-sm font-semibold text-foreground mt-1">{r.after}</p>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              )}
+            </div>
+          )}
+
+          {/* Weekly plan */}
+          <div className="space-y-3">
+            {goal.weeks.map((week) => {
+              const isWeekOpen = expandedWeek === week.num;
+              return (
+                <div key={week.num} className="border border-border rounded-lg overflow-hidden bg-background">
+                  <button
+                    onClick={() => setExpandedWeek(isWeekOpen ? null : week.num)}
+                    className="w-full flex items-center gap-3 p-4 text-left hover:bg-accent/5 transition-colors"
+                  >
+                    <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-accent/10 text-accent font-bold text-sm shrink-0">
+                      {week.num}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-foreground text-sm">Неделя {week.num}. {week.title}</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">{week.goal}</p>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform ${isWeekOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {isWeekOpen && (
+                    <div className="px-4 pb-4 space-y-4 border-t border-border pt-4">
+                      {week.blocks.map((block, bi) => (
+                        <div key={bi}>
+                          <h5 className="font-semibold text-foreground mb-2 flex items-center gap-2 text-sm">
+                            <BarChart3 className="h-3.5 w-3.5 text-accent" />
+                            {block.title}
+                          </h5>
+                          <ul className="space-y-1.5">
+                            {block.items.map((item, ii) => (
+                              <li key={ii} className="flex items-start gap-2.5 text-xs text-muted-foreground">
+                                <CheckCircle2 className="h-3.5 w-3.5 text-accent/60 shrink-0 mt-0.5" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                      <div className="pt-3 border-t border-border">
+                        <p className="text-xs text-muted-foreground flex items-start gap-2">
+                          <Calendar className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
+                          <span>
+                            <strong>Пятница — созвон 60 мин:</strong> 30 мин собственник + опердир, 20 мин консультант, 10 мин задачи
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Expected results */}
+          {goal.expectedResults && goal.expectedResults.length > 0 && (
+            <div>
+              <button
+                onClick={() => setShowExpected(!showExpected)}
+                className="flex items-center gap-2 text-sm font-bold text-foreground mb-3 hover:text-accent transition-colors"
+              >
+                <ChevronDown className={`h-4 w-4 transition-transform ${showExpected ? "rotate-180" : ""}`} />
+                Ожидаемые итоги — {formatMonth(goal.month)}
+              </button>
+              {showExpected && (
+                <div className="space-y-2">
+                  {goal.expectedResults.map((r, i) => (
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-background">
+                      <Shield className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-muted-foreground line-through">{r.before}</p>
+                        <p className="text-xs font-semibold text-foreground mt-1">{r.after}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -233,7 +247,6 @@ const ClientPortal = () => {
   const { client, protocols, goals } = data;
   const sortedProtocols = [...protocols].sort((a, b) => b.date.localeCompare(a.date));
   const sortedGoals = [...goals].sort((a, b) => b.month.localeCompare(a.month));
-  const latestGoal = sortedGoals[0];
 
   return (
     <Layout>
@@ -320,19 +333,9 @@ const ClientPortal = () => {
           </div>
 
           {activeTab === "goals" && (
-            <div className="space-y-16">
+            <div className="space-y-4">
               {sortedGoals.map((goal) => (
-                <div key={goal.id}>
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-6">
-                    {goal.title}
-                    {goal.subtitle && (
-                      <span className="block text-base font-normal text-muted-foreground mt-1">
-                        {goal.subtitle}
-                      </span>
-                    )}
-                  </h2>
-                  <GoalCard goal={goal} />
-                </div>
+                <GoalCard key={goal.id} goal={goal} />
               ))}
               {goals.length === 0 && (
                 <p className="text-center text-muted-foreground py-12">Целей пока нет</p>
