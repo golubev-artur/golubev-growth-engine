@@ -14,7 +14,8 @@ import Press from "./pages/Press";
 import FaqPage from "./pages/FaqPage";
 import Presentation from "./pages/Presentation";
 import Booking from "./pages/Booking";
-import ClientTerritoriaReklamy from "./pages/ClientTerritoriaReklamy";
+import ClientPortal from "./pages/ClientPortal";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +36,8 @@ const App = () => (
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/presentation" element={<Presentation />} />
           <Route path="/forma" element={<Booking />} />
-          <Route path="/client/territoria-reklamy" element={<ClientTerritoriaReklamy />} />
+          <Route path="/client/:slug" element={<ClientPortal />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
