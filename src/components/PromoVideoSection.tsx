@@ -29,6 +29,8 @@ const PromoVideoSection = () => {
             <video
               ref={videoRef}
               src="/promo.mp4"
+              poster="/promo-poster.jpg"
+              preload="metadata"
               className="w-full"
               playsInline
               onEnded={() => setPlaying(false)}
