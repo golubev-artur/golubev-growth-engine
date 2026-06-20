@@ -89,7 +89,7 @@ const Booking = () => {
 
                 <div className="flex items-center gap-3 mb-6 text-primary-foreground/50">
                   <Clock className="h-5 w-5 text-accent" />
-                  <span>45 минут · Zoom или Google Meet · Бесплатно</span>
+                  <span>45 минут · Онлайн · Бесплатно</span>
                 </div>
 
                 <ul className="space-y-4">
