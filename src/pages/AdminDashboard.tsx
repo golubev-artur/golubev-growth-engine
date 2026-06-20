@@ -82,7 +82,7 @@ const AdminDashboard = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Target className="h-4 w-4" />
-                        <span>{goals.length} цел{goals.length === 1 ? "ь" : goals.length < 5 ? "и" : "ей"}</span>
+                        <span>{goals.length} план{goals.length === 1 ? "" : goals.length < 5 ? "а" : "ов"}</span>
                       </div>
                     </div>
 

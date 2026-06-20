@@ -375,7 +375,7 @@ const ClientPortal = () => {
               }`}
             >
               <Target className="h-4 w-4 inline mr-2 -mt-0.5" />
-              Цели ({goals.length})
+              Планы работ ({goals.length})
             </button>
             <button
               onClick={() => setActiveTab("protocols")}
@@ -396,7 +396,7 @@ const ClientPortal = () => {
                 <GoalCard key={goal.id} goal={goal} defaultOpen={goal.id === hash} />
               ))}
               {goals.length === 0 && (
-                <p className="text-center text-muted-foreground py-12">Целей пока нет</p>
+                <p className="text-center text-muted-foreground py-12">Планов пока нет</p>
               )}
             </div>
           )}
