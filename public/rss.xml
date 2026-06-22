@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Sat, 20 Jun 2026 12:50:43 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 07:24:30 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,24 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как составить договор с контрагентом без ошибок: практическое руководство для собственника бизнеса</title>
+    <link>https://golubev-consulting.ru/blog/contract-with-counterparty-guide</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/contract-with-counterparty-guide</guid>
+    <description>Почему шаблонные договоры из интернета обходятся бизнесу в миллионы — и как составить договор с контрагентом, который защитит ваши деньги, сроки и нервы.</description>
+    <pubDate>Mon, 22 Jun 2026 00:00:00 GMT</pubDate>
+    <category>Юридические услуги</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
+  </item>
+  <item>
+    <title>Как провести аудит бизнес-процессов в компании: пошаговое руководство для собственника</title>
+    <link>https://golubev-consulting.ru/blog/business-process-audit-guide</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/business-process-audit-guide</guid>
+    <description>Почему бизнес буксует даже при хорошем продукте и сильной команде — и как аудит бизнес-процессов выявляет скрытые потери, дублирование и узкие места, которые съедают прибыль.</description>
+    <pubDate>Sun, 21 Jun 2026 00:00:00 GMT</pubDate>
+    <category>Бизнес-процессы</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как повысить лояльность клиентов в малом бизнесе: система, которая превращает разовых покупателей в постоянных</title>
     <link>https://golubev-consulting.ru/blog/customer-loyalty-small-business</link>
@@ -174,24 +192,6 @@
     <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Управление денежным потоком (cash flow) в малом бизнесе: как перестать жить от платежа до платежа</title>
-    <link>https://golubev-consulting.ru/blog/cash-flow-management-small-business</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/cash-flow-management-small-business</guid>
-    <description>Почему компания с хорошей выручкой может оказаться без денег на счёте — и как выстроить управление cash flow, чтобы бизнес дышал свободно, а не задыхался в кассовых разрывах.</description>
-    <pubDate>Sun, 31 May 2026 00:00:00 GMT</pubDate>
-    <category>Управление и стратегия</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-main.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как масштабировать малый бизнес без потери качества: система, которая позволяет расти и не разваливаться</title>
-    <link>https://golubev-consulting.ru/blog/scale-small-business-without-quality-loss</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/scale-small-business-without-quality-loss</guid>
-    <description>Почему при росте бизнеса проседает качество, уходят клиенты и начинается хаос — и как масштабировать компанию системно, сохраняя стандарты обслуживания и управляемость.</description>
-    <pubDate>Sat, 30 May 2026 00:00:00 GMT</pubDate>
-    <category>Управление и стратегия</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
