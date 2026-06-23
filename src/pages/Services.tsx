@@ -66,7 +66,7 @@ const ServicesPage = () => {
                     <span className="flex items-center justify-center w-10 h-10 rounded-md bg-accent/10 text-accent shrink-0">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">{s.title}</h3>
+                    <h2 className="font-semibold text-foreground group-hover:text-accent transition-colors text-base">{s.title}</h2>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{s.shortDesc}</p>
                   <span className="inline-flex items-center text-sm font-medium text-accent group-hover:gap-2 gap-1 transition-all">

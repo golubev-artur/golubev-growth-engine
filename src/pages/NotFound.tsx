@@ -16,6 +16,7 @@ const NotFound = () => {
         title="Страница не найдена"
         description="Запрашиваемая страница не существует. Вернитесь на главную страницу ГОЛУБЕВ КОНСАЛТИНГ."
         path="/404"
+        noIndex
       />
       <div className="flex min-h-screen items-center justify-center bg-muted">
         <div className="text-center">
