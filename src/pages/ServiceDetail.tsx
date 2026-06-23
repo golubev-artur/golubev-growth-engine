@@ -112,7 +112,7 @@ const ServiceDetail = () => {
       <ContactFormModal open={formOpen} onClose={() => { setFormOpen(false); setFormSourceItem(undefined); }} defaultDirection={service.title} sourceItem={formSourceItem} />
       <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" loading="lazy" className="w-full h-full object-cover object-top opacity-15" />
+          <img src={heroImage} alt={`${service.title} — направление консалтинга ГОЛУБЕВ КОНСАЛТИНГ`} loading="lazy" className="w-full h-full object-cover object-top opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
         </div>
         <div className="container mx-auto px-4 md:px-8 relative">

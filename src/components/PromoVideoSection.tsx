@@ -34,6 +34,7 @@ const PromoVideoSection = () => {
               className="w-full"
               playsInline
               onEnded={() => setPlaying(false)}
+              aria-label="Промо-видео Голубев Консалтинг — что получает ваша компания"
             />
           </div>
 

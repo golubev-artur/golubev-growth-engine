@@ -60,6 +60,8 @@ const BlogBanner = ({ category, title, readTime, date, index = 0 }: BlogBannerPr
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
       preserveAspectRatio="xMidYMid slice"
+      role="img"
+      aria-label={`${category}: ${title}`}
     >
       <defs>
         {/* Фон сетки */}

@@ -1,4 +1,4 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
@@ -7,11 +7,13 @@ import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
 import arthurMain from "@/assets/arthur-main.jpg";
 import ContactFormModal from "@/components/ContactFormModal";
 import { Button } from "@/components/ui/button";
+import { getCategoryHref } from "@/lib/categoryLink";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = getBlogPostBySlug(slug || "");
   const [formOpen, setFormOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -73,9 +75,15 @@ const BlogPost = () => {
           <Link to="/blog" className="inline-flex items-center gap-1 text-sm text-primary-foreground/50 hover:text-accent transition-colors mb-6">
             <ArrowLeft className="h-4 w-4" /> Все статьи
           </Link>
-          <span className="inline-block text-xs font-medium bg-accent/15 text-accent px-2.5 py-1 rounded-md mb-4">
-            {post.category}
-          </span>
+          {getCategoryHref(post.category) ? (
+            <Link to={getCategoryHref(post.category)!} className="inline-block text-xs font-medium bg-accent/15 text-accent px-2.5 py-1 rounded-md mb-4 hover:bg-accent hover:text-white transition-colors">
+              {post.category}
+            </Link>
+          ) : (
+            <span className="inline-block text-xs font-medium bg-accent/15 text-accent px-2.5 py-1 rounded-md mb-4">
+              {post.category}
+            </span>
+          )}
           <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground tracking-tight leading-[1.12] text-wrap-balance max-w-3xl">
             {post.title}
           </h1>
@@ -143,7 +151,13 @@ const BlogPost = () => {
                       className="w-20 h-20 rounded-lg object-cover object-top shrink-0"
                     />
                     <div className="min-w-0">
-                      <span className="text-xs text-accent font-medium">{related.category}</span>
+                      <span
+                        className="text-xs text-accent font-medium hover:underline"
+                        onClick={(e) => {
+                          const href = getCategoryHref(related.category);
+                          if (href) { e.preventDefault(); e.stopPropagation(); navigate(href); }
+                        }}
+                      >{related.category}</span>
                       <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors line-clamp-2 mt-0.5">
                         {related.title}
                       </h4>

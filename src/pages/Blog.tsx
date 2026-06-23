@@ -1,9 +1,10 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import { blogPosts } from "@/data/blog";
 import { ArrowRight, ArrowLeft, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { getCategoryHref } from "@/lib/categoryLink";
 
 const POSTS_PER_PAGE = 6;
 
@@ -11,6 +12,7 @@ const BlogPage = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const currentPage = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
 
   const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE);
@@ -75,7 +77,13 @@ const BlogPage = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <span className="inline-block text-xs font-medium bg-accent/10 text-accent px-2.5 py-1 rounded-md mb-3">
+                  <span
+                    className="inline-block text-xs font-medium bg-accent/10 text-accent px-2.5 py-1 rounded-md mb-3 hover:bg-accent hover:text-white transition-colors cursor-pointer"
+                    onClick={(e) => {
+                      const href = getCategoryHref(post.category);
+                      if (href) { e.preventDefault(); e.stopPropagation(); navigate(href); }
+                    }}
+                  >
                     {post.category}
                   </span>
                   <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors mb-2 leading-snug">
