@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Tue, 23 Jun 2026 04:04:52 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 04:04:40 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как проводить стратегическое планирование в компании: от годового плана до ежедневных действий</title>
+    <link>https://golubev-consulting.ru/blog/strategic-planning-company-guide</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/strategic-planning-company-guide</guid>
+    <description>Почему 80% стратегий остаются на бумаге — и как выстроить стратегическое планирование в компании, которое превращает амбициозные цели в конкретные результаты за квартал.</description>
+    <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
+    <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Управленческий учёт для малого бизнеса: с чего начать, чтобы видеть реальную картину</title>
     <link>https://golubev-consulting.ru/blog/management-accounting-small-business</link>
@@ -183,15 +192,6 @@
     <pubDate>Wed, 03 Jun 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
     <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Бюджетирование для малого бизнеса: с чего начать, чтобы деньги перестали утекать в никуда</title>
-    <link>https://golubev-consulting.ru/blog/budgeting-for-small-business</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/budgeting-for-small-business</guid>
-    <description>Как внедрить бюджетирование в малом бизнесе с нуля — простая система, которая даёт контроль над деньгами и позволяет принимать решения на основе цифр, а не интуиции.</description>
-    <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Управление и стратегия</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
