@@ -26,6 +26,11 @@ const BlogPost = () => {
     otherPosts[(postIndex + i * 2) % otherPosts.length]
   ).filter((p, i, arr) => arr.findIndex((a) => a.slug === p.slug) === i);
 
+  const fmt = (text: string) =>
+    text
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>')
+      .replace(/\(\/(blog|services)(\/[a-z0-9-]+)\)/g, '(<a href="/$1$2" class="text-accent hover:underline">/$1$2</a>)');
+
   const renderContent = (content: string) => {
     return content.split("\n\n").map((block, i) => {
       if (block.startsWith("## ")) {
@@ -38,7 +43,7 @@ const BlogPost = () => {
             {items.map((item, j) => (
               <li key={j} className="flex items-start gap-2 text-muted-foreground">
                 <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                <span dangerouslySetInnerHTML={{ __html: item.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} />
+                <span dangerouslySetInnerHTML={{ __html: fmt(item.slice(2)) }} />
               </li>
             ))}
           </ul>
@@ -48,7 +53,7 @@ const BlogPost = () => {
         <p
           key={i}
           className="text-muted-foreground leading-relaxed my-3"
-          dangerouslySetInnerHTML={{ __html: block.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }}
+          dangerouslySetInnerHTML={{ __html: fmt(block) }}
         />
       );
     });
