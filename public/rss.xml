@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Wed, 24 Jun 2026 04:04:40 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jun 2026 04:04:43 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,24 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как организовать удалённую команду эффективно: система управления без потери контроля и продуктивности</title>
+    <link>https://golubev-consulting.ru/blog/organize-remote-team-effectively</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/organize-remote-team-effectively</guid>
+    <description>Почему удалёнка без системы превращается в хаос — и как организовать удалённую команду так, чтобы сотрудники работали продуктивнее, чем в офисе.</description>
+    <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
+    <category>Управление и стратегия</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
+  </item>
+  <item>
+    <title>Email-маркетинг для B2B компании: как выстроить систему, которая приносит заявки, а не раздражает клиентов</title>
+    <link>https://golubev-consulting.ru/blog/email-marketing-b2b-company</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/email-marketing-b2b-company</guid>
+    <description>Почему рассылки в B2B улетают в спам и не приносят заявок — и как выстроить email-маркетинг, который формирует доверие и стабильно генерирует сделки.</description>
+    <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
+    <category>Маркетинг</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как проводить стратегическое планирование в компании: от годового плана до ежедневных действий</title>
     <link>https://golubev-consulting.ru/blog/strategic-planning-company-guide</link>
@@ -174,24 +192,6 @@
     <pubDate>Thu, 04 Jun 2026 00:00:00 GMT</pubDate>
     <category>Персонал и команда</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Система обучения сотрудников: как построить с нуля и перестать терять деньги на текучке</title>
-    <link>https://golubev-consulting.ru/blog/employee-training-system-from-scratch</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/employee-training-system-from-scratch</guid>
-    <description>Почему новички уходят в первые три месяца, а опытные сотрудники не растут — и как построить систему обучения, которая окупается уже в первом квартале.</description>
-    <pubDate>Wed, 03 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Персонал и команда</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как повысить рентабельность бизнеса: практические советы, которые работают без увеличения выручки</title>
-    <link>https://golubev-consulting.ru/blog/increase-business-profitability</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/increase-business-profitability</guid>
-    <description>Почему бизнес с хорошей выручкой приносит копейки прибыли — и как системно повысить рентабельность за счёт внутренних резервов, а не гонки за новыми клиентами.</description>
-    <pubDate>Wed, 03 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Управление и стратегия</category>
-    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
