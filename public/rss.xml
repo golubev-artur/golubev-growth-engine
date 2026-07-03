@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 29 Jun 2026 04:06:25 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2026 04:06:47 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Чек-лист проверки договора аренды коммерческой недвижимости для ИП: на что смотреть до подписания</title>
+    <link>https://golubev-consulting.ru/blog/commercial-lease-checklist-ip</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/commercial-lease-checklist-ip</guid>
+    <description>Какие пункты договора аренды коммерческого помещения ИП должен проверить до подписания — и как избежать ловушек, которые обходятся в сотни тысяч рублей.</description>
+    <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+    <category>Юридические услуги</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как рассчитать себестоимость услуги в малом бизнесе пошагово: руководство с реальными примерами</title>
     <link>https://golubev-consulting.ru/blog/service-cost-calculation-small-business</link>
@@ -183,15 +192,6 @@
     <pubDate>Sat, 13 Jun 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как мотивировать сотрудников без повышения зарплаты: инструменты, которые работают в малом бизнесе</title>
-    <link>https://golubev-consulting.ru/blog/motivate-employees-without-salary-increase</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/motivate-employees-without-salary-increase</guid>
-    <description>Почему деньги — далеко не главный мотиватор, и какие инструменты реально удерживают людей, когда бюджет на зарплату исчерпан, а текучка растёт.</description>
-    <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Персонал и команда</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
