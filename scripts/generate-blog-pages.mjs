@@ -115,3 +115,51 @@ for (const post of posts) {
 }
 
 console.log(`Generated ${posts.length} blog post pages in dist/blog/`);
+
+// ── Sitemap generation ──
+const today = new Date().toISOString().slice(0, 10);
+const latestPostDate = posts.length > 0 ? posts[0].date : today;
+
+const staticPages = [
+  { loc: "/", changefreq: "weekly", priority: "1.0" },
+  { loc: "/services", changefreq: "monthly", priority: "0.9" },
+  { loc: "/blog", changefreq: "weekly", priority: "0.9", lastmod: latestPostDate },
+  { loc: "/privacy", changefreq: "yearly", priority: "0.3" },
+  { loc: "/forma", changefreq: "monthly", priority: "0.8" },
+  { loc: "/faq", changefreq: "monthly", priority: "0.6" },
+  { loc: "/press", changefreq: "monthly", priority: "0.5" },
+  { loc: "/presentation", changefreq: "monthly", priority: "0.5" },
+];
+
+const servicePages = [
+  "sales-crm", "business-processes", "marketing", "management-strategy",
+  "hr-team", "tech-automation", "client-service", "strategic-session",
+];
+
+function sitemapEntry(loc, lastmod, changefreq, priority) {
+  return `  <url><loc>${SITE}${loc}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
+}
+
+const lines = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+];
+
+for (const p of staticPages) {
+  lines.push(sitemapEntry(p.loc, p.lastmod || today, p.changefreq, p.priority));
+}
+
+for (const slug of servicePages) {
+  lines.push(sitemapEntry(`/services/${slug}`, today, "monthly", "0.8"));
+}
+
+lines.push("");
+
+for (const post of posts) {
+  lines.push(sitemapEntry(`/blog/${post.slug}`, post.date, "monthly", "0.7"));
+}
+
+lines.push("</urlset>");
+
+fs.writeFileSync(path.join(DIST, "sitemap.xml"), lines.join("\n"));
+console.log(`Generated sitemap.xml with ${staticPages.length + servicePages.length + posts.length} URLs`);
