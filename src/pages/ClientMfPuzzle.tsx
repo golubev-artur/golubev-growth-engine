@@ -211,14 +211,14 @@ const ClientMfPuzzle = () => {
               <Video className="h-6 w-6 text-accent shrink-0 mt-1" />
               <div>
                 <h3 className="font-bold text-foreground mb-1">Формат</h3>
-                <p className="text-sm text-muted-foreground">Вся работа онлайн + 2 онлайн-встречи в месяц + 1 личная встреча в субботу</p>
+                <p className="text-sm text-muted-foreground">Вся работа онлайн + 2 онлайн-встречи в неделю при необходимости</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <MapPin className="h-6 w-6 text-accent shrink-0 mt-1" />
               <div>
                 <h3 className="font-bold text-foreground mb-1">Личная встреча</h3>
-                <p className="text-sm text-muted-foreground">1 раз в месяц, суббота - в офисе или на производстве компании</p>
+                <p className="text-sm text-muted-foreground">1 личная встреча по субботам в офисе или на производстве компании</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
