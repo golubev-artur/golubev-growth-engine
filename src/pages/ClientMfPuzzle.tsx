@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   CheckCircle2, ArrowRight, ChevronDown, Target, BarChart3,
   Users, Briefcase, TrendingUp, Shield, Zap, Settings,
-  Award, Clock, Calculator,
+  Award, Clock, Calculator, Video, MapPin,
 } from "lucide-react";
 
 const MONTHS = [
@@ -199,7 +199,7 @@ const ClientMfPuzzle = () => {
       {/* Overview cards */}
       <section className="py-8 bg-card border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="flex items-start gap-4">
               <Clock className="h-6 w-6 text-accent shrink-0 mt-1" />
               <div>
@@ -208,10 +208,17 @@ const ClientMfPuzzle = () => {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <Target className="h-6 w-6 text-accent shrink-0 mt-1" />
+              <Video className="h-6 w-6 text-accent shrink-0 mt-1" />
               <div>
-                <h3 className="font-bold text-foreground mb-1">Цель</h3>
-                <p className="text-sm text-muted-foreground">Выстроить систему, которая работает без сбоев</p>
+                <h3 className="font-bold text-foreground mb-1">Формат</h3>
+                <p className="text-sm text-muted-foreground">Вся работа онлайн + 2 онлайн-встречи в месяц + 1 личная встреча в субботу</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <MapPin className="h-6 w-6 text-accent shrink-0 mt-1" />
+              <div>
+                <h3 className="font-bold text-foreground mb-1">Личная встреча</h3>
+                <p className="text-sm text-muted-foreground">1 раз в месяц, суббота - в офисе или на производстве компании</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
