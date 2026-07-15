@@ -25,7 +25,7 @@ const benefits = [
   "Разберём вашу ситуацию и найдём точки роста",
   "Покажем, где бизнес теряет деньги",
   "Дадим конкретные рекомендации",
-  "Без обязательств — вы решаете сами",
+  "Без обязательств - вы решаете сами",
 ];
 
 const ContactSection = () => {
@@ -56,7 +56,7 @@ const ContactSection = () => {
         email: data.email as string,
         direction: direction || "",
         message: data.message as string,
-        source: `Форма обратной связи — ${getPageLabel(window.location.pathname)}`,
+        source: `Форма обратной связи - ${getPageLabel(window.location.pathname)}`,
       });
     } catch {
       // не блокируем UX
@@ -95,7 +95,7 @@ const ContactSection = () => {
                 Бесплатная консультация для вашего бизнеса
               </h2>
               <p className="text-primary-foreground/60 text-lg leading-relaxed mb-8">
-                45 минут с экспертом — разберём вашу ситуацию и покажем конкретные шаги к росту.
+                45 минут с экспертом - разберём вашу ситуацию и покажем конкретные шаги к росту.
               </p>
 
               <div className="flex items-center gap-3 mb-6 text-primary-foreground/50">
@@ -131,7 +131,7 @@ const ContactSection = () => {
               ) : (
                 <>
                   <h3 className="text-xl font-bold text-foreground mb-1">Записаться на встречу</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Заполните форму — мы подберём удобное время</p>
+                  <p className="text-sm text-muted-foreground mb-6">Заполните форму - мы подберём удобное время</p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <Input name="name" placeholder="Ваше имя" required className="bg-background" />

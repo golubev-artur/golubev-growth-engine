@@ -1,6 +1,6 @@
 /**
- * BlogBanner — SVG-баннер для карточек блога.
- * Стиль: тёмный фон, решётка, синий акцент — как в golubev_banner_team_v2.html
+ * BlogBanner - SVG-баннер для карточек блога.
+ * Стиль: тёмный фон, решётка, синий акцент - как в golubev_banner_team_v2.html
  */
 
 interface BlogBannerProps {
@@ -8,7 +8,7 @@ interface BlogBannerProps {
   title: string;
   readTime: string;
   date: string;
-  /** 0–11 — выбирает цветовой акцент тега */
+  /** 0–11 - выбирает цветовой акцент тега */
   index?: number;
 }
 

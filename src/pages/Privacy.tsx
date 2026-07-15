@@ -29,8 +29,8 @@ const Privacy = () => {
 
           <h2 className="text-xl font-bold text-foreground mt-8 mb-3">1. Общие положения</h2>
           <p className="text-muted-foreground leading-relaxed mb-3">
-            Настоящая Политика обработки персональных данных (далее — Политика) действует в отношении всей информации, которую сайт{" "}
-            <Link to="/" className="text-accent hover:underline">golubev-consulting.ru</Link> (далее — Сайт), принадлежащий Golubev Consulting (далее — Оператор), может получить о пользователе во время использования Сайта.
+            Настоящая Политика обработки персональных данных (далее - Политика) действует в отношении всей информации, которую сайт{" "}
+            <Link to="/" className="text-accent hover:underline">golubev-consulting.ru</Link> (далее - Сайт), принадлежащий Golubev Consulting (далее - Оператор), может получить о пользователе во время использования Сайта.
           </p>
 
           <h2 className="text-xl font-bold text-foreground mt-8 mb-3">2. Какие данные мы собираем</h2>
@@ -39,15 +39,15 @@ const Privacy = () => {
           </p>
           <ul className="space-y-2 my-3">
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">
-              <strong className="text-foreground">Данные из форм обратной связи</strong> — имя, номер телефона, адрес электронной почты, текст сообщения, которые вы указываете при заполнении{" "}
+              <strong className="text-foreground">Данные из форм обратной связи</strong> - имя, номер телефона, адрес электронной почты, текст сообщения, которые вы указываете при заполнении{" "}
               <Link to="/services" className="text-accent hover:underline">форм на страницах услуг</Link> и в{" "}
               <Link to="/blog" className="text-accent hover:underline">блоге</Link>.
             </li>
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">
-              <strong className="text-foreground">Технические данные</strong> — IP-адрес, тип браузера, операционная система, разрешение экрана, источник перехода на Сайт, информация о просмотренных страницах и времени, проведённом на Сайте.
+              <strong className="text-foreground">Технические данные</strong> - IP-адрес, тип браузера, операционная система, разрешение экрана, источник перехода на Сайт, информация о просмотренных страницах и времени, проведённом на Сайте.
             </li>
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">
-              <strong className="text-foreground">Данные cookies</strong> — небольшие текстовые файлы, которые сохраняются на вашем устройстве для обеспечения работы Сайта и анализа его использования.
+              <strong className="text-foreground">Данные cookies</strong> - небольшие текстовые файлы, которые сохраняются на вашем устройстве для обеспечения работы Сайта и анализа его использования.
             </li>
           </ul>
 
@@ -68,10 +68,10 @@ const Privacy = () => {
           </p>
           <ul className="space-y-2 my-3">
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">
-              <strong className="text-foreground">Необходимые cookies</strong> — обеспечивают корректную работу Сайта, запоминание ваших предпочтений (например, согласие с данной Политикой).
+              <strong className="text-foreground">Необходимые cookies</strong> - обеспечивают корректную работу Сайта, запоминание ваших предпочтений (например, согласие с данной Политикой).
             </li>
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">
-              <strong className="text-foreground">Аналитические cookies</strong> — используются сервисом Яндекс.Метрика для сбора статистики посещений, анализа поведения пользователей, оценки эффективности содержимого Сайта. Данные собираются в обезличенной форме.
+              <strong className="text-foreground">Аналитические cookies</strong> - используются сервисом Яндекс.Метрика для сбора статистики посещений, анализа поведения пользователей, оценки эффективности содержимого Сайта. Данные собираются в обезличенной форме.
             </li>
           </ul>
           <p className="text-muted-foreground leading-relaxed mb-3">

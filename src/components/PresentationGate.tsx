@@ -105,7 +105,7 @@ const PresentationGate = () => {
         phone: fields.phone.value,
         email: fields.email.value,
         message: `Компания: ${fields.company.value}`,
-        source: `Запрос презентации — ${getPageLabel(window.location.pathname)}`,
+        source: `Запрос презентации - ${getPageLabel(window.location.pathname)}`,
       });
     } catch {
       // не блокируем UX
@@ -179,7 +179,7 @@ const PresentationGate = () => {
       >
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left — description */}
+            {/* Left - description */}
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4">
                 <FileDown className="h-3.5 w-3.5" />
@@ -193,7 +193,7 @@ const PresentationGate = () => {
               </p>
               <ul className="space-y-3">
                 {[
-                  "10 слайдов — от проблемы до решения",
+                  "10 слайдов - от проблемы до решения",
                   "Реальные кейсы и цифры роста клиентов",
                   "Все форматы работы и стоимость",
                   "Пошаговый процесс от диагностики до результата",
@@ -206,7 +206,7 @@ const PresentationGate = () => {
               </ul>
             </div>
 
-            {/* Right — form / success */}
+            {/* Right - form / success */}
             <div className="bg-background rounded-2xl border border-border p-6 md:p-8 shadow-sm">
               {submitted ? (
                 <div className="text-center py-8">

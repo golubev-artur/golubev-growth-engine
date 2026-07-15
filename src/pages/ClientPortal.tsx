@@ -245,7 +245,7 @@ const GoalCard = ({ goal, defaultOpen }: { goal: MonthlyGoal; defaultOpen?: bool
                         <p className="text-xs text-muted-foreground flex items-start gap-2">
                           <Calendar className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
                           <span>
-                            <strong>Пятница — созвон 60 мин:</strong> 30 мин собственник + опердир, 20 мин консультант, 10 мин задачи
+                            <strong>Пятница - созвон 60 мин:</strong> 30 мин собственник + опердир, 20 мин консультант, 10 мин задачи
                           </span>
                         </p>
                       </div>
@@ -264,7 +264,7 @@ const GoalCard = ({ goal, defaultOpen }: { goal: MonthlyGoal; defaultOpen?: bool
                 className="flex items-center gap-2 text-sm font-bold text-foreground mb-3 hover:text-accent transition-colors"
               >
                 <ChevronDown className={`h-4 w-4 transition-transform ${showExpected ? "rotate-180" : ""}`} />
-                Ожидаемые итоги — {formatMonth(goal.month)}
+                Ожидаемые итоги - {formatMonth(goal.month)}
               </button>
               {showExpected && (
                 <div className="space-y-2">
@@ -309,7 +309,7 @@ const ClientPortal = () => {
   return (
     <Layout>
       <Seo
-        title={`${client.name} — Личный кабинет`}
+        title={`${client.name} - Личный кабинет`}
         description={`Протоколы встреч и цели для ${client.name} от Голубев Консалтинг`}
         path={`/client/${client.slug}`}
         noIndex

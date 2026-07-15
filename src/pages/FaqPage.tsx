@@ -12,7 +12,7 @@ const FaqPage = () => {
     <Layout>
       <Seo
         path="/faq"
-        title="FAQ — Голубев Консалтинг"
+        title="FAQ - Голубев Консалтинг"
         description="Ответы на частые вопросы о консалтинге, стоимости, процессе работы и результатах. Голубев Консалтинг."
       />
       <section className="bg-primary py-20 md:py-24">

@@ -29,7 +29,7 @@ interface SeoProps {
 }
 
 const SITE = "https://golubev-consulting.ru";
-const DEFAULT_TITLE = "Golubev Consulting — Системный консалтинг для бизнеса";
+const DEFAULT_TITLE = "Golubev Consulting - Системный консалтинг для бизнеса";
 const DEFAULT_DESC =
   "Системный консалтинг: продажи, CRM, маркетинг, бизнес-процессы, управление, автоматизация. Комплексные решения для роста вашего бизнеса.";
 
@@ -77,7 +77,7 @@ const Seo = ({
   service,
   noIndex,
 }: SeoProps) => {
-  const fullTitle = title ? `${title} — Golubev Consulting` : DEFAULT_TITLE;
+  const fullTitle = title ? `${title} - Golubev Consulting` : DEFAULT_TITLE;
   const desc = description || DEFAULT_DESC;
   const url = `${SITE}${path}`;
   const ogImage = resolveImage(image);

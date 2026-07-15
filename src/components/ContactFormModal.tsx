@@ -49,7 +49,7 @@ const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: Conta
         message: data.message as string,
         source: sourceItem
           ? `Кнопка «Записаться на консультацию» → ${getPageLabel(window.location.pathname)} → ${sourceItem}`
-          : `Модальная форма — ${getPageLabel(window.location.pathname)}`,
+          : `Модальная форма - ${getPageLabel(window.location.pathname)}`,
       });
     } catch {
       // не блокируем UX
@@ -84,7 +84,7 @@ const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: Conta
             Запись на консультацию
           </h2>
           <p className="text-muted-foreground text-sm">
-            Заполните форму — мы свяжемся с вами в течение рабочего дня.
+            Заполните форму - мы свяжемся с вами в течение рабочего дня.
           </p>
         </div>
 

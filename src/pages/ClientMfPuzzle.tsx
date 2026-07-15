@@ -168,7 +168,7 @@ const ClientMfPuzzle = () => {
   return (
     <Layout>
       <Seo
-        title="MF-Puzzle — План сопровождения"
+        title="MF-Puzzle - План сопровождения"
         description="Индивидуальный план сопровождения компании MF-Puzzle: 6 месяцев активной работы от Голубев Консалтинг"
         path="/client/mf-puzzle"
         noIndex
@@ -190,7 +190,7 @@ const ClientMfPuzzle = () => {
             MF-Puzzle
           </h1>
           <p className="text-primary-foreground/60 text-lg max-w-2xl">
-            План сопровождения на 6 месяцев — от диагностики до масштабирования.
+            План сопровождения на 6 месяцев - от диагностики до масштабирования.
             Полное выстраивание бизнес-процессов, CRM, команды и аналитики.
           </p>
         </div>
@@ -218,14 +218,14 @@ const ClientMfPuzzle = () => {
               <Shield className="h-6 w-6 text-accent shrink-0 mt-1" />
               <div>
                 <h3 className="font-bold text-foreground mb-1">После</h3>
-                <p className="text-sm text-muted-foreground">Внешний контроль — 100 000 ₽/мес</p>
+                <p className="text-sm text-muted-foreground">Внешний контроль - 100 000 ₽/мес</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Plan — 6 months */}
+      {/* Plan - 6 months */}
       <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <div className="text-center mb-10">
@@ -233,10 +233,10 @@ const ClientMfPuzzle = () => {
               План работ
             </p>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              6 месяцев — от фундамента до результата
+              6 месяцев - от фундамента до результата
             </h2>
             <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-              Каждый месяц предусматривает появление новых вводных — как из предыдущих этапов,
+              Каждый месяц предусматривает появление новых вводных - как из предыдущих этапов,
               так и новых задач. Все изменения фиксируются и интегрируются в текущий план работы.
             </p>
           </div>
@@ -273,7 +273,7 @@ const ClientMfPuzzle = () => {
                 {MONTHS.map((m) => (
                   <div key={m.num} className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">
-                      Месяц {m.num} — {m.title}
+                      Месяц {m.num} - {m.title}
                     </span>
                     <span className="font-semibold text-foreground whitespace-nowrap ml-4">
                       {m.price} ₽
@@ -292,7 +292,7 @@ const ClientMfPuzzle = () => {
             <div className="border border-border rounded-2xl bg-background p-6 md:p-8 flex flex-col">
               <h3 className="text-lg font-bold text-foreground mb-4">После 6 месяцев</h3>
               <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                Когда система выстроена и работает — я остаюсь на внешнем контроле.
+                Когда система выстроена и работает - я остаюсь на внешнем контроле.
                 Это значит, что бизнес продолжает расти, а я слежу за тем, чтобы
                 всё не сломалось и двигалось в нужном направлении.
               </p>
@@ -346,7 +346,7 @@ const ClientMfPuzzle = () => {
               Если коротко
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Вы платите один раз за построение системы — и дальше платите только за то,
+              Вы платите один раз за построение системы - и дальше платите только за то,
               чтобы она работала без сбоев. Это в разы дешевле, чем держать в штате
               всех специалистов, которых я заменяю.
             </p>

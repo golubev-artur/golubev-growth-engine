@@ -8,7 +8,7 @@ const Footer = () => (
     <div className="container mx-auto px-4 md:px-8 py-14">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-        {/* Col 1 — Brand */}
+        {/* Col 1 - Brand */}
         <div className="lg:col-span-1">
           <Link to="/" className="inline-flex items-center self-start mb-4">
             <img src="/logo-white.png" alt="Голубев Консалтинг" loading="lazy" className="h-20 w-auto" />
@@ -43,7 +43,7 @@ const Footer = () => (
           </div>
         </div>
 
-        {/* Col 2 — Services */}
+        {/* Col 2 - Services */}
         <div>
           <h4 className="text-sm font-semibold text-primary-foreground mb-4 tracking-wide">Услуги</h4>
           <ul className="space-y-2.5">
@@ -66,7 +66,7 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Col 3 — Company */}
+        {/* Col 3 - Company */}
         <div>
           <h4 className="text-sm font-semibold text-primary-foreground mb-4 tracking-wide">Компания</h4>
           <ul className="space-y-2.5">
@@ -121,11 +121,11 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Col 4 — CTA */}
+        {/* Col 4 - CTA */}
         <div>
           <h4 className="text-sm font-semibold text-primary-foreground mb-4 tracking-wide">Начать работу</h4>
           <p className="text-sm text-primary-foreground/50 mb-4 leading-relaxed">
-            Бесплатная 45-минутная диагностика — узнайте, где ваш бизнес теряет деньги.
+            Бесплатная 45-минутная диагностика - узнайте, где ваш бизнес теряет деньги.
           </p>
           <Link
             to="/#contact"

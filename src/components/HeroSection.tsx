@@ -28,7 +28,7 @@ const HeroSection = () => {
     <section id="hero" className="relative min-h-[90vh] flex items-center bg-primary overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0">
-        <img src={arthurHero} alt="Голубев Консалтинг — системный консалтинг для бизнеса" loading="eager" className="w-full h-full object-cover object-top opacity-20" />
+        <img src={arthurHero} alt="Голубев Консалтинг - системный консалтинг для бизнеса" loading="eager" className="w-full h-full object-cover object-top opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/70" />
       </div>
 
@@ -66,7 +66,7 @@ const HeroSection = () => {
           <div className="hidden lg:block">
             <img
               src={arthurHero}
-              alt="Артур Голубев — бизнес-консультант"
+              alt="Артур Голубев - бизнес-консультант"
               loading="eager"
               className="w-full max-w-md ml-auto rounded-xl shadow-2xl object-cover aspect-[3/4]"
             />
