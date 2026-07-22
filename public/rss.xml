@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 20 Jul 2026 04:06:20 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2026 04:06:57 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Какие метрики клиентского сервиса отслеживать малому бизнесу: 8 показателей, которые влияют на прибыль</title>
+    <link>https://golubev-consulting.ru/blog/customer-service-metrics-small-business</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/customer-service-metrics-small-business</guid>
+    <description>Разбираем ключевые метрики клиентского сервиса для малого бизнеса — от NPS и CSAT до времени первого ответа. Какие показатели внедрить в первую очередь и как превратить цифры в рост выручки.</description>
+    <pubDate>Wed, 22 Jul 2026 00:00:00 GMT</pubDate>
+    <category>Клиентский сервис</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-nps.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как составить должностную инструкцию руководителя отдела продаж: структура, обязанности и KPI</title>
     <link>https://golubev-consulting.ru/blog/sales-director-job-description</link>
@@ -183,15 +192,6 @@
     <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
     <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как защитить бизнес от правовых и финансовых рисков: чек-лист для собственника, который не хочет потерять всё</title>
-    <link>https://golubev-consulting.ru/blog/protect-business-legal-financial-risks</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/protect-business-legal-financial-risks</guid>
-    <description>Почему компании с хорошей выручкой теряют всё за месяцы из-за юридических и финансовых дыр - и как выстроить систему защиты бизнеса до того, как грянет проблема.</description>
-    <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Юридические услуги</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
