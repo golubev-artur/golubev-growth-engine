@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 27 Jul 2026 04:06:49 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2026 04:07:49 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как малому бизнесу защитить интеллектуальную собственность: практическое руководство без юридического тумана</title>
+    <link>https://golubev-consulting.ru/blog/protect-intellectual-property-small-business</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/protect-intellectual-property-small-business</guid>
+    <description>Название, логотип, сайт, база клиентов, скрипты и наработки — всё это активы, которые легко потерять, если ими не заниматься. Разбираем по шагам, как малому бизнесу защитить интеллектуальную собственность и что сделать в первую очередь.</description>
+    <pubDate>Wed, 29 Jul 2026 00:00:00 GMT</pubDate>
+    <category>Юридические услуги</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как проводить еженедельный контроль выполнения плана продаж: система, которая не даёт месяцу сорваться</title>
     <link>https://golubev-consulting.ru/blog/weekly-sales-plan-control</link>
@@ -183,15 +192,6 @@
     <pubDate>Sun, 21 Jun 2026 00:00:00 GMT</pubDate>
     <category>Бизнес-процессы</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как повысить лояльность клиентов в малом бизнесе: система, которая превращает разовых покупателей в постоянных</title>
-    <link>https://golubev-consulting.ru/blog/customer-loyalty-small-business</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/customer-loyalty-small-business</guid>
-    <description>Почему 70% клиентов уходят после первой покупки - и как выстроить систему лояльности, которая удерживает клиентов и увеличивает повторные продажи без увеличения рекламного бюджета.</description>
-    <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Клиентский сервис</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
