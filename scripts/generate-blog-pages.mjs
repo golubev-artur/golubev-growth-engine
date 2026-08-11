@@ -45,6 +45,46 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;");
 }
 
+function escapeText(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// Inline markdown -> HTML (mirrors fmt() in src/pages/BlogPost.tsx)
+function fmtInline(text) {
+  return escapeText(text)
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\(\/(blog|services)(\/[a-z0-9-]+)\)/g, '(<a href="/$1$2">/$1$2</a>)');
+}
+
+// Block markdown -> HTML (mirrors renderContent() in src/pages/BlogPost.tsx)
+function renderContentToHtml(content) {
+  return content
+    .split("\n\n")
+    .map((block) => {
+      const b = block.trim();
+      if (!b) return "";
+      if (b.startsWith("## ")) return `<h2>${escapeText(b.slice(3))}</h2>`;
+      if (b.startsWith("- ")) {
+        const items = b.split("\n").filter((l) => l.startsWith("- "));
+        return `<ul>${items.map((it) => `<li>${fmtInline(it.slice(2))}</li>`).join("")}</ul>`;
+      }
+      return `<p>${fmtInline(b)}</p>`;
+    })
+    .filter(Boolean)
+    .join("\n");
+}
+
+// Extract a post's markdown body (content field) from blog.ts by slug
+function extractContent(slug) {
+  const idx = blogSrc.indexOf(`slug: "${slug}"`);
+  if (idx === -1) return null;
+  const m = blogSrc.slice(idx).match(/content:\s*`([\s\S]*?)`\s*,?\s*\n\s*\}/);
+  return m ? m[1] : null;
+}
+
 for (const post of posts) {
   const fullTitle = `${post.title} — Golubev Consulting`;
   const url = `${SITE}/blog/${post.slug}`;
@@ -107,6 +147,39 @@ for (const post of posts) {
   html = html.replace(
     /<meta property="og:image:height" content="630"\s*\/?>/,
     `<meta property="og:image:height" content="630" />\n    ${articleMeta}`
+  );
+
+  // ── Prerender article body into #root (SEO: Yandex/Google see full text without JS) ──
+  const content = extractContent(post.slug);
+  if (content) {
+    const bodyHtml = `<article class="prose-container"><h1>${escapeText(post.title)}</h1>\n${renderContentToHtml(content)}</article>`;
+    html = html.replace('<div id="root"></div>', () => `<div id="root">${bodyHtml}</div>`);
+  } else {
+    console.warn(`  ! No content extracted for ${post.slug} — body not prerendered`);
+  }
+
+  // ── BlogPosting structured data ──
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Person", name: "Артур Голубев", url: SITE },
+    publisher: {
+      "@type": "Organization",
+      name: "Golubev Consulting",
+      logo: { "@type": "ImageObject", url: `${SITE}/og-image.png` },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    articleSection: post.category,
+    inLanguage: "ru-RU",
+  };
+  html = html.replace(
+    "</head>",
+    () => `  <script type="application/ld+json">\n${JSON.stringify(articleSchema, null, 2)}\n    </script>\n  </head>`
   );
 
   const dir = path.join(DIST, "blog", post.slug);
