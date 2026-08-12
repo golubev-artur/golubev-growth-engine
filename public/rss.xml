@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 10 Aug 2026 06:20:41 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2026 04:06:28 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Что делать, если клиент просит скидку в B2B-переговорах: 7 сценариев ответа без потери маржи</title>
+    <link>https://golubev-consulting.ru/blog/client-asks-for-discount-b2b</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/client-asks-for-discount-b2b</guid>
+    <description>Скидка - это не про деньги, а про переговорную позицию. Разбираем, что делать, если клиент просит скидку в B2B-переговорах: как отвечать, когда уступать, а когда держать цену, и как не приучить рынок торговаться с вами.</description>
+    <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
+    <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как проводить exit интервью при увольнении сотрудника: инструмент, который экономит бизнесу миллионы</title>
     <link>https://golubev-consulting.ru/blog/exit-interview-employee-termination</link>
@@ -183,15 +192,6 @@
     <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
     <category>Управление и стратегия</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-okr.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Управленческий учёт для малого бизнеса: с чего начать, чтобы видеть реальную картину</title>
-    <link>https://golubev-consulting.ru/blog/management-accounting-small-business</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/management-accounting-small-business</guid>
-    <description>Почему бухгалтерская отчётность не показывает реальную прибыль - и как внедрить управленческий учёт для малого бизнеса за 30 дней, чтобы принимать решения на основе цифр, а не интуиции.</description>
-    <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Финансы</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-ai.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
