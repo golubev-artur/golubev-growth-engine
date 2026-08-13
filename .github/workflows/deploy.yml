@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -33,10 +35,28 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Detect new blog posts
+        id: blog
+        run: |
+          DIFF=$(git diff HEAD~1 HEAD -- src/data/blog.ts || true)
+          if echo "$DIFF" | grep -q '^\+.*slug:'; then
+            SLUGS=$(echo "$DIFF" | grep '^\+.*slug:' | sed 's/.*slug: "\([^"]*\)".*/\1/' | head -5)
+            echo "new_posts=true" >> $GITHUB_OUTPUT
+            echo "slugs<<EOF" >> $GITHUB_OUTPUT
+            echo "$SLUGS" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "new_posts=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+
+    outputs:
+      new_posts: ${{ steps.blog.outputs.new_posts }}
+      slugs: ${{ steps.blog.outputs.slugs }}
 
   deploy:
     environment:
@@ -48,3 +68,24 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: needs.build.outputs.new_posts == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Send Telegram notification
+        env:
+          BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          CHAT_ID: "491832074"
+        run: |
+          SLUGS="${{ needs.build.outputs.slugs }}"
+          for SLUG in $SLUGS; do
+            TITLE=$(grep -A1 "slug: \"$SLUG\"" src/data/blog.ts | grep 'title:' | sed 's/.*title: "\([^"]*\)".*/\1/' | head -1)
+            URL="https://golubev-consulting.ru/blog/${SLUG}"
+            MSG="📝 Новый пост опубликован на golubev-consulting.ru%0A%0A${TITLE}%0A${URL}"
+            curl -s "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${MSG}" > /dev/null
+          done
