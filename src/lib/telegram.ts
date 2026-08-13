@@ -1,5 +1,7 @@
-const BOT_TOKEN = "8748102371:AAEGXw8APrHMKGOBcDgAP2IBQPvixuDlDwY";
-const CHAT_ID = "-5082288324";
+// Заявки шлём через серверный прокси api.golubev-consulting.ru/lead,
+// т.к. api.telegram.org заблокирован у посетителей из РФ (прямой fetch
+// из браузера не проходит). Сервер пересылает в Telegram надёжно.
+const LEAD_ENDPOINT = "https://api.golubev-consulting.ru/lead";
 
 export async function sendToTelegram(data: {
   name: string;
@@ -9,31 +11,20 @@ export async function sendToTelegram(data: {
   message?: string;
   source?: string;
 }): Promise<void> {
-  const lines = [
-    "🔔 <b>Новая заявка с сайта</b>",
-    "",
-    `👤 <b>Имя:</b> ${data.name}`,
-    `📞 <b>Телефон:</b> ${data.phone}`,
-  ];
-
-  if (data.email) lines.push(`📧 <b>Email:</b> ${data.email}`);
-  if (data.direction) lines.push(`📋 <b>Направление:</b> ${data.direction}`);
-  if (data.message) lines.push(`💬 <b>Сообщение:</b> ${data.message}`);
-  if (data.source) lines.push(``, `🌐 <b>Источник:</b> ${data.source}`);
-
-  const text = lines.join("\n");
-
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    const res = await fetch(LEAD_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "HTML" }),
+      body: JSON.stringify(data),
       signal: controller.signal,
     });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || !json.ok) {
+      throw new Error(json.error || `Ошибка отправки (${res.status})`);
+    }
+  } finally {
     clearTimeout(timeout);
-  } catch {
-    // не блокируем UX если TG недоступен
   }
 }
