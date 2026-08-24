@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Fri, 21 Aug 2026 04:06:43 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 24 Aug 2026 04:06:30 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как организовать планёрку отдела продаж, чтобы она была полезной</title>
+    <link>https://golubev-consulting.ru/blog/sales-department-meeting-format</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/sales-department-meeting-format</guid>
+    <description>Ежедневная планёрка либо разгоняет отдел продаж, либо крадёт полчаса и убивает мотивацию. Разбираем, как организовать планёрку отдела продаж, чтобы она была полезной: какой формат выбрать, о чём говорить, сколько это должно длиться и каких ошибок избегать.</description>
+    <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
+    <category>Продажи и CRM</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как составить план адаптации менеджера по продажам на первый месяц</title>
     <link>https://golubev-consulting.ru/blog/sales-manager-onboarding-first-month</link>
@@ -183,15 +192,6 @@
     <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
     <category>Финансы</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как увеличить повторные продажи в B2B: система, которая превращает разовых клиентов в постоянных</title>
-    <link>https://golubev-consulting.ru/blog/increase-repeat-sales-b2b</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/increase-repeat-sales-b2b</guid>
-    <description>Почему компании тратят миллионы на привлечение новых клиентов и игнорируют тех, кто уже купил - и как выстроить систему повторных продаж в B2B, которая растит выручку без рекламного бюджета.</description>
-    <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
-    <category>Продажи и CRM</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-nps.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
