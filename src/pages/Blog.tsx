@@ -5,6 +5,7 @@ import Seo from "@/components/Seo";
 import { blogPosts } from "@/data/blog";
 import { ArrowRight, ArrowLeft, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { getCategoryHref } from "@/lib/categoryLink";
+import { withUniqueImages } from "@/lib/uniquePageImages";
 
 const POSTS_PER_PAGE = 6;
 
@@ -18,7 +19,7 @@ const BlogPage = () => {
   const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE);
   const safePage = Math.min(currentPage, totalPages);
   const startIdx = (safePage - 1) * POSTS_PER_PAGE;
-  const pagePosts = blogPosts.slice(startIdx, startIdx + POSTS_PER_PAGE);
+  const pagePosts = withUniqueImages(blogPosts.slice(startIdx, startIdx + POSTS_PER_PAGE), blogPosts);
 
   useEffect(() => {
     window.scrollTo(0, 0);
