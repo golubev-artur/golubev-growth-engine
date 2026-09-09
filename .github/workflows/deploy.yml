@@ -86,6 +86,11 @@ jobs:
           for SLUG in $SLUGS; do
             TITLE=$(grep -A1 "slug: \"$SLUG\"" src/data/blog.ts | grep 'title:' | sed 's/.*title: "\([^"]*\)".*/\1/' | head -1)
             URL="https://golubev-consulting.ru/blog/${SLUG}"
-            MSG="📝 Новый пост опубликован на golubev-consulting.ru%0A%0A${TITLE}%0A${URL}"
-            curl -s "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${MSG}" > /dev/null
+            MSG=$(printf '📝 Новый пост опубликован на golubev-consulting.ru\n\n%s\n%s' "$TITLE" "$URL")
+            # Текст уходит телом POST с urlencode: в строке запроса пробелы и кириллица
+            # делали URL невалидным, и curl падал с кодом 3, не отправив сообщение.
+            curl -sS --fail -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${CHAT_ID}" \
+              --data-urlencode "text=${MSG}" \
+              -o /dev/null -w 'telegram sendMessage: HTTP %{http_code}\n'
           done
