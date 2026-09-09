@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { sendToTelegram } from "@/lib/telegram";
+import { leadErrorToast } from "@/lib/leadError";
 import { getPageLabel } from "@/lib/pageLabel";
 import {
   FileDown, Send, CheckCircle2, User, Phone, Mail, Building2, AlertCircle,
@@ -108,7 +109,10 @@ const PresentationGate = () => {
         source: `Запрос презентации - ${getPageLabel(window.location.pathname)}`,
       });
     } catch {
-      // не блокируем UX
+      // Заявка не ушла: доступ не открываем, поля остаются заполненными.
+      setLoading(false);
+      toast(leadErrorToast);
+      return;
     }
     setLoading(false);
     setSubmitted(true);

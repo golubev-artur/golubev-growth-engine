@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Send, Video, Clock, CheckCircle } from "lucide-react";
 import { sendToTelegram } from "@/lib/telegram";
+import { leadErrorToast } from "@/lib/leadError";
 import { getPageLabel } from "@/lib/pageLabel";
 
 const directions = [
@@ -59,7 +60,10 @@ const ContactSection = () => {
         source: `Форма обратной связи - ${getPageLabel(window.location.pathname)}`,
       });
     } catch {
-      // не блокируем UX
+      // Заявка не ушла: сообщаем посетителю и оставляем форму заполненной.
+      setLoading(false);
+      toast(leadErrorToast);
+      return;
     }
     setLoading(false);
     setSent(true);

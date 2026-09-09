@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Send, X } from "lucide-react";
 import { sendToTelegram } from "@/lib/telegram";
+import { leadErrorToast } from "@/lib/leadError";
 import { getPageLabel } from "@/lib/pageLabel";
 
 const directions = [
@@ -52,7 +53,10 @@ const ContactFormModal = ({ open, onClose, defaultDirection, sourceItem }: Conta
           : `Модальная форма - ${getPageLabel(window.location.pathname)}`,
       });
     } catch {
-      // не блокируем UX
+      // Заявка не ушла: окно не закрываем, данные сохраняем.
+      setLoading(false);
+      toast(leadErrorToast);
+      return;
     }
     setLoading(false);
     toast({

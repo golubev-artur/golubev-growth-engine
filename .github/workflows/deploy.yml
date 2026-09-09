@@ -94,3 +94,37 @@ jobs:
               --data-urlencode "text=${MSG}" \
               -o /dev/null -w 'telegram sendMessage: HTTP %{http_code}\n'
           done
+
+  indexnow:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: needs.build.outputs.new_posts == 'true'
+    steps:
+      - name: Ждём, пока Pages начнёт отдавать новые страницы
+        # Скрипт публикации на локальной машине пингует IndexNow сразу после
+        # пуша, когда деплой ещё идёт - робот приходит на 404 и запоминает его.
+        # Здесь пинг идёт после успешного деплоя плюс запас на раздачу по CDN.
+        run: sleep 300
+
+      - name: Пинг IndexNow (Яндекс + Bing)
+        env:
+          INDEXNOW_KEY: 1d7744ee576da47c8da7fa3bd5bacb55
+        run: |
+          FAILED=0
+          for SLUG in ${{ needs.build.outputs.slugs }}; do
+            URL="https://golubev-consulting.ru/blog/${SLUG}/"
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$URL" || echo 000)
+            echo "проверка $URL -> HTTP $CODE"
+            if [ "$CODE" != "200" ]; then
+              echo "::warning::$URL отдаёт $CODE - IndexNow не отправляем, иначе робот запомнит ошибку"
+              FAILED=1
+              continue
+            fi
+            for ENDPOINT in https://yandex.com/indexnow https://api.indexnow.org/indexnow; do
+              curl -sS --get "$ENDPOINT" \
+                --data-urlencode "url=$URL" \
+                --data-urlencode "key=$INDEXNOW_KEY" \
+                -o /dev/null -w "  $ENDPOINT -> HTTP %{http_code}\n" || echo "  $ENDPOINT -> ошибка запроса"
+            done
+          done
+          exit $FAILED

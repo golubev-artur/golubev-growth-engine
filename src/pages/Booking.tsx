@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Send, Video, Clock, CheckCircle } from "lucide-react";
 import { sendToTelegram } from "@/lib/telegram";
+import { leadErrorToast } from "@/lib/leadError";
 
 const directions = [
   "Продажи и CRM",
@@ -50,7 +51,10 @@ const Booking = () => {
         source: "Страница записи на онлайн-встречу (/forma)",
       });
     } catch {
-      // не блокируем UX
+      // Заявка не ушла: экран успеха не показываем, форму не сбрасываем.
+      setLoading(false);
+      toast(leadErrorToast);
+      return;
     }
     setLoading(false);
     setSent(true);
