@@ -79,7 +79,10 @@ const Seo = ({
 }: SeoProps) => {
   const fullTitle = title ? `${title} - Golubev Consulting` : DEFAULT_TITLE;
   const desc = description || DEFAULT_DESC;
-  const url = `${SITE}${path}`;
+  // Каноническая форма - со слешем на конце: страницы лежат каталогами, и 200
+  // отдаётся именно на слешевом адресе (безслешевый - 301 на него). Так canonical,
+  // sitemap и то, что реально отдаёт сервер, совпадают.
+  const url = path === "/" ? `${SITE}/` : `${SITE}${path.replace(/\/+$/, "")}/`;
   const ogImage = resolveImage(image);
 
   useEffect(() => {
