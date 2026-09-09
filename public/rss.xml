@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Wed, 26 Aug 2026 04:05:46 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 18:30:58 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как найти узкие места в бизнес-процессах и расшить их без остановки работы</title>
+    <link>https://golubev-consulting.ru/blog/find-bottlenecks-business-processes</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/find-bottlenecks-business-processes</guid>
+    <description>Когда бизнес упирается в потолок, собственник обычно идёт нанимать людей. Разбираем, как найти узкие места в бизнес-процессах тремя замерами и расшить их без остановки работы - чаще всего без затрат и нового штата.</description>
+    <pubDate>Wed, 09 Sep 2026 00:00:00 GMT</pubDate>
+    <category>Бизнес-процессы</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-automation.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как считать конверсию воронки продаж и где теряются клиенты</title>
     <link>https://golubev-consulting.ru/blog/sales-funnel-conversion-calculation</link>
@@ -183,15 +192,6 @@
     <pubDate>Wed, 08 Jul 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Чек-лист проверки договора аренды коммерческой недвижимости для ИП: на что смотреть до подписания</title>
-    <link>https://golubev-consulting.ru/blog/commercial-lease-checklist-ip</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/commercial-lease-checklist-ip</guid>
-    <description>Какие пункты договора аренды коммерческого помещения ИП должен проверить до подписания - и как избежать ловушек, которые обходятся в сотни тысяч рублей.</description>
-    <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Юридические услуги</category>
-    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
