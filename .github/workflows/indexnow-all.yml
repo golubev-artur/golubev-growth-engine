@@ -1,0 +1,87 @@
+name: IndexNow - переобход всех страниц
+
+# Запускается вручную. Берёт живой sitemap.xml, проверяет каждый адрес на месте
+# и отправляет в IndexNow только те, что реально отдают 200. Адреса с другим кодом
+# не отправляются и выводятся списком: звать робота на ошибку хуже, чем не звать.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Проверить все адреса из sitemap
+        run: |
+          curl -sS --fail --max-time 30 https://golubev-consulting.ru/sitemap.xml -o sitemap.xml
+          grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's|<loc>||; s|</loc>||' > all.txt
+          echo "адресов в sitemap: $(wc -l < all.txt)"
+
+          : > ok.txt
+          : > bad.txt
+          while read -r URL; do
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$URL" || echo 000)
+            if [ "$CODE" = "200" ]; then
+              echo "$URL" >> ok.txt
+            else
+              printf '%s %s\n' "$CODE" "$URL" >> bad.txt
+            fi
+          done < all.txt
+
+          echo "отдают 200: $(wc -l < ok.txt)"
+          echo "не 200:     $(wc -l < bad.txt)"
+          if [ -s bad.txt ]; then
+            echo "::warning::Не все адреса отдают 200 - их в IndexNow не отправляем:"
+            cat bad.txt
+          fi
+
+          {
+            echo "### Проверка адресов из sitemap"
+            echo ""
+            echo "- всего: $(wc -l < all.txt)"
+            echo "- отдают 200: $(wc -l < ok.txt)"
+            echo "- не 200: $(wc -l < bad.txt)"
+            if [ -s bad.txt ]; then
+              echo ""
+              echo '```'
+              cat bad.txt
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Отправить в IndexNow (Яндекс + Bing)
+        env:
+          INDEXNOW_KEY: 1d7744ee576da47c8da7fa3bd5bacb55
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, os, urllib.request, urllib.error
+
+          urls = [l.strip() for l in open("ok.txt") if l.strip()]
+          key = os.environ["INDEXNOW_KEY"]
+          payload = {
+              "host": "golubev-consulting.ru",
+              "key": key,
+              "keyLocation": f"https://golubev-consulting.ru/{key}.txt",
+              "urlList": urls,
+          }
+          data = json.dumps(payload).encode("utf-8")
+
+          print("")
+          print("### Отправка в IndexNow")
+          print("")
+          print(f"- адресов отправлено: {len(urls)}")
+          print("")
+
+          for endpoint in ("https://yandex.com/indexnow", "https://api.indexnow.org/indexnow"):
+              req = urllib.request.Request(
+                  endpoint, data=data,
+                  headers={"Content-Type": "application/json; charset=utf-8"},
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as resp:
+                      print(f"- `{endpoint}` -> HTTP {resp.status}")
+              except urllib.error.HTTPError as e:
+                  print(f"- `{endpoint}` -> HTTP {e.code} ({e.reason})")
+              except Exception as e:
+                  print(f"- `{endpoint}` -> ошибка: {e}")
+          PY
