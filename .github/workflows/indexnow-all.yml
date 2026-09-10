@@ -53,7 +53,8 @@ jobs:
         env:
           INDEXNOW_KEY: 1d7744ee576da47c8da7fa3bd5bacb55
         run: |
-          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          # tee, а не только в сводку: ответ поисковиков должен быть виден и в логе
+          python3 - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
           import json, os, urllib.request, urllib.error
 
           urls = [l.strip() for l in open("ok.txt") if l.strip()]
