@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Wed, 09 Sep 2026 18:30:58 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 09:22:52 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Стратегическая сессия для отдела продаж: как провести и что получить на выходе</title>
+    <link>https://golubev-consulting.ru/blog/strategic-session-sales-department</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/strategic-session-sales-department</guid>
+    <description>Половина сессий заканчивается красивым разговором и нулём изменений. Разбираем, как провести стратегическую сессию для отдела продаж: сценарий на день по блокам, что готовить заранее и какие три документа должны остаться на выходе.</description>
+    <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+    <category>Стратегические сессии</category>
+    <enclosure url="https://golubev-consulting.ru/blog/service-strategy-session.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как найти узкие места в бизнес-процессах и расшить их без остановки работы</title>
     <link>https://golubev-consulting.ru/blog/find-bottlenecks-business-processes</link>
@@ -183,15 +192,6 @@
     <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Регламент обработки входящих заявок в отделе продаж: пример, шаблон и пошаговое внедрение</title>
-    <link>https://golubev-consulting.ru/blog/incoming-leads-processing-regulation</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/incoming-leads-processing-regulation</guid>
-    <description>Как выглядит работающий регламент обработки входящих заявок в отделе продаж - с конкретным примером, шаблоном и инструкцией по внедрению, чтобы ни одна заявка не терялась.</description>
-    <pubDate>Wed, 08 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Продажи и CRM</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
