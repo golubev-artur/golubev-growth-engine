@@ -1,0 +1,55 @@
+name: Сторож блога
+
+# Раз в сутки проверяет, когда выходил последний пост. Если тишина дольше
+# четырёх дней (при графике пн/ср/пт максимальный нормальный разрыв - три дня),
+# шлёт тревогу в Telegram. Нужен потому, что публикацию уже один раз тихо
+# заклинило на месяц, и об этом никто не узнал: сама публикация зависит от
+# внешних механизмов, а эта проверка работает на GitHub и ни от чего не зависит.
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Проверить дату последнего поста
+        id: check
+        run: |
+          LAST=$(grep -m1 -o 'date: "[0-9-]*"' src/data/blog.ts | sed 's/date: "//; s/"//')
+          if [ -z "$LAST" ]; then
+            echo "::error::не удалось прочитать дату последнего поста из src/data/blog.ts"
+            exit 1
+          fi
+          TODAY=$(date -u +%F)
+          DAYS=$(( ( $(date -u -d "$TODAY" +%s) - $(date -u -d "$LAST" +%s) ) / 86400 ))
+          echo "последний пост: $LAST, сегодня: $TODAY, дней без публикаций: $DAYS"
+          echo "last=$LAST" >> $GITHUB_OUTPUT
+          echo "days=$DAYS" >> $GITHUB_OUTPUT
+          if [ "$DAYS" -gt 4 ]; then echo "stale=true" >> $GITHUB_OUTPUT; else echo "stale=false" >> $GITHUB_OUTPUT; fi
+          {
+            echo "### Сторож блога"
+            echo ""
+            echo "- последний пост: $LAST"
+            echo "- дней без публикаций: $DAYS"
+            echo "- тревога: $([ "$DAYS" -gt 4 ] && echo да || echo нет)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Тревога в Telegram
+        if: steps.check.outputs.stale == 'true'
+        env:
+          BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          CHAT_ID: "491832074"
+          LAST: ${{ steps.check.outputs.last }}
+          DAYS: ${{ steps.check.outputs.days }}
+        run: |
+          MSG=$(printf '🚨 Блог молчит %s дней\n\nПоследний пост: %s\nПо графику пн/ср/пт разрыв больше 4 дней означает, что публикация сломалась.\n\nhttps://golubev-consulting.ru/blog/' "$DAYS" "$LAST")
+          curl -sS --fail -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${MSG}" \
+            -o /dev/null -w 'telegram sendMessage: HTTP %{http_code}\n'
