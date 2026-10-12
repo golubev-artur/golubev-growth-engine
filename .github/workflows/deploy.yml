@@ -120,11 +120,22 @@ jobs:
               FAILED=1
               continue
             fi
+            # --http1.1 и User-Agent: без них Яндекс обрывает соединение
+            # (HTTP/2 stream INTERNAL_ERROR либо ответ без тела).
             for ENDPOINT in https://yandex.com/indexnow https://api.indexnow.org/indexnow; do
-              curl -sS --get "$ENDPOINT" \
-                --data-urlencode "url=$URL" \
-                --data-urlencode "key=$INDEXNOW_KEY" \
-                -o /dev/null -w "  $ENDPOINT -> HTTP %{http_code}\n" || echo "  $ENDPOINT -> ошибка запроса"
+              CODE=000
+              for ATTEMPT in 1 2 3; do
+                CODE=$(curl -sS --http1.1 --max-time 30 \
+                  -A "golubev-consulting.ru IndexNow client (+https://golubev-consulting.ru)" \
+                  --get "$ENDPOINT" \
+                  --data-urlencode "url=$URL" \
+                  --data-urlencode "key=$INDEXNOW_KEY" \
+                  -o /dev/null -w '%{http_code}' || echo 000)
+                case "$CODE" in 2*) break;; esac
+                sleep $((ATTEMPT * 3))
+              done
+              echo "  $ENDPOINT -> HTTP $CODE"
+              case "$CODE" in 2*) ;; *) echo "::warning::$ENDPOINT не принял $URL (HTTP $CODE)";; esac
             done
           done
           exit $FAILED
