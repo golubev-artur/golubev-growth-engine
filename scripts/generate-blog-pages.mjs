@@ -87,8 +87,11 @@ function extractContent(slug) {
 
 // Title в выдаче обрезается примерно на 60-65 символах. Приписка бренда занимает 21,
 // поэтому к длинным заголовкам её не добавляем - иначе обрежется сам заголовок.
+// Бренд пишем по-русски: сайт и запросы русскоязычные, и в выдаче приписка
+// совпадает с тем, как бренд набирают. Длина та же, что у латиницы.
 function pageTitle(t) {
-  return t.length <= 41 ? `${t} — Golubev Consulting` : t;
+  if (t.includes("Голубев Консалтинг")) return t; // бренд уже в заголовке - не дублируем
+  return t.length <= 41 ? `${t} — Голубев Консалтинг` : t;
 }
 
 // Description обрезается примерно на 160 символах: режем по границе слова сами,
@@ -203,7 +206,7 @@ for (const post of posts) {
     `<meta property="article:author" content="Артур Голубев" />`,
     `<meta property="article:section" content="Бизнес-консалтинг" />`,
     `<meta property="og:locale" content="ru_RU" />`,
-    `<meta property="og:site_name" content="Golubev Consulting" />`,
+    `<meta property="og:site_name" content="Голубев Консалтинг" />`,
   ].join("\n    ");
   html = html.replace(
     /<meta property="og:image:height" content="630"\s*\/?>/,
@@ -230,7 +233,8 @@ for (const post of posts) {
     author: { "@type": "Person", name: "Артур Голубев", url: SITE },
     publisher: {
       "@type": "Organization",
-      name: "Golubev Consulting",
+      name: "Голубев Консалтинг",
+      alternateName: "Golubev Consulting",
       logo: { "@type": "ImageObject", url: `${SITE}/og-image.png` },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -306,7 +310,8 @@ const generalFaqs = (() => {
 
 const ORG = {
   "@type": "Organization",
-  name: "Golubev Consulting",
+  name: "Голубев Консалтинг",
+  alternateName: "Golubev Consulting",
   url: SITE,
 };
 
@@ -416,13 +421,13 @@ const otherPages = [
     route: "/blog",
     title: "Блог - статьи и руководства по развитию бизнеса",
     description:
-      "Практические статьи о продажах, CRM, автоматизации, управлении и маркетинге. Опыт и инструменты из реальных проектов Golubev Consulting.",
+      "Практические статьи о продажах, CRM, автоматизации, управлении и маркетинге. Опыт и инструменты из реальных проектов Голубев Консалтинг.",
     bodyHtml: blogListHtml,
     jsonLd: breadcrumbs([{ name: "Блог", path: "/blog" }]),
   },
   {
     route: "/faq",
-    title: "FAQ - Голубев Консалтинг",
+    title: "Вопросы и ответы о консалтинге",
     description:
       "Ответы на частые вопросы о консалтинге, стоимости, процессе работы и результатах. Голубев Консалтинг.",
     bodyHtml: faqBodyHtml,
@@ -440,7 +445,7 @@ const otherPages = [
   },
   {
     route: "/press",
-    title: "Для СМИ - Голубев Консалтинг",
+    title: "Для СМИ и журналистов",
     description:
       "Пресс-материалы, публикации, экспертные комментарии и контакты пресс-службы Голубев Консалтинг. Скачать логотип, фото и описание компании для СМИ.",
     bodyHtml:
@@ -483,16 +488,16 @@ const otherPages = [
   },
   {
     route: "/presentation",
-    title: "Скачать презентацию - Голубев Консалтинг",
+    title: "Скачать презентацию компании",
     description:
       "Получите полную презентацию Голубев Консалтинг: подход, услуги, кейсы и результаты. Бесплатно после заполнения формы.",
     bodyHtml:
       `<article class="prose-container"><h1>Презентация компании</h1>` +
-      `<p>Полная презентация «Голубев Консалтинг» в одном файле: подход к работе, семь направлений ` +
+      `<p>Полная презентация «Голубев Консалтинг» в одном файле: подход к работе, ${services.length} направлений ` +
       `услуг, примеры проектов и результаты в цифрах.</p>` +
       `<h2>Что внутри</h2><ul>` +
       `<li>Как мы работаем: от диагностики до внедрения</li>` +
-      `<li>Семь направлений и состав услуг по каждому</li>` +
+      `<li>${services.length} направлений и состав услуг по каждому</li>` +
       `<li>Примеры проектов с измеримыми результатами</li>` +
       `<li>Форматы сотрудничества и этапы работы</li>` +
       `</ul>` +
@@ -545,7 +550,7 @@ console.log(`Generated ${otherPages.length} static pages (services, blog, faq, p
     `<li><strong>12+</strong> лет в консалтинге</li>` +
     `<li><strong>150+</strong> проектов доведено до внедрения</li>` +
     `<li><strong>87</strong> компаний-клиентов</li>` +
-    `<li><strong>7</strong> направлений в одной команде</li>` +
+    `<li><strong>${services.length}</strong> направлений в одной команде</li>` +
     `</ul>` +
     `<h2>Направления работы</h2><ul>` +
     services.map((s) => `<li><a href="/services/${s.slug}">${escapeText(s.title)}</a> - ${escapeText(s.shortDesc)}</li>`).join("") +

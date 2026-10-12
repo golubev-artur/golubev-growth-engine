@@ -29,7 +29,7 @@ interface SeoProps {
 }
 
 const SITE = "https://golubev-consulting.ru";
-const DEFAULT_TITLE = "Golubev Consulting - Системный консалтинг для бизнеса";
+const DEFAULT_TITLE = "Голубев Консалтинг — Системный консалтинг для бизнеса";
 const DEFAULT_DESC =
   "Системный консалтинг: продажи, CRM, маркетинг, бизнес-процессы, управление, автоматизация. Комплексные решения для роста вашего бизнеса.";
 
@@ -77,7 +77,18 @@ const Seo = ({
   service,
   noIndex,
 }: SeoProps) => {
-  const fullTitle = title ? `${title} - Golubev Consulting` : DEFAULT_TITLE;
+  // Бренд в приписке - по-русски: аудитория и запросы русскоязычные, в выдаче
+  // кириллица совпадает с тем, что люди набирают. Латиница осталась только
+  // alternateName в разметке, чтобы поисковик связал оба написания.
+  // Те же два правила, что в scripts/generate-blog-pages.mjs (pageTitle): бренд
+  // не дублируем, а к длинным заголовкам не приписываем вовсе - иначе выдача
+  // обрежет сам заголовок. Логика должна совпадать с пререндером: иначе робот
+  // видит один title в HTML и другой после отрисовки.
+  const fullTitle = !title
+    ? DEFAULT_TITLE
+    : title.includes("Голубев Консалтинг") || title.length > 41
+      ? title
+      : `${title} — Голубев Консалтинг`;
   const desc = description || DEFAULT_DESC;
   // Каноническая форма - со слешем на конце: страницы лежат каталогами, и 200
   // отдаётся именно на слешевом адресе (безслешевый - 301 на него). Так canonical,
@@ -113,7 +124,7 @@ const Seo = ({
     setMeta("property", "og:image:width", "1200");
     setMeta("property", "og:image:height", "630");
     setMeta("property", "og:locale", "ru_RU");
-    setMeta("property", "og:site_name", "Golubev Consulting");
+    setMeta("property", "og:site_name", "Голубев Консалтинг");
 
     // Twitter
     setMeta("name", "twitter:card", "summary_large_image");
@@ -144,7 +155,8 @@ const Seo = ({
         },
         publisher: {
           "@type": "Organization",
-          name: "Golubev Consulting",
+          name: "Голубев Консалтинг",
+          alternateName: "Golubev Consulting",
           logo: {
             "@type": "ImageObject",
             url: `${SITE}/favicon-512.png`,
@@ -188,7 +200,8 @@ const Seo = ({
         url,
         provider: {
           "@type": "Organization",
-          name: "Golubev Consulting",
+          name: "Голубев Консалтинг",
+          alternateName: "Golubev Consulting",
           url: SITE,
         },
       });

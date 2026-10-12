@@ -1,6 +1,6 @@
 {
-  "name": "Golubev Consulting",
-  "short_name": "Golubev",
+  "name": "Голубев Консалтинг",
+  "short_name": "Голубев",
   "icons": [
     { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" }

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import PresentationGate from "@/components/PresentationGate";
+import { services } from "@/data/services";
 import { CheckCircle2 } from "lucide-react";
 
 const Presentation = () => {
@@ -11,7 +12,7 @@ const Presentation = () => {
     <Layout>
       <Seo
         path="/presentation"
-        title="Скачать презентацию - Голубев Консалтинг"
+        title="Скачать презентацию компании"
         description="Получите полную презентацию Голубев Консалтинг: подход, услуги, кейсы и результаты. Бесплатно после заполнения формы."
       />
 
@@ -28,7 +29,7 @@ const Presentation = () => {
           <div className="grid sm:grid-cols-2 gap-3 max-w-xl">
             {[
               "Подход и методология работы",
-              "Все 9 направлений консалтинга",
+              `Все ${services.length} направлений консалтинга`,
               "Реальные кейсы и цифры роста",
               "Форматы работы и стоимость",
             ].map((item, i) => (

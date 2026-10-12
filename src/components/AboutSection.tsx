@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import teamPhoto from "@/assets/team-photo.jpg";
+import { services } from "@/data/services";
 
 const stats = [
   { value: "12+", label: "лет опыта" },
   { value: "150+", label: "проектов" },
   { value: "87", label: "клиентов" },
-  { value: "7", label: "направлений" },
+  { value: String(services.length), label: "направлений" },
 ];
 
 const AboutSection = () => {

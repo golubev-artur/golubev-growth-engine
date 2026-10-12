@@ -30,7 +30,7 @@ const Privacy = () => {
           <h2 className="text-xl font-bold text-foreground mt-8 mb-3">1. Общие положения</h2>
           <p className="text-muted-foreground leading-relaxed mb-3">
             Настоящая Политика обработки персональных данных (далее - Политика) действует в отношении всей информации, которую сайт{" "}
-            <Link to="/" className="text-accent hover:underline">golubev-consulting.ru</Link> (далее - Сайт), принадлежащий Golubev Consulting (далее - Оператор), может получить о пользователе во время использования Сайта.
+            <Link to="/" className="text-accent hover:underline">golubev-consulting.ru</Link> (далее - Сайт), принадлежащий Голубев Консалтинг (далее - Оператор), может получить о пользователе во время использования Сайта.
           </p>
 
           <h2 className="text-xl font-bold text-foreground mt-8 mb-3">2. Какие данные мы собираем</h2>
@@ -58,7 +58,7 @@ const Privacy = () => {
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">Улучшение качества работы Сайта и его содержимого</li>
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">Анализ поведения пользователей для улучшения пользовательского опыта</li>
             <li className="text-muted-foreground leading-relaxed pl-4 border-l-2 border-accent/30">Предоставление информации об{" "}
-              <Link to="/services" className="text-accent hover:underline">услугах Golubev Consulting</Link>
+              <Link to="/services" className="text-accent hover:underline">услугах Голубев Консалтинг</Link>
             </li>
           </ul>
 

@@ -49,7 +49,7 @@ const FAQ: { keywords: string[]; answer: string }[] = [
   },
   {
     keywords: ["кто", "артур", "голубев", "опыт", "компания", "о вас"],
-    answer: "Golubev Consulting - это системный консалтинг от Артура Голубева. 12+ лет опыта, 150+ проектов, 87 клиентов. 8 направлений: от продаж до автоматизации. Каждый проект - индивидуальный подход.",
+    answer: "Голубев Консалтинг - это системный консалтинг от Артура Голубева. 12+ лет опыта, 150+ проектов, 87 клиентов. 10 направлений: от продаж до автоматизации. Каждый проект - индивидуальный подход.",
   },
   {
     keywords: ["формат", "онлайн", "офлайн", "удалённо", "город", "москва"],
@@ -63,7 +63,7 @@ const FAQ: { keywords: string[]; answer: string }[] = [
 
 const GREETING: Message = {
   role: "bot",
-  text: "Здравствуйте! Я AI-ассистент Golubev Consulting. Задайте вопрос о наших услугах, ценах, сроках - или нажмите кнопку ниже, чтобы обсудить ваш проект.",
+  text: "Здравствуйте! Я AI-ассистент Голубев Консалтинг. Задайте вопрос о наших услугах, ценах, сроках - или нажмите кнопку ниже, чтобы обсудить ваш проект.",
   showCta: true,
 };
 
@@ -138,7 +138,7 @@ const AiChatWidget = () => {
               </div>
               <div>
                 <p className="text-sm font-semibold">AI Ассистент</p>
-                <p className="text-xs opacity-60">Golubev Consulting</p>
+                <p className="text-xs opacity-60">Голубев Консалтинг</p>
               </div>
             </div>
             <button onClick={() => setOpen(false)} className="text-primary-foreground/50 hover:text-primary-foreground transition-colors">

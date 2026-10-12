@@ -25,7 +25,7 @@ const AdminDashboard = () => {
       <section className="py-16 md:py-20 bg-primary">
         <div className="container mx-auto px-4 md:px-8">
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-3">
-            Golubev Consulting
+            Голубев Консалтинг
           </p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground tracking-tight leading-[1.08]">
             Панель управления
