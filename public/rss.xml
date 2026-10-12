@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Fri, 09 Oct 2026 09:22:52 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 03:06:43 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Платёжный календарь: как перестать попадать в кассовые разрывы</title>
+    <link>https://golubev-consulting.ru/blog/payment-calendar-small-business</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/payment-calendar-small-business</guid>
+    <description>Прибыльная компания двадцатого числа не может заплатить зарплату, потому что деньги от клиента придут двадцать пятого. Разбираем, как собрать платёжный календарь за вечер, вести его по 15 минут в неделю и закрывать разрывы звонками, а не займами.</description>
+    <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+    <category>Финансы</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-okr.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Стратегическая сессия для отдела продаж: как провести и что получить на выходе</title>
     <link>https://golubev-consulting.ru/blog/strategic-session-sales-department</link>
@@ -183,15 +192,6 @@
     <pubDate>Mon, 13 Jul 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как провести ABC-анализ клиентской базы в Excel: пошаговая инструкция с реальными примерами</title>
-    <link>https://golubev-consulting.ru/blog/abc-analysis-client-base-excel</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/abc-analysis-client-base-excel</guid>
-    <description>Как провести ABC-анализ клиентской базы в Excel за один день - и увидеть, какие клиенты приносят прибыль, а какие только отнимают время менеджеров.</description>
-    <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Продажи и CRM</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-5.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
