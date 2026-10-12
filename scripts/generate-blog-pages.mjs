@@ -85,6 +85,19 @@ function extractContent(slug) {
   return m ? m[1] : null;
 }
 
+// Title в выдаче обрезается примерно на 60-65 символах. Приписка бренда занимает 21,
+// поэтому к длинным заголовкам её не добавляем - иначе обрежется сам заголовок.
+function pageTitle(t) {
+  return t.length <= 41 ? `${t} — Golubev Consulting` : t;
+}
+
+// Description обрезается примерно на 160 символах: режем по границе слова сами,
+// чтобы в выдаче не было оборванного на середине слова текста.
+function metaDescription(d) {
+  if (d.length <= 160) return d;
+  return d.slice(0, 157).replace(/[\s.,;:–-]+\S*$/, "") + "…";
+}
+
 // Каноническая форма адреса: со слешем на конце. Страницы лежат каталогами,
 // и GitHub Pages отдаёт 200 именно на слешевом варианте, а безслешевый - 301 на него.
 function canonical(route) {
@@ -104,9 +117,9 @@ function addJsonLd(html, data) {
 
 // Собирает страницу из dist/index.html: мета, canonical, микроразметка, статичное тело.
 function buildPage({ route, title, description, bodyHtml, jsonLd, image }) {
-  const fullTitle = `${title} — Golubev Consulting`;
+  const fullTitle = pageTitle(title);
   const safeTitle = escapeHtml(fullTitle);
-  const safeDesc = escapeHtml(description);
+  const safeDesc = escapeHtml(metaDescription(description));
   const url = canonical(route);
   const ogImage = image || `${SITE}/og-image.png`;
 
@@ -134,10 +147,10 @@ function writePage(route, html) {
 }
 
 for (const post of posts) {
-  const fullTitle = `${post.title} — Golubev Consulting`;
+  const fullTitle = pageTitle(post.title);
   const url = canonical(`/blog/${post.slug}`);
   const safeTitle = escapeHtml(fullTitle);
-  const safeDesc = escapeHtml(post.excerpt);
+  const safeDesc = escapeHtml(metaDescription(post.excerpt));
 
   let html = template;
 
@@ -208,7 +221,6 @@ for (const post of posts) {
 
   // ── BlogPosting structured data ──
   const articleSchema = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
@@ -225,9 +237,23 @@ for (const post of posts) {
     articleSection: post.category,
     inLanguage: "ru-RU",
   };
+  const postGraph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      articleSchema,
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Главная", item: SITE },
+          { "@type": "ListItem", position: 2, name: "Блог", item: canonical("/blog") },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ],
+  };
   html = html.replace(
     "</head>",
-    () => `  <script type="application/ld+json">\n${JSON.stringify(articleSchema, null, 2)}\n    </script>\n  </head>`
+    () => `  <script type="application/ld+json">\n${JSON.stringify(postGraph, null, 2)}\n    </script>\n  </head>`
   );
 
   html = addCanonical(html, canonical(`/blog/${post.slug}`));
@@ -255,7 +281,13 @@ const services = [];
       name: x[1],
       desc: x[2],
     }));
-    services.push({ slug: m[1], title: m[2], shortDesc: m[3], description: m[4], items });
+    const faqFrom = chunk.indexOf("faqs: [");
+    const faqBlock = faqFrom === -1 ? "" : chunk.slice(faqFrom);
+    const faqs = [...faqBlock.matchAll(/question:\s*"([^"]+)",\s*answer:\s*"([^"]+)"/g)].map((x) => ({
+      question: x[1],
+      answer: x[2],
+    }));
+    services.push({ slug: m[1], title: m[2], shortDesc: m[3], description: m[4], items, faqs });
   });
 }
 if (services.length === 0) throw new Error("не удалось разобрать services.ts");
@@ -295,12 +327,18 @@ for (const svc of services) {
         .map((it) => `<li><strong>${escapeText(it.name)}</strong> - ${escapeText(it.desc)}</li>`)
         .join("")}</ul>`
     : "";
+  const faqHtml = svc.faqs.length
+    ? `<h2>Частые вопросы</h2>` +
+      svc.faqs.map((f) => `<h3>${escapeText(f.question)}</h3><p>${escapeText(f.answer)}</p>`).join("")
+    : "";
   const bodyHtml =
     `<article class="prose-container">` +
     `<h1>${escapeText(svc.title)}</h1>` +
     `<p>${escapeText(svc.description)}</p>` +
     itemsHtml +
-    `<p>Обсудить задачу: <a href="/forma">записаться на бесплатную консультацию</a>.</p>` +
+    faqHtml +
+    `<p>Обсудить задачу: <a href="/forma">записаться на бесплатную консультацию</a>. ` +
+    `Другие направления - в разделе услуг (<a href="/services">/services</a>).</p>` +
     `</article>`;
   const html = buildPage({
     route,
@@ -319,6 +357,18 @@ for (const svc of services) {
           areaServed: "RU",
         },
         breadcrumbs([{ name: "Услуги", path: "/services" }, { name: svc.title, path: route }]),
+        ...(svc.faqs.length
+          ? [
+              {
+                "@type": "FAQPage",
+                mainEntity: svc.faqs.map((f) => ({
+                  "@type": "Question",
+                  name: f.question,
+                  acceptedAnswer: { "@type": "Answer", text: f.answer },
+                })),
+              },
+            ]
+          : []),
       ],
     },
   });
@@ -393,40 +443,82 @@ const otherPages = [
     title: "Для СМИ - Голубев Консалтинг",
     description:
       "Пресс-материалы, публикации, экспертные комментарии и контакты пресс-службы Голубев Консалтинг. Скачать логотип, фото и описание компании для СМИ.",
-    bodyHtml: simple(
-      "Пресс-центр",
-      "Пресс-материалы, публикации и экспертные комментарии Голубев Консалтинг. Логотип, фотографии и описание компании доступны для скачивания, контакты пресс-службы: press@golubev-consulting.ru."
-    ),
+    bodyHtml:
+      `<article class="prose-container"><h1>Пресс-центр</h1>` +
+      `<p>Артур Голубев - основатель компании «Голубев Консалтинг», консультант с 12-летним опытом. ` +
+      `Комментирует темы системного управления, построения отделов продаж, автоматизации и ` +
+      `бизнес-процессов в малом и среднем бизнесе.</p>` +
+      `<h2>Что можно получить</h2><ul>` +
+      `<li>Экспертный комментарий для публикации</li>` +
+      `<li>Логотип компании и фотографии в высоком разрешении</li>` +
+      `<li>Описание компании и факты для справки</li>` +
+      `<li>Данные и наблюдения из практики: 150+ проектов, 87 компаний-клиентов</li>` +
+      `</ul>` +
+      `<h2>Контакты пресс-службы</h2>` +
+      `<p>Почта: press@golubev-consulting.ru. Телефон: +7 (926) 169-21-14. ` +
+      `Отвечаем в течение рабочего дня.</p>` +
+      `<p>Экспертные материалы компании публикуются в блоге (/blog).</p></article>`,
   },
   {
     route: "/forma",
     title: "Запись на бесплатную онлайн-встречу",
     description:
       "Запишитесь на бесплатную 45-минутную онлайн-консультацию с экспертом Голубев Консалтинг. Разберём вашу ситуацию и дадим конкретные рекомендации.",
-    bodyHtml: simple(
-      "Бесплатная консультация для вашего бизнеса",
-      "45 минут с экспертом онлайн: разберём вашу ситуацию, покажем, где бизнес теряет деньги, и дадим конкретные рекомендации. Без обязательств."
-    ),
+    bodyHtml:
+      `<article class="prose-container"><h1>Бесплатная консультация для вашего бизнеса</h1>` +
+      `<p>45 минут онлайн с экспертом «Голубев Консалтинг». Разбираем вашу ситуацию и показываем, ` +
+      `где бизнес теряет деньги. Без обязательств и без продаж на встрече.</p>` +
+      `<h2>Что получите на встрече</h2><ul>` +
+      `<li>Разбор текущей ситуации по фактам и цифрам</li>` +
+      `<li>Точки, где теряются клиенты, время или маржа</li>` +
+      `<li>Конкретные рекомендации, что делать в первую очередь</li>` +
+      `<li>Честный ответ, нужен ли вам консалтинг вообще</li>` +
+      `</ul>` +
+      `<h2>Как проходит</h2>` +
+      `<p>Вы оставляете заявку, мы связываемся и подбираем удобное время. Встреча проходит онлайн ` +
+      `и занимает 45 минут. По итогам вы получаете рекомендации, независимо от того, станете вы ` +
+      `клиентом или нет.</p>` +
+      `<p>Направления работы описаны в разделе услуг (/services). ` +
+      `Телефон для связи: +7 (926) 169-21-14.</p></article>`,
   },
   {
     route: "/presentation",
     title: "Скачать презентацию - Голубев Консалтинг",
     description:
       "Получите полную презентацию Голубев Консалтинг: подход, услуги, кейсы и результаты. Бесплатно после заполнения формы.",
-    bodyHtml: simple(
-      "Презентация компании",
-      "Полная презентация Голубев Консалтинг: подход к работе, направления услуг, кейсы и результаты проектов."
-    ),
+    bodyHtml:
+      `<article class="prose-container"><h1>Презентация компании</h1>` +
+      `<p>Полная презентация «Голубев Консалтинг» в одном файле: подход к работе, семь направлений ` +
+      `услуг, примеры проектов и результаты в цифрах.</p>` +
+      `<h2>Что внутри</h2><ul>` +
+      `<li>Как мы работаем: от диагностики до внедрения</li>` +
+      `<li>Семь направлений и состав услуг по каждому</li>` +
+      `<li>Примеры проектов с измеримыми результатами</li>` +
+      `<li>Форматы сотрудничества и этапы работы</li>` +
+      `</ul>` +
+      `<p>Презентация доступна бесплатно после заполнения короткой формы. ` +
+      `Если удобнее обсудить задачу голосом, записывайтесь на консультацию (/forma) ` +
+      `или звоните: +7 (926) 169-21-14.</p></article>`,
   },
   {
     route: "/privacy",
     title: "Политика обработки персональных данных",
     description:
       "Политика обработки персональных данных на сайте golubev-consulting.ru. Информация о сборе, хранении и использовании данных.",
-    bodyHtml: simple(
-      "Политика обработки персональных данных",
-      "Информация о том, какие персональные данные собираются на сайте golubev-consulting.ru, как они хранятся и используются."
-    ),
+    bodyHtml:
+      `<article class="prose-container"><h1>Политика обработки персональных данных</h1>` +
+      `<p>Политика описывает, какие персональные данные собираются на сайте golubev-consulting.ru, ` +
+      `с какой целью и как они хранятся.</p>` +
+      `<h2>Какие данные собираются</h2>` +
+      `<p>Через формы на сайте: имя, телефон, адрес электронной почты, название компании ` +
+      `и текст сообщения. Эти данные вы указываете добровольно.</p>` +
+      `<h2>Зачем они нужны</h2>` +
+      `<p>Только чтобы связаться с вами по вашей заявке, согласовать время консультации ` +
+      `и отправить запрошенные материалы. Данные не передаются третьим лицам и не используются ` +
+      `для рассылок без вашего согласия.</p>` +
+      `<h2>Как отозвать согласие</h2>` +
+      `<p>Напишите на info@golubev-consulting.ru - мы удалим ваши данные. ` +
+      `Сайт использует cookies для работы аналитики.</p></article>`,
   },
 ];
 
@@ -434,6 +526,52 @@ for (const page of otherPages) {
   writePage(page.route, buildPage(page));
 }
 console.log(`Generated ${otherPages.length} static pages (services, blog, faq, press, forma, presentation, privacy)`);
+
+
+// ── Главная ──
+// Раньше она была единственной страницей без пререндера: робот видел пустой #root,
+// ни H1, ни canonical, ни текста. Для самой важной страницы сайта это недопустимо.
+{
+  const latest = posts.slice(0, 6);
+  const bodyHtml =
+    `<article class="prose-container">` +
+    `<h1>Системный консалтинг для роста вашего бизнеса</h1>` +
+    `<p>Продажи · Маркетинг · Бизнес-процессы · Управление · Автоматизация · Персонал · Клиентский сервис</p>` +
+    `<h2>Выстраиваем системы, которые работают без вас</h2>` +
+    `<p>ГОЛУБЕВ КОНСАЛТИНГ - это команда практиков, которая помогает собственникам бизнеса навести порядок ` +
+    `в продажах, процессах, маркетинге и управлении. Мы не просто консультируем - мы внедряем решения ` +
+    `и доводим их до результата. Работаем с малым и средним бизнесом в России и СНГ.</p>` +
+    `<ul>` +
+    `<li><strong>12+</strong> лет в консалтинге</li>` +
+    `<li><strong>150+</strong> проектов доведено до внедрения</li>` +
+    `<li><strong>87</strong> компаний-клиентов</li>` +
+    `<li><strong>7</strong> направлений в одной команде</li>` +
+    `</ul>` +
+    `<h2>Направления работы</h2><ul>` +
+    services.map((s) => `<li><a href="/services/${s.slug}">${escapeText(s.title)}</a> - ${escapeText(s.shortDesc)}</li>`).join("") +
+    `</ul>` +
+    `<h2>Из блога</h2><ul>` +
+    latest.map((p) => `<li><a href="/blog/${p.slug}">${escapeText(p.title)}</a></li>`).join("") +
+    `</ul><p><a href="/blog">Все статьи блога</a></p>` +
+    `<h2>Контакты</h2>` +
+    `<p>Телефон: +7 (926) 169-21-14. Почта: info@golubev-consulting.ru. ` +
+    `Адрес: г. Москва, м. Красные ворота, Мясницкая ул., 46 стр. 1.</p>` +
+    `<p><a href="/forma">Записаться на бесплатную 45-минутную консультацию</a></p>` +
+    `</article>`;
+
+  let html = template.replace('<div id="root"></div>', () => `<div id="root">${bodyHtml}</div>`);
+  html = addCanonical(html, canonical("/"));
+  html = addJsonLd(html, {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Голубев Консалтинг",
+    url: SITE,
+    inLanguage: "ru-RU",
+    publisher: ORG,
+  });
+  fs.writeFileSync(path.join(DIST, "index.html"), html);
+  console.log("Generated homepage with prerendered content");
+}
 
 // ── Sitemap generation ──
 const today = new Date().toISOString().slice(0, 10);
