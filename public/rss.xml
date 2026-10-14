@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 12 Oct 2026 03:06:43 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 03:07:48 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как считать стоимость лида и не обманывать себя в отчётах</title>
+    <link>https://golubev-consulting.ru/blog/cost-per-lead-calculation</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/cost-per-lead-calculation</guid>
+    <description>Рекламный бюджет делят на число заявок и получают красивую цифру, которая ничего не значит. Разбираем, какие расходы обязаны попасть в расчёт, как чистить заявки и как дойти от стоимости лида до стоимости клиента.</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
+    <category>Маркетинг</category>
+    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Платёжный календарь: как перестать попадать в кассовые разрывы</title>
     <link>https://golubev-consulting.ru/blog/payment-calendar-small-business</link>
@@ -183,15 +192,6 @@
     <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
     <category>Юридические услуги</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Какие отчёты руководитель должен получать от отдела продаж еженедельно: полный список с шаблонами</title>
-    <link>https://golubev-consulting.ru/blog/weekly-sales-department-reports</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/weekly-sales-department-reports</guid>
-    <description>Какие еженедельные отчёты от отдела продаж действительно нужны руководителю - и как превратить их из формальности в инструмент управления, который повышает выручку.</description>
-    <pubDate>Mon, 13 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Продажи и CRM</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
