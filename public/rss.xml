@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Wed, 14 Oct 2026 03:07:48 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 03:07:13 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как автоматизировать отчётность: от ручных таблиц к дашборду для собственника</title>
+    <link>https://golubev-consulting.ru/blog/automate-reporting-dashboard</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/automate-reporting-dashboard</guid>
+    <description>Отчёт собирают два дня руками, а собственник видит его десятого числа, когда менять уже нечего. Разбираем, как выстроить цепочку от источников данных до живого дашборда и с чего начать, чтобы не получить красивый экран, которым никто не пользуется.</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 GMT</pubDate>
+    <category>Автоматизация</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-ai.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как считать стоимость лида и не обманывать себя в отчётах</title>
     <link>https://golubev-consulting.ru/blog/cost-per-lead-calculation</link>
@@ -183,15 +192,6 @@
     <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
     <category>Финансы</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как правильно оформить сотрудника по ГПХ вместо трудового договора: пошаговая инструкция и подводные камни</title>
-    <link>https://golubev-consulting.ru/blog/gph-contract-vs-employment</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/gph-contract-vs-employment</guid>
-    <description>Когда договор ГПХ действительно выгоден малому бизнесу, а когда превращается в штраф от трудовой инспекции - разбираем правила оформления, типичные ошибки и реальные кейсы.</description>
-    <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Юридические услуги</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-1.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
