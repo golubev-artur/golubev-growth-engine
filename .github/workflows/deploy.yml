@@ -33,6 +33,10 @@ jobs:
         run: npm install
 
       - name: Build
+        # Ключ запасного канала отправки заявок (Web3Forms). Если секрет не
+        # задан, запасной канал просто выключен и сборка проходит как обычно.
+        env:
+          VITE_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
         run: npm run build
 
       - name: Detect new blog posts

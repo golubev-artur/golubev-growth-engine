@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { sendToTelegram } from "@/lib/telegram";
+import { sendLead } from "@/lib/lead";
 import { leadErrorToast } from "@/lib/leadError";
 import { getPageLabel } from "@/lib/pageLabel";
 import {
@@ -101,7 +101,7 @@ const PresentationGate = () => {
 
     setLoading(true);
     try {
-      await sendToTelegram({
+      await sendLead({
         name: fields.name.value,
         phone: fields.phone.value,
         email: fields.email.value,

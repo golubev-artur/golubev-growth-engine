@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Send, Video, Clock, CheckCircle } from "lucide-react";
-import { sendToTelegram } from "@/lib/telegram";
+import { sendLead } from "@/lib/lead";
 import { leadErrorToast } from "@/lib/leadError";
 import { getPageLabel } from "@/lib/pageLabel";
 
@@ -51,7 +51,7 @@ const ContactSection = () => {
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form));
     try {
-      await sendToTelegram({
+      await sendLead({
         name: data.name as string,
         phone: data.phone as string,
         email: data.email as string,
