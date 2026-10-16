@@ -1,0 +1,13 @@
+{
+  "name": "golubev-lead-email",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Дублирование заявок с сайта на почту: модуль для сервера api.golubev-consulting.ru",
+  "scripts": {
+    "test-mail": "node lead-email.js --test"
+  },
+  "dependencies": {
+    "nodemailer": "6.9.14"
+  }
+}

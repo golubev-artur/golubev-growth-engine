@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# заявки и секреты серверного модуля
+client-api/leads.log
+client-api/.env
+client-api/node_modules
