@@ -15,9 +15,24 @@ const LEAD_ENDPOINT = "https://api.golubev-consulting.ru/lead";
 const BACKUP_ENDPOINT = "https://api.web3forms.com/submit";
 
 // Ключ доступа Web3Forms. Подставляется при сборке из секрета репозитория
-// WEB3FORMS_KEY (см. .github/workflows/deploy.yml). Если ключа нет, запасной
-// канал просто выключен - поведение остаётся прежним.
+// WEB3FORMS_KEY (см. шаг Build в .github/workflows/deploy.yml).
+//
+// В сам код ключ не вписываем: хранение ключей в исходниках - плохая привычка,
+// даже когда конкретный ключ публичный по устройству сервиса. Без ключа
+// запасной канал просто выключен, поведение остаётся прежним.
 const BACKUP_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+
+// Проверка запасного канала без настоящей аварии: открыть страницу с формой,
+// добавив к адресу ?forcebackup=1 - заявка уйдёт сразу запасным каналом, минуя
+// сервер. Нужно, чтобы канал можно было проверить заранее, а не выяснять его
+// работоспособность в момент, когда он понадобился.
+function backupForced(): boolean {
+  try {
+    return new URLSearchParams(window.location.search).get("forcebackup") === "1";
+  } catch {
+    return false;
+  }
+}
 
 export interface LeadData {
   name: string;
@@ -84,6 +99,14 @@ async function sendViaBackup(data: LeadData): Promise<boolean> {
  * с телефоном для связи.
  */
 export async function sendLead(data: LeadData): Promise<void> {
+  if (backupForced()) {
+    const delivered = await sendViaBackup({
+      ...data,
+      source: `${data.source || ""} (проверка запасного канала)`.trim(),
+    });
+    if (!delivered) throw new Error("Запасной канал не принял заявку");
+    return;
+  }
   try {
     await sendViaProxy(data);
     return;

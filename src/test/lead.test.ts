@@ -33,18 +33,18 @@ describe("отправка заявки", () => {
   });
 
   it("при работающем прокси отправляет только в него, запасной канал не трогает", async () => {
-    const fetchMock = vi.fn(async () => jsonResponse({ ok: true }));
+    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) => jsonResponse({ ok: true }));
     vi.stubGlobal("fetch", fetchMock);
     const { sendLead } = await loadWithKey("test-key");
 
     await expect(sendLead(lead)).resolves.toBeUndefined();
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(fetchMock.mock.calls[0][0]).toBe(PROXY);
+    expect(fetchMock.mock.calls[0]?.[0]).toBe(PROXY);
   });
 
   it("если прокси упал, а запасной канал принял - заявка доставлена, ошибки нет", async () => {
-    const fetchMock = vi.fn(async (url: string) =>
+    const fetchMock = vi.fn(async (url: string, _init?: RequestInit) =>
       url === PROXY ? Promise.reject(new Error("сеть недоступна")) : jsonResponse({ success: true })
     );
     vi.stubGlobal("fetch", fetchMock);
@@ -53,11 +53,11 @@ describe("отправка заявки", () => {
     await expect(sendLead(lead)).resolves.toBeUndefined();
 
     expect(fetchMock).toHaveBeenCalledTimes(2);
-    expect(fetchMock.mock.calls[1][0]).toBe(BACKUP);
+    expect(fetchMock.mock.calls[1]?.[0]).toBe(BACKUP);
   });
 
   it("если упали оба канала - бросает ошибку, чтобы посетитель увидел её и телефон", async () => {
-    const fetchMock = vi.fn(async (url: string) =>
+    const fetchMock = vi.fn(async (url: string, _init?: RequestInit) =>
       url === PROXY ? jsonResponse({ ok: false, error: "сервер недоступен" }, false) : jsonResponse({ success: false }, false)
     );
     vi.stubGlobal("fetch", fetchMock);
@@ -68,7 +68,7 @@ describe("отправка заявки", () => {
   });
 
   it("без ключа запасного канала ведёт себя как раньше: упал прокси - ошибка", async () => {
-    const fetchMock = vi.fn(async () => jsonResponse({ ok: false, error: "сервер недоступен" }, false));
+    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) => jsonResponse({ ok: false, error: "сервер недоступен" }, false));
     vi.stubGlobal("fetch", fetchMock);
     const { sendLead } = await loadWithKey(undefined);
 
@@ -76,8 +76,23 @@ describe("отправка заявки", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
+  it("с ?forcebackup=1 заявка идёт сразу запасным каналом - это ручная проверка канала", async () => {
+    window.history.replaceState({}, "", "/forma/?forcebackup=1");
+    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) => jsonResponse({ success: true }));
+    vi.stubGlobal("fetch", fetchMock);
+    const { sendLead } = await loadWithKey("test-key");
+
+    await expect(sendLead(lead)).resolves.toBeUndefined();
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0]?.[0]).toBe(BACKUP);
+    const body = JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body));
+    expect(body["Откуда заявка"]).toContain("проверка запасного канала");
+    window.history.replaceState({}, "", "/");
+  });
+
   it("в запасной канал уходят все поля заявки и пометка, что канал запасной", async () => {
-    const fetchMock = vi.fn(async (url: string) =>
+    const fetchMock = vi.fn(async (url: string, _init?: RequestInit) =>
       url === PROXY ? Promise.reject(new Error("нет связи")) : jsonResponse({ success: true })
     );
     vi.stubGlobal("fetch", fetchMock);
@@ -85,7 +100,7 @@ describe("отправка заявки", () => {
 
     await sendLead({ ...lead, direction: "Продажи и CRM", message: "Нужен аудит" });
 
-    const body = JSON.parse(fetchMock.mock.calls[1][1].body as string);
+    const body = JSON.parse(String(fetchMock.mock.calls[1]?.[1]?.body));
     expect(body.access_key).toBe("test-key");
     expect(body.subject).toContain("Иван Петров");
     expect(body["Телефон"]).toBe("+7 926 111-22-33");
