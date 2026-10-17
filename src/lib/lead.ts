@@ -1,15 +1,15 @@
-// Отправка заявки с сайта. Два канала, по очереди.
+// Отправка заявки с сайта. Два независимых канала, оба на каждую заявку.
 //
-// Основной - серверный прокси api.golubev-consulting.ru/lead. Напрямую в
-// api.telegram.org из браузера нельзя: у посетителей из РФ он заблокирован,
-// запрос не проходит. Прокси пересылает заявку в Telegram и на почту.
+// Первый - серверный прокси api.golubev-consulting.ru/lead, оттуда заявка
+// уходит в Telegram. Напрямую в api.telegram.org из браузера нельзя: у
+// посетителей из РФ он заблокирован, запрос не проходит.
 //
-// Запасной - внешний сервис Web3Forms, который шлёт заявку на почту владельца
-// напрямую из браузера. Он нужен ровно на один случай: прокси недоступен.
-// Тогда заявка всё равно доходит, а не теряется вместе с клиентом.
+// Второй - письмо на почту владельца через внешний сервис Web3Forms, прямо из
+// браузера. Владелец хочет видеть каждую заявку в почте, поэтому письмо идёт
+// всегда, а не только в аварии.
 //
-// Запасной канал включается ТОЛЬКО если основной не сработал, иначе на каждую
-// заявку приходило бы по два уведомления.
+// Каналы ничем не связаны: Telegram и почта идут разными дорогами, и падение
+// любой из них заявку не теряет.
 
 const LEAD_ENDPOINT = "https://api.golubev-consulting.ru/lead";
 const BACKUP_ENDPOINT = "https://api.web3forms.com/submit";
@@ -19,12 +19,12 @@ const BACKUP_ENDPOINT = "https://api.web3forms.com/submit";
 //
 // В сам код ключ не вписываем: хранение ключей в исходниках - плохая привычка,
 // даже когда конкретный ключ публичный по устройству сервиса. Без ключа
-// запасной канал просто выключен, поведение остаётся прежним.
+// почтовый канал просто выключен, работает только Telegram.
 const BACKUP_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
-// Проверка запасного канала без настоящей аварии: открыть страницу с формой,
-// добавив к адресу ?forcebackup=1 - заявка уйдёт сразу запасным каналом, минуя
-// сервер. Нужно, чтобы канал можно было проверить заранее, а не выяснять его
+// Проверка почтового канала отдельно от остального: открыть страницу с формой,
+// добавив к адресу ?forcebackup=1 - заявка уйдёт только письмом, минуя сервер.
+// Нужно, чтобы канал можно было проверить заранее, а не выяснять его
 // работоспособность в момент, когда он понадобился.
 function backupForced(): boolean {
   try {
@@ -70,7 +70,7 @@ async function sendViaProxy(data: LeadData): Promise<void> {
 
 // Письмо владельцу через внешний сервис. Текст собираем здесь же, чтобы в
 // почте была та же картина, что и в Telegram: кто, телефон, откуда заявка.
-async function sendViaBackup(data: LeadData): Promise<boolean> {
+async function sendEmail(data: LeadData): Promise<boolean> {
   if (!BACKUP_KEY) return false;
   try {
     const res = await postJson(BACKUP_ENDPOINT, {
@@ -84,7 +84,6 @@ async function sendViaBackup(data: LeadData): Promise<boolean> {
       Направление: data.direction || "",
       Сообщение: data.message || "",
       "Откуда заявка": data.source || "",
-      Канал: "Запасной канал: основной сервер не ответил",
     });
     const json = (await res.json().catch(() => ({}))) as { success?: boolean };
     return res.ok && json.success === true;
@@ -94,24 +93,37 @@ async function sendViaBackup(data: LeadData): Promise<boolean> {
 }
 
 /**
- * Отправляет заявку. Бросает ошибку, только если НИ ОДИН канал не сработал,
- * то есть заявка действительно потеряна и посетителю нужно показать ошибку
- * с телефоном для связи.
+ * Отправляет заявку обоими каналами сразу: в Telegram через сервер и письмом
+ * на почту. Это сделано намеренно - письмо должно приходить по КАЖДОЙ заявке,
+ * а не только в аварии, и второе уведомление тут не лишнее, а нужное.
+ *
+ * Побочный эффект приятный: каналы независимы, поэтому падение любого из них
+ * заявку не теряет.
+ *
+ * Бросает ошибку, только если не сработал НИ ОДИН канал, то есть заявка
+ * действительно потеряна и посетителю нужно показать ошибку с телефоном.
  */
 export async function sendLead(data: LeadData): Promise<void> {
+  // Режим проверки почтового канала: ?forcebackup=1 - шлём только письмо.
   if (backupForced()) {
-    const delivered = await sendViaBackup({
+    const delivered = await sendEmail({
       ...data,
-      source: `${data.source || ""} (проверка запасного канала)`.trim(),
+      source: `${data.source || ""} (проверка почтового канала)`.trim(),
     });
-    if (!delivered) throw new Error("Запасной канал не принял заявку");
+    if (!delivered) throw new Error("Почтовый канал не принял заявку");
     return;
   }
-  try {
-    await sendViaProxy(data);
-    return;
-  } catch (primaryError) {
-    const delivered = await sendViaBackup(data);
-    if (!delivered) throw primaryError;
+
+  // Параллельно, а не по очереди: посетитель не должен ждать два запроса.
+  let proxyError: unknown = null;
+  const [, emailDelivered] = await Promise.all([
+    sendViaProxy(data).catch((error: unknown) => {
+      proxyError = error;
+    }),
+    sendEmail(data),
+  ]);
+
+  if (proxyError && !emailDelivered) {
+    throw proxyError instanceof Error ? proxyError : new Error("Заявку не удалось отправить");
   }
 }
