@@ -39,6 +39,27 @@ jobs:
           VITE_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
         run: npm run build
 
+      - name: Проверить, включён ли запасной канал заявок
+        # Запасной канал включается ключом из секрета WEB3FORMS_KEY. Без этой
+        # проверки факт включения остаётся на веру: ключ попадает в собранный
+        # скрипт молча, и узнать об этом можно было бы только в момент аварии.
+        # Сам ключ не печатаем - только есть он в сборке или нет.
+        env:
+          KEY: ${{ secrets.WEB3FORMS_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::warning::Секрет WEB3FORMS_KEY не задан - запасной канал отправки заявок ВЫКЛЮЧЕН"
+            echo "- запасной канал заявок: выключен (нет секрета WEB3FORMS_KEY)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if grep -rqF "$KEY" dist/assets; then
+            echo "запасной канал заявок включён: ключ попал в сборку"
+            echo "- запасной канал заявок: включён, ключ в сборке" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::Секрет WEB3FORMS_KEY задан, но ключ не попал в сборку - запасной канал работать не будет"
+            exit 1
+          fi
+
       - name: Detect new blog posts
         id: blog
         run: |
