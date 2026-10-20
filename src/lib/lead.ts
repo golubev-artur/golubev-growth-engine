@@ -34,38 +34,15 @@ function backupForced(): boolean {
   }
 }
 
-// Режим разбора проблем: ?forcebackup=1 показывает прямо на странице, что
-// ответил почтовый сервис. Без этого отладка вслепую: заявка «ушла», письма
-// нет, и причина не видна ни владельцу, ни нам.
+// Разбор проблем с почтовым каналом: ответ сервиса пишется в консоль браузера
+// и только в режиме ?forcebackup=1. На странице ничего не показываем - это
+// служебная информация, и посетитель её видеть не должен ни при каких условиях.
 function diagnose(text: string): void {
   if (!backupForced()) return;
   try {
-    const box = document.createElement("pre");
-    box.textContent = text;
-    box.setAttribute(
-      "style",
-      [
-        "position:fixed",
-        "left:12px",
-        "right:12px",
-        "bottom:12px",
-        "z-index:2147483647",
-        "max-height:45vh",
-        "overflow:auto",
-        "margin:0",
-        "padding:12px 14px",
-        "background:#0c1a2e",
-        "color:#e6f0fa",
-        "border:1px solid #1e90ff",
-        "border-radius:10px",
-        "font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace",
-        "white-space:pre-wrap",
-        "word-break:break-word",
-      ].join(";")
-    );
-    document.body.appendChild(box);
+    console.info("[проверка почтового канала]\n" + text);
   } catch {
-    /* страница могла уже уйти - диагностика не должна ничего ломать */
+    /* диагностика не должна ничего ломать */
   }
 }
 
