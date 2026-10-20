@@ -34,6 +34,41 @@ function backupForced(): boolean {
   }
 }
 
+// Режим разбора проблем: ?forcebackup=1 показывает прямо на странице, что
+// ответил почтовый сервис. Без этого отладка вслепую: заявка «ушла», письма
+// нет, и причина не видна ни владельцу, ни нам.
+function diagnose(text: string): void {
+  if (!backupForced()) return;
+  try {
+    const box = document.createElement("pre");
+    box.textContent = text;
+    box.setAttribute(
+      "style",
+      [
+        "position:fixed",
+        "left:12px",
+        "right:12px",
+        "bottom:12px",
+        "z-index:2147483647",
+        "max-height:45vh",
+        "overflow:auto",
+        "margin:0",
+        "padding:12px 14px",
+        "background:#0c1a2e",
+        "color:#e6f0fa",
+        "border:1px solid #1e90ff",
+        "border-radius:10px",
+        "font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace",
+        "white-space:pre-wrap",
+        "word-break:break-word",
+      ].join(";")
+    );
+    document.body.appendChild(box);
+  } catch {
+    /* страница могла уже уйти - диагностика не должна ничего ломать */
+  }
+}
+
 export interface LeadData {
   name: string;
   phone: string;
@@ -45,13 +80,13 @@ export interface LeadData {
 
 const TIMEOUT_MS = 8000;
 
-async function postJson(url: string, body: unknown): Promise<Response> {
+async function postJson(url: string, body: unknown, extraHeaders?: Record<string, string>): Promise<Response> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
     return await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...extraHeaders },
       body: JSON.stringify(body),
       signal: controller.signal,
     });
@@ -71,23 +106,45 @@ async function sendViaProxy(data: LeadData): Promise<void> {
 // Письмо владельцу через внешний сервис. Текст собираем здесь же, чтобы в
 // почте была та же картина, что и в Telegram: кто, телефон, откуда заявка.
 async function sendEmail(data: LeadData): Promise<boolean> {
-  if (!BACKUP_KEY) return false;
+  if (!BACKUP_KEY) {
+    diagnose("Почтовый канал выключен: при сборке сайта не было ключа.");
+    return false;
+  }
   try {
-    const res = await postJson(BACKUP_ENDPOINT, {
-      access_key: BACKUP_KEY,
-      subject: `Заявка с сайта: ${data.name || "без имени"}${data.phone ? `, ${data.phone}` : ""}`,
-      from_name: "Сайт golubev-consulting.ru",
-      // Поля уходят в письмо списком, поэтому названия - человеческие.
-      Имя: data.name || "",
-      Телефон: data.phone || "",
-      Почта: data.email || "",
-      Направление: data.direction || "",
-      Сообщение: data.message || "",
-      "Откуда заявка": data.source || "",
-    });
-    const json = (await res.json().catch(() => ({}))) as { success?: boolean };
-    return res.ok && json.success === true;
-  } catch {
+    const res = await postJson(
+      BACKUP_ENDPOINT,
+      {
+        access_key: BACKUP_KEY,
+        subject: `Заявка с сайта: ${data.name || "без имени"}${data.phone ? `, ${data.phone}` : ""}`,
+        from_name: "Сайт golubev-consulting.ru",
+        // Поля уходят в письмо списком, поэтому названия - человеческие.
+        Имя: data.name || "",
+        Телефон: data.phone || "",
+        Почта: data.email || "",
+        Направление: data.direction || "",
+        Сообщение: data.message || "",
+        "Откуда заявка": data.source || "",
+      },
+      // Без этого заголовка сервис отвечает не JSON, а переадресацией на свою
+      // страницу - так указано в его документации.
+      { Accept: "application/json" }
+    );
+    const text = await res.text().catch(() => "");
+    let json: { success?: boolean; message?: string } = {};
+    try {
+      json = JSON.parse(text);
+    } catch {
+      /* не JSON - покажем как есть в режиме проверки */
+    }
+    const ok = res.ok && json.success === true;
+    diagnose(
+      `Ответ почтового сервиса: HTTP ${res.status}\n` +
+        `Принято: ${ok ? "да" : "нет"}\n` +
+        `Текст ответа: ${text.slice(0, 500) || "(пусто)"}`
+    );
+    return ok;
+  } catch (e) {
+    diagnose(`Запрос к почтовому сервису не прошёл: ${e instanceof Error ? e.message : String(e)}`);
     return false;
   }
 }

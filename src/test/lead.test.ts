@@ -14,8 +14,15 @@ const lead = {
   source: "Форма обратной связи - Главная",
 };
 
+// Почтовый канал читает ответ через text(), прокси - через json(),
+// поэтому заглушка умеет и то и другое.
 const jsonResponse = (body: unknown, ok = true) =>
-  ({ ok, status: ok ? 200 : 500, json: async () => body }) as Response;
+  ({
+    ok,
+    status: ok ? 200 : 500,
+    json: async () => body,
+    text: async () => JSON.stringify(body),
+  }) as Response;
 
 const okProxy = () => jsonResponse({ ok: true });
 const failProxy = () => jsonResponse({ ok: false, error: "сервер недоступен" }, false);
