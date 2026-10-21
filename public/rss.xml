@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 19 Oct 2026 03:07:40 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 03:16:12 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как выстроить систему сбора отзывов, чтобы клиенты писали сами</title>
+    <link>https://golubev-consulting.ru/blog/collect-client-reviews-system</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/collect-client-reviews-system</guid>
+    <description>Довольный клиент молчит, недовольный пишет - и картина в интернете выходит хуже реальной. Разбираем, в какой момент просить отзыв, как отсеивать недовольных до публикации и почему конверсия вырастает в десять раз.</description>
+    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+    <category>Клиентский сервис</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-nps.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как передать процесс новому сотруднику: чек-лист вместо «смотри и учись»</title>
     <link>https://golubev-consulting.ru/blog/handover-process-to-new-employee</link>
@@ -183,15 +192,6 @@
     <pubDate>Wed, 22 Jul 2026 00:00:00 GMT</pubDate>
     <category>Клиентский сервис</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-nps.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как составить должностную инструкцию руководителя отдела продаж: структура, обязанности и KPI</title>
-    <link>https://golubev-consulting.ru/blog/sales-director-job-description</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/sales-director-job-description</guid>
-    <description>Пошаговое руководство по созданию должностной инструкции РОПа - от зон ответственности и полномочий до конкретных KPI. С примерами формулировок и типичными ошибками.</description>
-    <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Персонал и команда</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-hr.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
