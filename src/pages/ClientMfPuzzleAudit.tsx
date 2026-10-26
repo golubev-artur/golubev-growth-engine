@@ -2,7 +2,16 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
-import { ArrowLeft, CheckCircle2, AlertTriangle, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  AlertTriangle,
+  ExternalLink,
+  CreditCard,
+  TrendingDown,
+  Filter,
+  LifeBuoy,
+} from "lucide-react";
 
 // Отчёт по итогам аудита маркетплейсов для MF-Puzzle.
 // Страница закрыта от поисковиков (noIndex) - это персональный документ клиента.
@@ -93,8 +102,8 @@ const ClientMfPuzzleAudit = () => {
           </h1>
           <p className="text-primary-foreground/60 text-lg max-w-2xl mb-8">
             Проведён аудит площадок, все магазины и товары заведены в единую систему mpprofit.
-            Ниже - что уже сделано, что требуется от вас и какие действия заблокированы
-            до устранения замечаний.
+            Ниже - что уже сделано, что показывает дашборд сейчас, что требуется от вас
+            и какие действия заблокированы до устранения замечаний.
           </p>
           <div className="flex flex-wrap gap-3">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/15 border border-accent/30 text-accent text-sm font-medium">
@@ -110,6 +119,30 @@ const ClientMfPuzzleAudit = () => {
               Система: seller.mpprofit.ru
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Обязательное условие работы - продление платформы */}
+      <section className="py-8 bg-card border-b border-border">
+        <div className="container mx-auto px-4 md:px-8 max-w-4xl">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-5 p-6 rounded-2xl border border-accent/40 bg-accent/5">
+            <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-accent/15 text-accent shrink-0">
+              <CreditCard className="h-6 w-6" />
+            </span>
+            <div className="flex-1">
+              <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">
+                Обязательно
+              </p>
+              <h2 className="text-lg md:text-xl font-bold text-foreground mb-1">
+                Оплатить продление платформы
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Без продления подписки работать в системе не получится: доступ к данным,
+                отчётам и настроенному учёту закроется. Это первое, что нужно сделать, -
+                всё остальное в отчёте имеет смысл только при работающей платформе.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -155,12 +188,55 @@ const ClientMfPuzzleAudit = () => {
         </div>
       </section>
 
-      {/* 2. Что нужно сделать вам */}
+      {/* 2. Текущая ситуация по дашборду */}
       <section className="py-12 md:py-16 bg-card border-y border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <div className="flex items-baseline gap-3 mb-2">
             <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-accent/10 text-accent text-xs font-bold shrink-0">
               2
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              Текущая ситуация по дашборду
+            </h2>
+          </div>
+          <p className="text-muted-foreground mb-8 ml-10">
+            Сейчас картина негативная, и её нужно исправлять. Важно понимать, откуда взялся минус.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="p-6 rounded-xl border border-border bg-background">
+              <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent mb-4">
+                <TrendingDown className="h-5 w-5" />
+              </span>
+              <h3 className="font-bold text-foreground mb-2">Минус дал не маркетплейс</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Отрицательный результат сформировали не продажи на площадках, а дополнительные
+                затраты, заведённые для обслуживания маркетплейса. Поэтому разбираться нужно
+                с составом этих затрат, а не с самими продажами.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl border border-border bg-background">
+              <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent mb-4">
+                <Filter className="h-5 w-5" />
+              </span>
+              <h3 className="font-bold text-foreground mb-2">Как читать основной дашборд</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Если ни один магазин не выбран - дашборд показывает дополнительные затраты.
+                Если выбрать один магазин или сразу все - дополнительные затраты не отображаются.
+                Это особенность системы: сравнивая цифры, смотрите, какой фильтр включён.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Что нужно сделать вам */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container mx-auto px-4 md:px-8 max-w-4xl">
+          <div className="flex items-baseline gap-3 mb-2">
+            <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-accent/10 text-accent text-xs font-bold shrink-0">
+              3
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">Что нужно сделать вам</h2>
           </div>
@@ -170,7 +246,7 @@ const ClientMfPuzzleAudit = () => {
 
           <ul className="grid sm:grid-cols-2 gap-4">
             {TODO.map((item, i) => (
-              <li key={i} className="flex gap-4 p-5 rounded-xl border border-border bg-background">
+              <li key={i} className="flex gap-4 p-5 rounded-xl border border-border bg-card">
                 <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-foreground mb-1 leading-snug">{item.title}</p>
@@ -182,8 +258,8 @@ const ClientMfPuzzleAudit = () => {
         </div>
       </section>
 
-      {/* 3. Блокирующее условие */}
-      <section className="py-12 md:py-16 bg-background">
+      {/* 4. Блокирующее условие */}
+      <section className="py-12 md:py-16 bg-card border-t border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-6 md:p-8">
             <div className="flex items-baseline gap-3 mb-6">
@@ -208,6 +284,28 @@ const ClientMfPuzzleAudit = () => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Поддержка платформы */}
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-5 p-6 rounded-2xl border border-border bg-background">
+            <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent shrink-0">
+              <LifeBuoy className="h-6 w-6" />
+            </span>
+            <div className="flex-1">
+              <h3 className="font-bold text-foreground mb-1">Остались вопросы по системе</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                По всем дополнительным вопросам обращайтесь в поддержку платформы{" "}
+                <a
+                  href="https://seller.mpprofit.ru"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  seller.mpprofit.ru
+                </a>
+                : там подскажут по любому разделу и ответят на вопросы по работе в системе.
+              </p>
+            </div>
           </div>
 
           <p className="text-sm text-muted-foreground mt-8 pt-6 border-t border-border flex flex-wrap justify-between gap-2">
