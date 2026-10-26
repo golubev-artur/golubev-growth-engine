@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import ContactFormModal from "@/components/ContactFormModal";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import {
   CheckCircle2, ArrowRight, ChevronDown, Target, BarChart3,
   Users, Briefcase, TrendingUp, Shield, Zap, Settings,
-  Award, Clock, Calculator, Video, MapPin,
+  Award, Clock, Calculator, Video, MapPin, FileText,
 } from "lucide-react";
 
 const MONTHS = [
@@ -475,6 +476,30 @@ const ClientMfPuzzle = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Отчёт по аудиту - ссылка на отдельную страницу */}
+      <section className="py-8 bg-background border-b border-border">
+        <div className="container mx-auto px-4 md:px-8 max-w-4xl">
+          <Link
+            to="/client/mf-puzzle/audit"
+            className="group flex items-start gap-4 p-5 md:p-6 rounded-2xl border border-accent/30 bg-accent/5 hover:bg-accent/10 transition-colors"
+          >
+            <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-accent/15 text-accent shrink-0">
+              <FileText className="h-5 w-5" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-semibold tracking-widest uppercase text-accent mb-1">
+                Отчёт по проекту
+              </span>
+              <span className="block font-bold text-foreground mb-1">Аудит маркетплейсов</span>
+              <span className="block text-sm text-muted-foreground">
+                Что сделано, что требуется от вас и какие действия заблокированы до устранения замечаний.
+              </span>
+            </span>
+            <ArrowRight className="h-5 w-5 text-accent shrink-0 mt-1 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </section>
 

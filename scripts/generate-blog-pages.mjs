@@ -532,6 +532,45 @@ for (const page of otherPages) {
 }
 console.log(`Generated ${otherPages.length} static pages (services, blog, faq, press, forma, presentation, privacy)`);
 
+// ── Персональные страницы клиентов ──
+// Генерируются, чтобы ссылка, отправленная клиенту, отдавалась с кодом 200 и
+// давала нормальное превью в мессенджерах. Без этого адрес вида /client/...
+// существует только в браузере: сервер отвечает 404, и вместо карточки со
+// ссылкой приходит голый адрес.
+//
+// Эти страницы закрыты от поисковиков: robots noindex и отсутствие в sitemap.
+// Тело намеренно не пререндерим - содержимое персональное, в исходнике
+// страницы ему делать нечего. Робот получает только заголовок и отказ в
+// индексации, человек - ту же страницу, что и раньше.
+const clientPages = [
+  {
+    route: "/client/mf-puzzle",
+    title: "MF-Puzzle - План сопровождения",
+    description:
+      "Индивидуальный план сопровождения компании MF-Puzzle: 6 месяцев активной работы от Голубев Консалтинг.",
+  },
+  {
+    route: "/client/mf-puzzle/audit",
+    title: "MF-Puzzle - Аудит маркетплейсов",
+    description:
+      "Отчёт по итогам аудита маркетплейсов: что сделано, что требуется от клиента и какие действия заблокированы до устранения замечаний.",
+  },
+  {
+    route: "/client/territoria-reklamy",
+    title: "Территория рекламы - План работ",
+    description: "Личный кабинет клиента: планы работ по месяцам и протоколы встреч.",
+  },
+];
+
+for (const page of clientPages) {
+  const html = buildPage(page).replace(
+    /<meta name="robots" content="[^"]*"\s*\/?>/,
+    '<meta name="robots" content="noindex, nofollow" />'
+  );
+  writePage(page.route, html);
+}
+console.log(`Generated ${clientPages.length} client pages (noindex)`);
+
 
 // ── Главная ──
 // Раньше она была единственной страницей без пререндера: робот видел пустой #root,
