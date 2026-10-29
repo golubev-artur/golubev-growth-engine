@@ -33,30 +33,26 @@ jobs:
         run: npm install
 
       - name: Build
-        # Ключ запасного канала отправки заявок (Web3Forms). Если секрет не
-        # задан, запасной канал просто выключен и сборка проходит как обычно.
         env:
-          VITE_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          VITE_EMAILJS_SERVICE: ${{ secrets.EMAILJS_SERVICE }}
+          VITE_EMAILJS_TEMPLATE: ${{ secrets.EMAILJS_TEMPLATE }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: npm run build
 
-      - name: Проверить, включён ли запасной канал заявок
-        # Запасной канал включается ключом из секрета WEB3FORMS_KEY. Без этой
-        # проверки факт включения остаётся на веру: ключ попадает в собранный
-        # скрипт молча, и узнать об этом можно было бы только в момент аварии.
-        # Сам ключ не печатаем - только есть он в сборке или нет.
+      - name: Проверить, включён ли почтовый канал заявок
         env:
-          KEY: ${{ secrets.WEB3FORMS_KEY }}
+          KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: |
           if [ -z "$KEY" ]; then
-            echo "::warning::Секрет WEB3FORMS_KEY не задан - запасной канал отправки заявок ВЫКЛЮЧЕН"
-            echo "- запасной канал заявок: выключен (нет секрета WEB3FORMS_KEY)" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::Секреты EmailJS не заданы - почтовый канал заявок ВЫКЛЮЧЕН"
+            echo "- почтовый канал заявок: выключен (нет секретов EmailJS)" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           if grep -rqF "$KEY" dist/assets; then
-            echo "запасной канал заявок включён: ключ попал в сборку"
-            echo "- запасной канал заявок: включён, ключ в сборке" >> "$GITHUB_STEP_SUMMARY"
+            echo "почтовый канал заявок включён: ключ попал в сборку"
+            echo "- почтовый канал заявок: включён (EmailJS)" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "::error::Секрет WEB3FORMS_KEY задан, но ключ не попал в сборку - запасной канал работать не будет"
+            echo "::error::Секрет EMAILJS_PUBLIC_KEY задан, но не попал в сборку"
             exit 1
           fi
 
