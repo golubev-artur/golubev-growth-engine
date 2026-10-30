@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Wed, 28 Oct 2026 03:15:51 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 03:17:06 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как собрать посадочную страницу под услугу, которая приносит заявки</title>
+    <link>https://golubev-consulting.ru/blog/service-landing-page-conversion</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/service-landing-page-conversion</guid>
+    <description>Большинство посадочных страниц проваливаются не из-за дизайна, а из-за структуры: посетитель не понимает, что ему предлагают и почему это стоит внимания. Разбираем блоки, последовательность и тексты, которые превращают трафик в заявки.</description>
+    <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
+    <category>Маркетинг</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-ai.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как считать зарплатный фонд и не уйти в минус при росте команды</title>
     <link>https://golubev-consulting.ru/blog/payroll-budget-planning</link>
@@ -183,15 +192,6 @@
     <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
     <category>Маркетинг</category>
     <enclosure url="https://golubev-consulting.ru/blog/arthur-office-2.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как малому бизнесу защитить интеллектуальную собственность: практическое руководство без юридического тумана</title>
-    <link>https://golubev-consulting.ru/blog/protect-intellectual-property-small-business</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/protect-intellectual-property-small-business</guid>
-    <description>Название, логотип, сайт, база клиентов, скрипты и наработки - всё это активы, которые легко потерять, если ими не заниматься. Разбираем по шагам, как малому бизнесу защитить интеллектуальную собственность и что сделать в первую очередь.</description>
-    <pubDate>Wed, 29 Jul 2026 00:00:00 GMT</pubDate>
-    <category>Юридические услуги</category>
-    <enclosure url="https://golubev-consulting.ru/blog/arthur-office-4.jpg" type="image/jpeg" length="0"/>
   </item>
   </channel>
 </rss>
