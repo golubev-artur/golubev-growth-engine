@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /client/
 
 Sitemap: https://golubev-consulting.ru/sitemap.xml
 Host: https://golubev-consulting.ru
+
+User-agent: Yandex
+Allow: /
+Disallow: /admin
+Disallow: /client/
+Clean-param: forcebackup&utm_source&utm_medium&utm_campaign&utm_content&utm_term

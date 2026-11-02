@@ -108,6 +108,9 @@ function canonical(route) {
 }
 
 function addCanonical(html, url) {
+  if (html.includes('rel="canonical"')) {
+    return html.replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${url}" />`);
+  }
   return html.replace("</head>", () => `  <link rel="canonical" href="${url}" />\n  </head>`);
 }
 
@@ -203,6 +206,7 @@ for (const post of posts) {
 
   const articleMeta = [
     `<meta property="article:published_time" content="${post.date}" />`,
+    `<meta property="article:modified_time" content="${post.date}" />`,
     `<meta property="article:author" content="Артур Голубев" />`,
     `<meta property="article:section" content="Бизнес-консалтинг" />`,
     `<meta property="og:locale" content="ru_RU" />`,
