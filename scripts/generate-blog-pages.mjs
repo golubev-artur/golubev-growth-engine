@@ -216,7 +216,7 @@ for (const post of posts) {
   // ── Prerender article body into #root (SEO: Yandex/Google see full text without JS) ──
   const content = extractContent(post.slug);
   if (content) {
-    const bodyHtml = `<article class="prose-container"><h1>${escapeText(post.title)}</h1>\n${renderContentToHtml(content)}</article>`;
+    const bodyHtml = `<article class="prerender-content"><h1>${escapeText(post.title)}</h1>\n${renderContentToHtml(content)}</article>`;
     html = html.replace('<div id="root"></div>', () => `<div id="root">${bodyHtml}</div>`);
   } else {
     console.warn(`  ! No content extracted for ${post.slug} — body not prerendered`);
@@ -337,7 +337,7 @@ for (const svc of services) {
       svc.faqs.map((f) => `<h3>${escapeText(f.question)}</h3><p>${escapeText(f.answer)}</p>`).join("")
     : "";
   const bodyHtml =
-    `<article class="prose-container">` +
+    `<article class="prerender-content">` +
     `<h1>${escapeText(svc.title)}</h1>` +
     `<p>${escapeText(svc.description)}</p>` +
     itemsHtml +
@@ -383,7 +383,7 @@ console.log(`Generated ${services.length} service pages in dist/services/`);
 
 // ── Прочие страницы ──
 const servicesListHtml =
-  `<article class="prose-container"><h1>Наши услуги</h1>` +
+  `<article class="prerender-content"><h1>Наши услуги</h1>` +
   `<p>Системный консалтинг для малого и среднего бизнеса: ${services.length} направлений.</p><ul>` +
   services
     .map(
@@ -394,7 +394,7 @@ const servicesListHtml =
   `</ul></article>`;
 
 const blogListHtml =
-  `<article class="prose-container"><h1>Статьи и практические руководства</h1>` +
+  `<article class="prerender-content"><h1>Статьи и практические руководства</h1>` +
   `<p>Практические материалы о продажах, CRM, автоматизации, управлении и маркетинге. Всего статей: ${posts.length}.</p><ul>` +
   posts
     .map((p) => `<li><a href="/blog/${p.slug}">${escapeText(p.title)}</a> <span>${p.date}</span></li>`)
@@ -402,11 +402,11 @@ const blogListHtml =
   `</ul></article>`;
 
 const faqBodyHtml =
-  `<article class="prose-container"><h1>Часто задаваемые вопросы</h1>` +
+  `<article class="prerender-content"><h1>Часто задаваемые вопросы</h1>` +
   generalFaqs.map((f) => `<h2>${escapeText(f.question)}</h2><p>${escapeText(f.answer)}</p>`).join("") +
   `</article>`;
 
-const simple = (h1, text) => `<article class="prose-container"><h1>${escapeText(h1)}</h1><p>${escapeText(text)}</p></article>`;
+const simple = (h1, text) => `<article class="prerender-content"><h1>${escapeText(h1)}</h1><p>${escapeText(text)}</p></article>`;
 
 const otherPages = [
   {
@@ -449,7 +449,7 @@ const otherPages = [
     description:
       "Пресс-материалы, публикации, экспертные комментарии и контакты пресс-службы Голубев Консалтинг. Скачать логотип, фото и описание компании для СМИ.",
     bodyHtml:
-      `<article class="prose-container"><h1>Пресс-центр</h1>` +
+      `<article class="prerender-content"><h1>Пресс-центр</h1>` +
       `<p>Артур Голубев - основатель компании «Голубев Консалтинг», консультант с 12-летним опытом. ` +
       `Комментирует темы системного управления, построения отделов продаж, автоматизации и ` +
       `бизнес-процессов в малом и среднем бизнесе.</p>` +
@@ -470,7 +470,7 @@ const otherPages = [
     description:
       "Запишитесь на бесплатную 45-минутную онлайн-консультацию с экспертом Голубев Консалтинг. Разберём вашу ситуацию и дадим конкретные рекомендации.",
     bodyHtml:
-      `<article class="prose-container"><h1>Бесплатная консультация для вашего бизнеса</h1>` +
+      `<article class="prerender-content"><h1>Бесплатная консультация для вашего бизнеса</h1>` +
       `<p>45 минут онлайн с экспертом «Голубев Консалтинг». Разбираем вашу ситуацию и показываем, ` +
       `где бизнес теряет деньги. Без обязательств и без продаж на встрече.</p>` +
       `<h2>Что получите на встрече</h2><ul>` +
@@ -492,7 +492,7 @@ const otherPages = [
     description:
       "Получите полную презентацию Голубев Консалтинг: подход, услуги, кейсы и результаты. Бесплатно после заполнения формы.",
     bodyHtml:
-      `<article class="prose-container"><h1>Презентация компании</h1>` +
+      `<article class="prerender-content"><h1>Презентация компании</h1>` +
       `<p>Полная презентация «Голубев Консалтинг» в одном файле: подход к работе, ${services.length} направлений ` +
       `услуг, примеры проектов и результаты в цифрах.</p>` +
       `<h2>Что внутри</h2><ul>` +
@@ -511,7 +511,7 @@ const otherPages = [
     description:
       "Политика обработки персональных данных на сайте golubev-consulting.ru. Информация о сборе, хранении и использовании данных.",
     bodyHtml:
-      `<article class="prose-container"><h1>Политика обработки персональных данных</h1>` +
+      `<article class="prerender-content"><h1>Политика обработки персональных данных</h1>` +
       `<p>Политика описывает, какие персональные данные собираются на сайте golubev-consulting.ru, ` +
       `с какой целью и как они хранятся.</p>` +
       `<h2>Какие данные собираются</h2>` +
@@ -578,7 +578,7 @@ console.log(`Generated ${clientPages.length} client pages (noindex)`);
 {
   const latest = posts.slice(0, 6);
   const bodyHtml =
-    `<article class="prose-container">` +
+    `<article class="prerender-content">` +
     `<h1>Системный консалтинг для роста вашего бизнеса</h1>` +
     `<p>Продажи · Маркетинг · Бизнес-процессы · Управление · Автоматизация · Персонал · Клиентский сервис</p>` +
     `<h2>Выстраиваем системы, которые работают без вас</h2>` +
