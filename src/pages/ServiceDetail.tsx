@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import { getServiceBySlug, services } from "@/data/services";
+import { blogPosts } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle2, ChevronDown, X } from "lucide-react";
 import {
@@ -320,6 +321,50 @@ const ServiceDetail = () => {
           </Accordion>
         </div>
       </section>
+
+      {/* Related blog posts */}
+      {(() => {
+        const SLUG_TO_CATEGORY: Record<string, string[]> = {
+          "sales-crm": ["Продажи и CRM"],
+          "business-processes": ["Бизнес-процессы"],
+          "marketing": ["Маркетинг"],
+          "management-strategy": ["Управление и стратегия"],
+          "hr-team": ["Персонал и команда"],
+          "tech-automation": ["Автоматизация"],
+          "client-service": ["Клиентский сервис"],
+          "strategic-session": ["Стратегические сессии"],
+          "finance": ["Финансы"],
+          "legal": ["Юридические услуги"],
+        };
+        const cats = SLUG_TO_CATEGORY[service.slug] || [];
+        const related = blogPosts.filter((p) => cats.includes(p.category)).slice(0, 4);
+        if (related.length === 0) return null;
+        return (
+          <section className="py-16 md:py-24 bg-background">
+            <div className="container mx-auto px-4 md:px-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-8">Статьи по теме</h2>
+              <div className="grid sm:grid-cols-2 gap-5">
+                {related.map((post) => (
+                  <Link
+                    key={post.slug}
+                    to={`/blog/${post.slug}`}
+                    className="group flex gap-4 p-5 rounded-xl border border-border bg-card hover:border-accent/30 hover:shadow-md transition-all"
+                  >
+                    <img src={post.image} alt={post.title} className="w-20 h-20 rounded-lg object-cover object-top shrink-0" />
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors line-clamp-2">{post.title}</h4>
+                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{post.excerpt}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-6 text-center">
+                <Link to="/blog" className="text-sm text-accent hover:underline">Все статьи блога &rarr;</Link>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Related services */}
       <section className="py-16 md:py-24 bg-card">

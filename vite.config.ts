@@ -19,4 +19,15 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "blog-data": ["./src/data/blog.ts"],
+          "services-data": ["./src/data/services.ts"],
+          "recharts": ["recharts"],
+        },
+      },
+    },
+  },
 }));
