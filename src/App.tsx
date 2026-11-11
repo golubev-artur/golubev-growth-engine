@@ -15,6 +15,7 @@ const Press = lazy(() => import("./pages/Press"));
 const FaqPage = lazy(() => import("./pages/FaqPage"));
 const Presentation = lazy(() => import("./pages/Presentation"));
 const Booking = lazy(() => import("./pages/Booking"));
+const ClientPressroll = lazy(() => import("./pages/ClientPressroll"));
 const ClientMfPuzzle = lazy(() => import("./pages/ClientMfPuzzle"));
 const ClientMfPuzzleAudit = lazy(() => import("./pages/ClientMfPuzzleAudit"));
 const ClientPortal = lazy(() => import("./pages/ClientPortal"));
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/presentation" element={<Presentation />} />
             <Route path="/forma" element={<Booking />} />
+            <Route path="/client/pressroll" element={<ClientPressroll />} />
             <Route path="/client/mf-puzzle" element={<ClientMfPuzzle />} />
             <Route path="/client/mf-puzzle/audit" element={<ClientMfPuzzleAudit />} />
             <Route path="/client/:slug" element={<ClientPortal />} />
