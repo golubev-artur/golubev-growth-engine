@@ -564,6 +564,11 @@ const clientPages = [
     title: "Территория рекламы - План работ",
     description: "Личный кабинет клиента: планы работ по месяцам и протоколы встреч.",
   },
+  {
+    route: "/client/pressroll",
+    title: "Форма обратной связи",
+    description: "Форма обратной связи",
+  },
 ];
 
 for (const page of clientPages) {
