@@ -5,7 +5,7 @@
     <link>https://golubev-consulting.ru/blog</link>
     <description>Системный консалтинг для малого и среднего бизнеса: продажи, CRM, маркетинг, управление, автоматизация.</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 16 Nov 2026 03:16:08 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 03:16:05 GMT</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://golubev-consulting.ru/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -13,6 +13,15 @@
       <title>Голубев Консалтинг</title>
       <link>https://golubev-consulting.ru</link>
     </image>
+  <item>
+    <title>Как автоматизировать воронку найма без HR-системы</title>
+    <link>https://golubev-consulting.ru/blog/automate-hiring-funnel-no-hrms</link>
+    <guid isPermaLink="true">https://golubev-consulting.ru/blog/automate-hiring-funnel-no-hrms</guid>
+    <description>Пошаговая инструкция: как автоматизировать воронку найма с помощью бесплатных инструментов, если у вас нет бюджета на HR-платформу.</description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+    <category>Автоматизация</category>
+    <enclosure url="https://golubev-consulting.ru/blog/blog-ai.jpg" type="image/jpeg" length="0"/>
+  </item>
   <item>
     <title>Как измерить скорость ответа клиенту и почему она важнее скидки</title>
     <link>https://golubev-consulting.ru/blog/client-response-time-measurement</link>
@@ -181,15 +190,6 @@
     <guid isPermaLink="true">https://golubev-consulting.ru/blog/sales-funnel-conversion-calculation</guid>
     <description>Собственник смотрит в отчёт «конверсия 20%» и не понимает, много это или мало и что с этим делать. Разбираем, как считать конверсию воронки продаж и где теряются клиенты: чем отличается этапная конверсия от сквозной, как найти узкое место и не обмануть себя цифрами.</description>
     <pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate>
-    <category>Продажи и CRM</category>
-    <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
-  </item>
-  <item>
-    <title>Как организовать планёрку отдела продаж, чтобы она была полезной</title>
-    <link>https://golubev-consulting.ru/blog/sales-department-meeting-format</link>
-    <guid isPermaLink="true">https://golubev-consulting.ru/blog/sales-department-meeting-format</guid>
-    <description>Ежедневная планёрка либо разгоняет отдел продаж, либо крадёт полчаса и убивает мотивацию. Разбираем, как организовать планёрку отдела продаж, чтобы она была полезной: какой формат выбрать, о чём говорить, сколько это должно длиться и каких ошибок избегать.</description>
-    <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
     <category>Продажи и CRM</category>
     <enclosure url="https://golubev-consulting.ru/blog/blog-crm.jpg" type="image/jpeg" length="0"/>
   </item>
