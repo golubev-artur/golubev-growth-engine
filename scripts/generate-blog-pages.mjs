@@ -114,6 +114,12 @@ function addCanonical(html, url) {
   return html.replace("</head>", () => `  <link rel="canonical" href="${url}" />\n  </head>`);
 }
 
+function addHreflang(html, url) {
+  const links = `  <link rel="alternate" hreflang="ru" href="${url}" />\n  <link rel="alternate" hreflang="x-default" href="${url}" />\n`;
+  if (html.includes('hreflang="ru"')) return html;
+  return html.replace("</head>", () => links + "  </head>");
+}
+
 function addJsonLd(html, data) {
   return html.replace(
     "</head>",
@@ -141,6 +147,7 @@ function buildPage({ route, title, description, bodyHtml, jsonLd, image }) {
     .replace(/<meta name="twitter:image" content="[^"]*"\s*\/?>/, `<meta name="twitter:image" content="${ogImage}" />`);
 
   html = addCanonical(html, url);
+  html = addHreflang(html, url);
   if (jsonLd) html = addJsonLd(html, jsonLd);
   if (bodyHtml) html = html.replace('<div id="root"></div>', () => `<div id="root">${bodyHtml}</div>`);
   return html;
@@ -209,6 +216,7 @@ for (const post of posts) {
     `<meta property="article:modified_time" content="${post.date}" />`,
     `<meta property="article:author" content="Артур Голубев" />`,
     `<meta property="article:section" content="Бизнес-консалтинг" />`,
+    `<meta property="article:tag" content="${post.category}" />`,
     `<meta property="og:locale" content="ru_RU" />`,
     `<meta property="og:site_name" content="Голубев Консалтинг" />`,
   ].join("\n    ");
@@ -329,6 +337,19 @@ const breadcrumbs = (crumbs) => ({
 });
 
 // ── Страницы услуг ──
+const SLUG_TO_CATEGORY = {
+  "sales-crm": ["Продажи и CRM"],
+  "business-processes": ["Бизнес-процессы"],
+  "marketing": ["Маркетинг"],
+  "management-strategy": ["Управление и стратегия"],
+  "hr-team": ["Персонал и команда"],
+  "tech-automation": ["Автоматизация"],
+  "client-service": ["Клиентский сервис"],
+  "strategic-session": ["Стратегические сессии"],
+  "finance": ["Финансы"],
+  "legal": ["Юридические услуги"],
+};
+
 for (const svc of services) {
   const route = `/services/${svc.slug}`;
   const itemsHtml = svc.items.length
@@ -340,12 +361,18 @@ for (const svc of services) {
     ? `<h2>Частые вопросы</h2>` +
       svc.faqs.map((f) => `<h3>${escapeText(f.question)}</h3><p>${escapeText(f.answer)}</p>`).join("")
     : "";
+  const cats = SLUG_TO_CATEGORY[svc.slug] || [];
+  const relatedPosts = posts.filter((p) => cats.includes(p.category)).slice(0, 4);
+  const relatedHtml = relatedPosts.length > 0
+    ? `<h2>Статьи по теме</h2><ul>${relatedPosts.map((p) => `<li><a href="/blog/${p.slug}">${escapeText(p.title)}</a></li>`).join("")}</ul>`
+    : "";
   const bodyHtml =
     `<article class="prerender-content">` +
     `<h1>${escapeText(svc.title)}</h1>` +
     `<p>${escapeText(svc.description)}</p>` +
     itemsHtml +
     faqHtml +
+    relatedHtml +
     `<p>Обсудить задачу: <a href="/forma">записаться на бесплатную консультацию</a>. ` +
     `Другие направления - в разделе услуг (<a href="/services">/services</a>).</p>` +
     `</article>`;
